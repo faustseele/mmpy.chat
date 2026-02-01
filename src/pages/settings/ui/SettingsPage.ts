@@ -1,6 +1,9 @@
+import { isMobile } from "@/shared/lib/browser/isMobile.ts";
+import { cx } from "@/shared/lib/helpers/formatting/classnames.ts";
 import { handleUpdateAvatar } from "@entities/user/model/actions.ts";
 import { handleLogout } from "@features/authenticate/model/actions.ts";
 import { InputEditor } from "@features/edit-profile/ui/InputEditor.ts";
+import cssPage from "@pages/page/ui/page.module.css";
 import { Page } from "@pages/page/ui/Page.ts";
 import { ComponentProps } from "@shared/lib/Component/model/types.ts";
 import { getInstances } from "@shared/lib/helpers/factory/functions.ts";
@@ -19,6 +22,17 @@ export class SettingsPage extends Page<SettingsProps> {
 
   constructor(props: ComponentProps<SettingsProps, SettingsPage>) {
     super(props);
+  }
+
+  public getRootTagCx(): string {
+    const mobile = isMobile();
+
+    return cx(
+      cssPage.moduleWindow,
+      css.moduleWindow_settings,
+      mobile && cssPage.moduleWindow_mobile,
+      mobile && css.moduleWindow_settingsMobile,
+    );
   }
 
   public componentDidMount(): void {
@@ -202,24 +216,36 @@ export class SettingsPage extends Page<SettingsProps> {
       heading_profile,
       heading_backToChats,
       user_avatar,
+      user_avatar_mobile,
       subheading_form,
       buttonEditInfo,
       buttonEditPassword,
     } = nodes;
 
+    const mobile = isMobile();
+
     return /*html*/ `
-      <header class="${css.profileHeadings}">
-        {{{ ${heading_profile.params.configs.id} }}}
+      <header class="${css.settingsHeadings} ${mobile && css.settingsHeadings_mobile}">
+        {{#if ${mobile}}}
+          <div class="${css.settingsHeadings__mobile}">
+            {{{${user_avatar_mobile.params.configs.id} }}}
+            <h2 class="${css.settingsFace__name}">{{ profileName }}</h2>
+          </div>
+        {{else}}
+          {{{ ${heading_profile.params.configs.id} }}}
+        {{/if}}
+
         {{{ ${heading_backToChats.params.configs.id} }}}
       </header>
       
       <main class="${css.settingsContent}">
-        <div class="${css.settingsFace}">
+        {{#unless ${mobile}}}
+          <div class="${css.settingsFace}">
+            {{{${user_avatar.params.configs.id} }}}
 
-          {{{${user_avatar.params.configs.id} }}}
-
-          <h2 class="${css.settingsFace__name}">{{ profileName }}</h2>
-        </div>
+            <h2 class="${css.settingsFace__name}">{{ profileName }}</h2>
+          </div>
+        {{/unless}}
 
         <div class="${css.settingsInputs}">
           {{{ ${subheading_form.params.configs.id} }}}

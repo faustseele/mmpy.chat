@@ -16,5 +16,5 @@
 .moduleWindow_mobile {
   width: calc(100% - 16px);
   max-width: calc(100% - 16px);
-  height: 90vh;
+  height: 93vh;
 }

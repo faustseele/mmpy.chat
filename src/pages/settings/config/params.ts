@@ -48,7 +48,7 @@ export const settingsPageParams: ComponentParams<SettingsProps> = {
   configs: {
     id: PageId.Settings,
     rootTag: "form",
-    classNames: cx(cssPage.moduleWindow, css.moduleWindow_profile),
+    classNames: cx(cssPage.moduleWindow, css.moduleWindow_settings),
     type: "change-info",
     profileName: "Loading..",
     user: null,
@@ -67,6 +67,17 @@ export const settingsPageParams: ComponentParams<SettingsProps> = {
         size: "xl",
         updateAvatar: (file) => handleUpdateAvatar(file),
       }) as any,
+      user_avatar_mobile: getAvatarNode(
+        "user_avatar_mobile",
+        -1,
+        "user_avatar",
+        "",
+        {
+          hasInput: true,
+          size: "m",
+          updateAvatar: (file) => handleUpdateAvatar(file),
+        },
+      ),
       subheading_form: getSubheadingNode(
         "subheading_form",
         "Ваши данные:",
@@ -88,6 +99,8 @@ export const settingsPageParams: ComponentParams<SettingsProps> = {
     edges: {
       heading_backToChats: "heading_backToChats",
       heading_profile: "heading_profile",
+      user_avatar: "user_avatar",
+      user_avatar_mobile: "user_avatar_mobile",
       subheading_form: "subheading_form",
       inputsEditors_info: [
         "editor-email",

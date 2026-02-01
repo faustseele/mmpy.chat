@@ -20,6 +20,17 @@ export const mapSettingsState = ({
       updateAvatar: (file) => handleUpdateAvatar(file),
     },
   );
+  const user_avatar_mobile = getAvatarNode(
+    "user_avatar_mobile",
+    -1,
+    "user_avatar",
+    user?.avatar,
+    {
+      hasInput: true,
+      size: "m",
+      updateAvatar: (file) => handleUpdateAvatar(file),
+    },
+  );
 
   return {
     configs: {
@@ -30,9 +41,7 @@ export const mapSettingsState = ({
     children: {
       nodes: {
         user_avatar,
-      },
-      edges: {
-        user_avatar: "user_avatar",
+        user_avatar_mobile,
       },
     },
   };

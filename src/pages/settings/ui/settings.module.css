@@ -1,17 +1,31 @@
-.moduleWindow_profile {
+.moduleWindow_settings {
   min-width: 500px;
-  min-height: 800px;
-
-  align-items: center;
+  min-height: 90vh;
 }
 
-.profileHeadings {
+.moduleWindow_settingsMobile {
+  min-width: calc(100% - 16px);
+  max-width: calc(100% - 16px);
+}
+
+.settingsHeadings {
   width: 100%;
   padding: 0 8px;
   box-sizing: border-box;
 
   display: flex;
   justify-content: space-between;
+}
+
+.settingsHeadings_mobile {
+  margin-bottom: 12px;
+}
+
+.settingsHeadings__mobile {
+  margin-top: 6px;
+
+  display: flex;
+  column-gap: 6px;
 }
 
 .settingsContent {
@@ -53,15 +67,15 @@
 }
 
 .footer {
-  flex-grow: 1;
-
   display: flex;
   flex-direction: column;
-  row-gap: 12px;
+  row-gap: 8px;
   align-items: center;
   justify-content: end;
+
+  flex: 1;
   
-  padding-bottom: 16px;
+  padding-bottom: 8px;
   box-sizing: border-box;
 }
 
