@@ -38,11 +38,11 @@
 }
 
 .attachButton {
-  mask-image: url('../../../static/attach.svg');
+  mask-image: url('../../../../static/attach.svg');
 }
 
 .sendButton {
-  mask-image: url('../../../static/send-msg.svg');
+  mask-image: url('../../../../static/send-msg.svg');
   width: 17px;
 }
 

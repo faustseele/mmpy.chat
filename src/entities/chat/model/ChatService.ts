@@ -98,7 +98,7 @@ class ChatService {
       const { token } = await ChatAPI.getToken(chatId);
       this.ws.openWS(user.id, chatId, token);
 
-      console.log("chat select success !, token:", token);
+      // console.log("chat select success !, token:", token);
       return { ok: true };
     } catch (e) {
       console.error("chat select failed:", e);
@@ -148,17 +148,17 @@ class ChatService {
     }
   }
 
-  public async addUsers(
+  public async addUser(
     chatId: ChatId,
-    users: number[],
+    user: number,
   ): Promise<ApiResponse<string>> {
     try {
-      const res = await ChatAPI.addUsers({ chatId, users });
+      const res = await ChatAPI.addUser({ chatId, users: [user] });
 
-      console.log("users-add success:", res);
+      console.log("user-add success:", res);
       return { ok: true, data: res };
     } catch (e) {
-      console.error("users-add failed:", e);
+      console.error("user-add failed:", e);
       return { ok: false, err: e as ApiError };
     }
   }

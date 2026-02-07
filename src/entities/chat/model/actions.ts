@@ -9,8 +9,11 @@ import { globalBus } from "@/shared/lib/EventBus/EventBus.ts";
 import { ls_getLastChatId } from "@shared/lib/LocalStorage/actions.ts";
 import ChatService from "./ChatService.ts";
 
-export const handleAddUsers = async (id: ChatId, users: number[]) => {
-  await ChatService.addUsers(id, users);
+export const handleAddUser = async (
+  id: ChatId,
+  user: number,
+): Promise<ApiResponse<string>> => {
+  return await ChatService.addUser(id, user);
 };
 
 export const handleCloseChat = () => {
@@ -19,23 +22,44 @@ export const handleCloseChat = () => {
 
 export const handleCreateChat = async (
   title: string,
+  noToast = false,
 ): Promise<ApiResponse<CreateChatResponse>> => {
+  if (!noToast) globalBus.emit("toast", { msg: `Creating ´${title}'..` });
+
   const res = await ChatService.createChat(title);
 
   if (res.ok) {
     await ChatService.fetchChats();
     await ChatService.selectChat(res.data!.id);
+    if (!noToast)
+      globalBus.emit("toast", { msg: `'${title}' created!` }, "success");
+  } else {
+    console.error("ChatService: createChat failed:", res);
+    globalBus.emit("toast", { msg: `Dev error: ${res.err?.reason}` }, "error");
   }
 
   return res;
 };
 
-export const handleDeleteChat = async (id: number) => {
-  await ChatService.deleteChat(id);
-  ChatService.deselectChat();
+export const handleDeleteChat = async (id: number, chatTitle: string) => {
+  globalBus.emit("toast", { msg: "Deleting chat..." });
+  const res = await ChatService.deleteChat(id);
 
-  await ChatService.fetchChats();
-  
+  if (res.ok) {
+    await ChatService.fetchChats();
+
+    globalBus.emit("toast", {
+      msg: `Chat '${chatTitle}' deleted successfully.`,
+      type: "success",
+    });
+    ChatService.deselectChat();
+  } else {
+    console.error("ChatService: deleteChat failed:", res);
+    globalBus.emit("toast", {
+      msg: "Dev error: " + res.err?.reason,
+      type: "error",
+    });
+  }
 };
 
 export const handleFetchChats = async (
@@ -45,8 +69,8 @@ export const handleFetchChats = async (
 
   if (!resList.ok) {
     console.error("fetchChats failed:", resList.err);
-    globalBus.emit("show-toast", {
-      message: resList.err?.reason,
+    globalBus.emit("toast", {
+      msg: resList.err?.reason,
       type: "error",
     });
     return resList;
@@ -71,7 +95,10 @@ export const handleSelectChat = async (id: number) => {
   await ChatService.selectChat(id);
 };
 
-export const handleUpdateChatAvatar = async (id: ChatId, file: File): Promise<void> => {
+export const handleUpdateChatAvatar = async (
+  id: ChatId,
+  file: File,
+): Promise<void> => {
   await ChatService.updateChatAvatar(id, file);
   await ChatService.fetchChats();
 };

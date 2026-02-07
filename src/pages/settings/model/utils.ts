@@ -13,11 +13,8 @@ export const onGoodForm = (
 ): ((
   formData: Record<string, string>,
 ) => Promise<ApiResponse<Partial<UserResponse> | string>>) => {
-  function dispatchToast(message: string, type: ToastType = "info") {
-    globalBus.emit("show-toast", {
-      message,
-      type,
-    });
+  function dispatchToast(msg: string, type: ToastType = "info") {
+    globalBus.emit("toast", { msg, type });
   }
 
   if (submitType === "change-info") {
@@ -79,16 +76,15 @@ export const onGoodForm = (
 export const onBadForm = (submitType: SettingsType): (() => void) => {
   if (submitType === "change-info") {
     return () => {
-      globalBus.emit("show-toast", {
-        message: "The field seems incorrect.",
+      globalBus.emit("toast", {
+        msg: "The field seems incorrect.",
         type: "error",
       });
     };
   } else {
     return () => {
-      globalBus.emit("show-toast", {
-        message:
-          "Either the old is incorrect or the new password is not valid.",
+      globalBus.emit("toast", {
+        msg: "Either the old is incorrect or the new password is not valid.",
         type: "error",
       });
     };

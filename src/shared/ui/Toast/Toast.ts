@@ -24,7 +24,7 @@ export class Toast extends Component<ToastProps> {
 
   public componentDidMount(): void {
     /* mounting Toast to globalBus */
-    globalBus.on("show-toast", (payload: ToastPayload) =>
+    globalBus.on("toast", (payload: ToastPayload) =>
       this.showToast(payload),
     );
   }
@@ -34,10 +34,10 @@ export class Toast extends Component<ToastProps> {
       console.error("Toast: element is not defined", this.domService);
       return;
     }
-    this.element.textContent = this.configs.message;
+    this.element.textContent = this.configs.msg;
   }
 
-  public showToast({ message, type = "info" }: ToastPayload): void {
+  public showToast({ msg, type = "info" }: ToastPayload): void {
     if (!this.element) return;
 
     /* clear timer if toast active */
@@ -56,7 +56,7 @@ export class Toast extends Component<ToastProps> {
     setTimeout(() => {
       this.setProps({
         configs: {
-          message,
+          msg,
           type,
           show: true,
         },
@@ -71,7 +71,7 @@ export class Toast extends Component<ToastProps> {
           },
         });
       }, 2000);
-    }, 200);
+    }, 300);
   }
   public getInnerMarkup(): string {
     return /*html*/ ``;

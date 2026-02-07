@@ -47,7 +47,7 @@ class ChatAPI extends BaseAPI {
     return chatsAPIInstance.delete("", { data }) as Promise<DeleteChatResponse>;
   }
 
-  public addUsers(data: ChatUsersRequest): Promise<ChatUsersResponse> {
+  public addUser(data: ChatUsersRequest): Promise<ChatUsersResponse> {
     return chatsAPIInstance.put("/users", {
       data,
     }) as Promise<ChatUsersResponse>;

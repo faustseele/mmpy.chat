@@ -1,11 +1,11 @@
 .moduleWindow_auth {
   justify-content: space-between;
   
-  min-height: 80vh;
+  min-height: 85vh;
 }
 
 .authHeading {
-  padding: 0 8px;
+  padding: 0 6px;
   height: auto;
 }
 

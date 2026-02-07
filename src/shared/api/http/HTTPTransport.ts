@@ -106,8 +106,8 @@ export default class HTTPTransport {
           try {
             xhr.send();
           } catch (e) {
-            globalBus.emit("show-toast", {
-              message: "HTTPTransport: xhr.send failed",
+            globalBus.emit("toast", {
+              msg: "HTTPTransport: xhr.send failed",
               type: "error",
             });
             throw new Error(
@@ -120,8 +120,8 @@ export default class HTTPTransport {
           xhr.send(body);
         }
       } catch (e) {
-        globalBus.emit("show-toast", {
-          message: "HTTPTransport: xhr.send failed",
+        globalBus.emit("toast", {
+          msg: "HTTPTransport: xhr.send failed",
           type: "error",
         });
         throw new Error("HTTPTransport: xhr.send failed", e as ErrorOptions);

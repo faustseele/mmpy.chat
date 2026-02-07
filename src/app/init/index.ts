@@ -31,12 +31,7 @@ const handleUA = (root: HTMLBodyElement) => {
   const ua = navigator.userAgent;
   console.log("handleUA: ua", ua);
 
-  if (isMobile()) {
-    const app = document.getElementById("app");
-    if (app) app.classList.add("app_mobile");
-  } else {
-    prependNavigation(root);
-  }
+  if (!isMobile()) prependNavigation(root);
 };
 
 const prependGlobalToast = (root: HTMLBodyElement) => {

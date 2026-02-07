@@ -11,14 +11,14 @@ export interface ToastProps extends BaseProps {
 interface ToastConfigs extends BaseConfigs {
   rootTag: Extract<RootTag, "span">;
   type: ToastType;
-  message: string;
+  msg: string;
   show: boolean;
   /* in ms */
   duration?: number;
 }
 
 export type ToastPayload = {
-  message: string;
+  msg: string;
   type: ToastType;
 }
 

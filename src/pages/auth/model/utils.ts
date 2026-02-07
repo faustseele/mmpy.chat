@@ -12,36 +12,36 @@ const emitToast = (res: ApiResponse<UserResponse>, type: SubmitTypes) => {
   if (!res.ok) {
     const err = res.err;
     const msg = `${err?.reason}`;
-    globalBus.emit("show-toast", { message: msg, type: "error" });
+    globalBus.emit("toast", { msg: msg, type: "error" });
     return;
   }
 
   if (type === "sign-up") {
-    globalBus.emit("show-toast", {
-      message: "Account created successfully.",
+    globalBus.emit("toast", {
+      msg: "Account created successfully.",
       type: "success",
     });
     return;
   }
 
   if (type === "sign-in") {
-    globalBus.emit("show-toast", {
-      message: "Welcome back!",
+    globalBus.emit("toast", {
+      msg: "Welcome back!",
       type: "success",
     });
     return;
   }
 
-  globalBus.emit("show-toast", {
-    message: "Developer error: unhandled condition.",
+  globalBus.emit("toast", {
+    msg: "Developer error: unhandled condition.",
     type: "error",
   });
   console.error("AuthPage: unhandled condition.", this);
 };
 
 export const onBadForm = (msg?: string) => {
-  globalBus.emit("show-toast", {
-    message: msg ?? "Please fill all the fields correctly.",
+  globalBus.emit("toast", {
+    msg: msg ?? "Please fill all the fields correctly.",
     type: "error",
   });
 };

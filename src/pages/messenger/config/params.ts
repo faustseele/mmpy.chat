@@ -7,7 +7,7 @@ import { getInputNode } from "@/shared/ui/Input/factory.ts";
 import { getSpinnerNode } from "@/shared/ui/Spinner/factory.ts";
 import { RouteConfigs } from "@app/providers/router/types.ts";
 import {
-  handleAddUsers,
+  handleAddUser,
   handleCloseChat,
   handleCreateChat,
   handleDeleteChat,
@@ -96,9 +96,9 @@ export const messengerPageParams: ComponentParams<MessengerProps> = {
   },
   on: {
     addChatWithUser: (firstName: string, secondName: string) =>
-      handleCreateChat(`${firstName} ${secondName}`),
+      handleCreateChat(`${firstName} ${secondName}`, true),
     addNotes: handleCreateChat,
-    addUsers: handleAddUsers,
+    addUser: handleAddUser,
     deleteChat: handleDeleteChat,
     findUser: handleFindUser,
     updateChatAvatar: handleUpdateChatAvatar,

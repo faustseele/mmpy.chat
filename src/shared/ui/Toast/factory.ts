@@ -11,7 +11,7 @@ import { Toast } from "./Toast.ts";
 import { ToastProps, ToastType } from "./types.ts";
 
 export const getToastNode = (
-  message: string,
+  msg: string,
   type: ToastType = "info",
   duration: number = 2000,
 ): ComponentNode<ToastProps> => {
@@ -21,7 +21,7 @@ export const getToastNode = (
       rootTag: "span",
       show: false,
       classNames: css.toast,
-      message,
+      msg,
       type,
       duration,
     },

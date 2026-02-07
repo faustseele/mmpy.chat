@@ -25,6 +25,7 @@ type SettingsMap =
   | "heading_backToChats"
   | "heading_profile"
   | "user_avatar"
+  | "user_avatar_mobile"
   | "subheading_form"
   | "buttonEditInfo"
   | "buttonEditPassword"

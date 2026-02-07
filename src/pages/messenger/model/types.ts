@@ -48,8 +48,8 @@ export type MessengerOn = {
     secondName: string,
   ) => Promise<ApiResponse<CreateChatResponse>>;
   addNotes: (title: string) => void;
-  addUsers: (chatId: ChatId, users: number[]) => Promise<void>;
-  deleteChat: (chatId: ChatId) => Promise<void>;
+  addUser: (chatId: ChatId, user: number) => Promise<ApiResponse<string>>;
+  deleteChat: (chatId: ChatId, chatTitle: string) => Promise<void>;
   findUser: (login: string) => Promise<ApiResponse<UserResponse>>;
   updateChatAvatar: (chatId: ChatId, file: File) => Promise<void>;
 };

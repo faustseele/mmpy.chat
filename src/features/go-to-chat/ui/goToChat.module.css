@@ -28,6 +28,7 @@
 .goToChat_selected {
   border-style: solid;
   border-color: var(--color-universal-br-active);
+  background-color: var(--color-item-bg-sel);
 }
 
 .avatarWrap {
