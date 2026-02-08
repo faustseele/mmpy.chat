@@ -82,17 +82,17 @@ export const settingsPageParams: ComponentParams<SettingsProps> = {
         "subheading_form",
         "Ваши данные:",
       ) as any,
-      buttonEditInfo: getButtonNode("buttonEditInfo", "Изменить данные", {
+      buttonEditInfo: getButtonNode("buttonEditInfo", "Изменить данные 📝", {
         type: "submit",
       }) as any,
       buttonEditPassword: getButtonNode(
         "buttonEditPassword",
-        "Изменить пароль",
+        "Изменить пароль 🔑",
         {
           isSilent: true,
         },
       ) as any,
-      buttonLogout: getButtonNode("buttonLogout", "Выйти", {
+      buttonLogout: getButtonNode("buttonLogout", "Выйти 🕳️", {
         isSilent: true,
       }) as any,
     },
