@@ -58,7 +58,7 @@ export const messengerPageParams: ComponentParams<MessengerProps> = {
       }) as any,
       findUserChatButton: getButtonNode(
         "findUserChatButton",
-        "Найти пользователя 👤",
+        "Найти юзера 👤",
         { tooltip: "Найти пользователя по логину" },
       ) as any,
       closeChatButton: getButtonNode("closeChatButton", "❌", {

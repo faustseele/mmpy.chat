@@ -16,7 +16,7 @@ export const handleGoToSettings = () => {
 };
 
 export const handleAddChat = async (on: MessengerOn) => {
-  const explanation = `Логин пользователя (например:):
+  const explanation = `Логин пользователя (например):
   \n• miathompson \n• lucasbrown \n• noahrodriguez \n• emmawilson \n• liamgarcia \n• oliviamartinez \n• sophialee \n• masonkim \n• isabellapatel \n• ethanwong \n• emil \n• LevTolstoy \n• yandex \n• LeUser \n• mishima \n• tolkien \n• baudrillard \n• foucault \n• shakespear`;
 
   const input = window.prompt(explanation, "");

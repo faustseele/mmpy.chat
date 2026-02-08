@@ -50,10 +50,10 @@ const authPageParams_signIn: ComponentParams<AuthProps> = {
     nodes: {
       ...(inputs_signIn as any),
       heading: getHeadingNode("heading", "Вход 🚪"),
-      buttonFormSubmit: getButtonNode("buttonFormSubmit", "🔑 Войти", {
+      buttonFormSubmit: getButtonNode("buttonFormSubmit", "Войти 🔑", {
         type: "submit",
       }),
-      buttonGuest: getButtonNode("buttonGuest", "👻 Гость"),
+      buttonGuest: getButtonNode("buttonGuest", "Гость 👻"),
       buttonReroute: getButtonNode("buttonReroute", "Впервые?", {
         isSilent: true,
         on: {
@@ -84,12 +84,12 @@ const authPageParams_signUp: ComponentParams<AuthProps> = {
       heading: getHeadingNode("heading", "Регистрация 🎀"),
       buttonFormSubmit: getButtonNode(
         "buttonFormSubmit",
-        "✒️ Зарегистрироваться",
+        "Зарегистрироваться ✒️",
         {
           type: "submit",
         },
       ),
-      buttonGuest: getButtonNode("buttonGuest", "👻 Гость"),
+      buttonGuest: getButtonNode("buttonGuest", "Гость 👻"),
       buttonReroute: getButtonNode("buttonReroute", "Я свой!", {
         isSilent: true,
         on: {
