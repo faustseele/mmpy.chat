@@ -50,7 +50,7 @@ export const settingsPageParams: ComponentParams<SettingsProps> = {
     rootTag: "form",
     classNames: cx(cssPage.moduleWindow, css.moduleWindow_settings),
     type: "change-info",
-    profileName: "Loading..",
+    profileName: "...",
     user: null,
   },
   children: {

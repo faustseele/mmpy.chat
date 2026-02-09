@@ -6,7 +6,6 @@ import {
   handleCreateChat,
   handleFetchChats,
 } from "@entities/chat/model/actions.ts";
-import { ls_removeLastChatId } from "@shared/lib/LocalStorage/actions.ts";
 import { RouteLink } from "@shared/types/universal.ts";
 import { GUEST_CREDS } from "../config/guest.ts";
 import AuthService from "./AuthService.ts";
@@ -14,7 +13,6 @@ import { SignInData, SignUpData } from "./types.ts";
 
 export const handleFetchUser = async (): Promise<ApiResponse<UserResponse>> => {
   const res = await AuthService.fetchUser();
-  if (!res.ok) ls_removeLastChatId();
   return res;
 };
 

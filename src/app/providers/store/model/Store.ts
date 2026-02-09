@@ -1,3 +1,4 @@
+import { ls_getLoggedIn } from "@/shared/lib/LocalStorage/actions.ts";
 import { PageNode } from "@pages/page/model/types.ts";
 import { Page } from "@pages/page/ui/Page.ts";
 import { BaseProps } from "@shared/lib/Component/model/base.types.ts";
@@ -32,7 +33,7 @@ class Store extends EventBus<StoreEventBusEvents> {
   private state: AppState = {
     api: apiInitialState,
     controllers: {
-      isLoggedIn: false,
+      isLoggedIn: ls_getLoggedIn(),
     },
     pageNodes: { },
   };
