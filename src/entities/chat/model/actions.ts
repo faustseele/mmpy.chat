@@ -68,7 +68,7 @@ export const handleFetchChats = async (
   const resList = await ChatService.fetchChats(query);
 
   if (!resList.ok) {
-    console.error("fetchChats failed:", resList.err);
+    console.error("fetchChats failed:", resList.err?.response);
     globalBus.emit("toast", {
       msg: resList.err?.reason,
       type: "error",

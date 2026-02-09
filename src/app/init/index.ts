@@ -18,7 +18,9 @@ export const initApp = async () => {
 const bootstrapAuth = async () => {
   try {
     const user = await handleFetchUser();
-    if (user) await handleFetchChats();
+
+    /* no-'await' bc it's unnecessary for FCP to happen */
+    if (user.ok) handleFetchChats();
 
     const isLoggedIn = Store.getState().controllers.isLoggedIn;
     console.log("bootstrapAuth: isLoggedIn?", isLoggedIn);
