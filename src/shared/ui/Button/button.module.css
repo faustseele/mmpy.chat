@@ -6,10 +6,8 @@
  
  padding: 14px 6px;
 
- font-size: 14px;
- line-height: 15px;
- letter-spacing: 0.02em;
  font-family: var(--font-family);
+ letter-spacing: 0.02em;
  color: var(--color-content);
  white-space: nowrap;
  text-decoration: none;

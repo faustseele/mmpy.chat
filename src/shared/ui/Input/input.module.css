@@ -32,9 +32,6 @@
   position: absolute;
   left: 8px;
   top: 19px;
-  font-family: inherit;
-  font-size: 14px;
-  line-height: 15px;
   letter-spacing: 0.02em;
   color: var(--color-content-darkest);
 }
@@ -51,10 +48,8 @@
   box-sizing: border-box;
 
   background-color: transparent;
-
-  font-family: inherit;
-  font-size: 14px;
-  line-height: 15px;
+ 
+  font-family: var(--font-family);
   letter-spacing: 0.02em;
   color: var(--color-content-light);
 

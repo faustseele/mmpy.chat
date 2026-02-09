@@ -65,7 +65,6 @@
 
   background-color: var(--color-btn-bg);
 
-  font-family: inherit;
   color: var(--color-content-light);
   text-align: center;
 
@@ -131,8 +130,6 @@
 }
 
 .chatTitle {
-  font-family: inherit;
-  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.05em;
   line-height: 18px;
@@ -197,9 +194,7 @@
 }
 
 .noMessages {
-  font-family: inherit;
   color: var(--color-acc-light);
-  font-size: 14px;
   font-weight: 500;
   opacity: 0.7;
 }

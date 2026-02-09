@@ -1,4 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@font-face {
+  src: url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap') format('woff2');
+  font-family: "Montserrat", Helvetica, Arial, sans-serif;
+}
+
 
 :root {
   --color-alert: #f5ae75;
@@ -29,9 +33,9 @@
   --color-btn-br: rgba(255, 255, 255, 0.3);
   --color-universal-br-active: rgba(255, 255, 255, 0.6);
 
-  --transition: 0.2s ease-in-out;
-
   --font-family: "Montserrat", Helvetica, Arial, sans-serif;
+
+  --transition: 0.2s ease-in-out;
 }
 
 /* The actual persistent
@@ -45,8 +49,11 @@ body {
   justify-content: center;
   align-items: center;
 
-  min-height: 100vh;
   font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 15px;
+
+  min-height: 100vh;
 }
 
 #app {

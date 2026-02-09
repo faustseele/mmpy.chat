@@ -56,10 +56,7 @@
   outline: none;
   background-color: var(--color-item-bg);
 
-  font-size: 14px;
-  line-height: 15px;
   letter-spacing: 0.02em;
-  font-family: inherit;
   color: var(--color-content);
 
   transition: var(--transition);
