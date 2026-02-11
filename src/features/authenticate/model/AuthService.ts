@@ -116,6 +116,7 @@ class AuthService {
         ls_setLoggedIn(false);
       } else {
         console.error("fetchUser failed", e);
+        return { ok: false, err: e as ApiError };
       }
 
       ls_removeLastChatId();

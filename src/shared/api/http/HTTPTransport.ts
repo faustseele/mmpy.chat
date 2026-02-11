@@ -96,7 +96,7 @@ export default class HTTPTransport {
 
       xhr.onabort = () => reject({ reason: "Request aborted" });
       xhr.onerror = () => reject({ reason: "Network error" });
-      xhr.ontimeout = () => reject({ reason: "Request timed out" });
+      xhr.ontimeout = () => reject({ code: 408, reason: "Request Timeout" });
 
       xhr.timeout = options.timeout || 5000;
       xhr.withCredentials = withCredentials;

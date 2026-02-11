@@ -37,7 +37,7 @@ const getMessageFieldParams = (
       label: "Message Input",
     },
     on: {
-      sendMessage: handleSendMessage,
+      submit: (e) => handleSendMessage(e),
     },
   };
 };

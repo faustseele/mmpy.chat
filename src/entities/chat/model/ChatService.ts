@@ -201,6 +201,10 @@ class ChatService {
     this.ws.sendMessage(content);
   }
 
+  public sendFile(resourceId: number) {
+    this.ws.sendFile(resourceId);
+  }
+
   public deselectChat() {
     const currId = Store.getState().api.chats.activeId;
     if (currId) this.ws.closeWS(currId);

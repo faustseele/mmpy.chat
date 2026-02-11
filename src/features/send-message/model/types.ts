@@ -7,8 +7,7 @@ import { RootTag } from "@shared/lib/DOM/types.ts";
 export interface MessageFieldProps extends BaseProps {
   configs: MessageFieldConfigs;
   on: {
-    sendMessage: (text: string) => void;
-    submit?: (e: Event) => void;
+    submit: (e: Event) => void;
   };
 }
 

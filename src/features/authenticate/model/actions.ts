@@ -13,6 +13,13 @@ import { SignInData, SignUpData } from "./types.ts";
 
 export const handleFetchUser = async (): Promise<ApiResponse<UserResponse>> => {
   const res = await AuthService.fetchUser();
+  
+  if (!res.ok && res.err?.status === 408) {
+    globalBus.emit("toast", {
+      msg: "Request Timeout. Try Again.",
+      type: "error",
+    });
+  }
   return res;
 };
 
@@ -47,7 +54,9 @@ export const handleSignIn = async (
   return res;
 };
 
-export const handleGuestSignIn = async (): Promise<ApiResponse<UserResponse>> => {
+export const handleGuestSignIn = async (): Promise<
+  ApiResponse<UserResponse>
+> => {
   globalBus.emit("toast", { msg: "Launching Guest Mode..." });
   const res = await AuthService.signIn(GUEST_CREDS);
 
