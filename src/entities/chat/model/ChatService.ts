@@ -9,7 +9,7 @@ import {
 } from "@/shared/api/model/api.types.ts";
 import { ApiError, ApiResponse } from "@/shared/api/model/types.ts";
 import Store from "@app/providers/store/model/Store.ts";
-import { ls_storeLastChatId } from "@shared/lib/LocalStorage/actions.ts";
+import { ls_removeLastChatId, ls_storeLastChatId } from "@shared/lib/LocalStorage/actions.ts";
 import ChatAPI from "../api/ChatAPI.ts";
 import { ChatWebsocket } from "../lib/ChatWebsocket.ts";
 import { getChatType } from "./utils.ts";
@@ -199,6 +199,7 @@ class ChatService {
 
     Store.set("api.chats.activeId", null);
     Store.set("api.chats.currentChat", null);
+    ls_removeLastChatId();
   }
 }
 

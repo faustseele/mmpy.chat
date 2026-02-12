@@ -11,6 +11,7 @@ export const mapMessengerState = (
   state: AppState,
 ): ComponentPatch<MessengerProps> => {
   const { list: chats, activeId, messagesByChatId } = state.api.chats;
+  console.log(activeId)
   const currentChat = activeId
     ? (chats?.find((chat) => chat.id === activeId) ?? null)
     : null;

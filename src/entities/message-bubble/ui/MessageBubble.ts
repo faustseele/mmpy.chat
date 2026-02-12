@@ -34,12 +34,14 @@ export class MessageBubble extends Component<MessageProps> {
         <p class="${css.dateBubble}">{{date}}</p>
       {{else}}
         <div class="${css.content}">
-          {{#if text}}
-            <p class="${css.content__text}">{{text}}</p>
-          {{/if}}
           {{#if image}}
             <img class="${css.content__image}" src="{{image}}" alt="MessageBubble image" />
           {{/if}}
+          {{#unless image}}
+            {{#if text}}
+              <p class="${css.content__text}">{{text}}</p>
+            {{/if}}
+          {{/unless}}
           <p class="${css.content__infoBox}">{{date}}</p>
         </div>
       {{/if}}

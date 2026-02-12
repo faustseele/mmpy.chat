@@ -64,8 +64,9 @@ export class Avatar extends Component<AvatarProps> {
   public getInnerMarkup(): string {
     const inputId = avatarId(this.configs.chatId);
 
+    /* fetchpriority="high" for optimal LCP timing */
     return /*html*/ `
-      <img class="${css.avatarWrap__img}" src="{{src}}" alt="Participant's avatar" />
+      <img class="${css.avatarWrap__img}" src="{{src}}" alt="Participant's avatar" fetchpriority="high"/>
 
       {{#if noAvatar }}
         <span class="${css.avatarWrap__letter}"> {{letter}} </span>
