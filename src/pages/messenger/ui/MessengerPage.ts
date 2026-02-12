@@ -16,6 +16,9 @@ import { MessengerNodes, MessengerProps } from "../model/types.ts";
 import css from "./messenger.module.css";
 
 export class MessengerPage extends Page<MessengerProps> {
+  private prevPlaceholder: string = "";
+  private prevSpinner: boolean = false;
+
   constructor(props: ComponentProps<MessengerProps, MessengerPage>) {
     super(props);
   }
@@ -63,19 +66,19 @@ export class MessengerPage extends Page<MessengerProps> {
     const msgField = this.children?.nodes["messageField"].runtime
       ?.instance as MessageField;
 
-    const isLoadingMessages = this.configs.isLoadingMessages;
+    const isLoadingMessages = this.configs.isLoadingMessages ?? false;
+    const placeholder =
+      this.configs.info.type === "notes" ? "Заметка:" : "Cообщение...";
 
-    spinner.setProps({
-      configs: {
-        isOn: isLoadingMessages,
-      },
-    });
-    msgField.setProps({
-      configs: {
-        placeholder:
-          this.configs.info.type === "notes" ? "Заметка:" : "Cообщение...",
-      },
-    });
+    /* caching placeholder & spinner to avoid unnecessary re-renders */
+    if (isLoadingMessages !== this.prevSpinner && spinner) {
+      spinner.setProps({ configs: { isOn: isLoadingMessages } });
+      this.prevSpinner = isLoadingMessages;
+    }
+    if (placeholder !== this.prevPlaceholder && msgField) {
+      msgField.setProps({ configs: { placeholder } });
+      this.prevPlaceholder = placeholder;
+    }
   }
 
   private _wireAddChat(addUser: Button) {

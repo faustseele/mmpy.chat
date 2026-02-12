@@ -10,11 +10,11 @@ export class MessageField extends Component<MessageFieldProps> {
   }
 
   public componentDidRender(): void {
+    console.log("MessageField");
     this._wireAttach();
   }
 
   private _wireAttach(): void {
-    // console.log("attach", this.element);
     const attach = this.element?.querySelector<HTMLInputElement>(
       `#${css.attachInput}`,
     );

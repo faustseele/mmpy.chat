@@ -9,6 +9,10 @@ export class Spinner extends Component<SpinnerProps> {
     super(props);
   }
 
+  public componentDidRender(): void {
+    console.log("Spinner");
+  }
+
   public getRootTagCx(): string {
     const { isBig, isOn } = this.configs;
     return cx(css.spinner, isBig && css.spinner_big, !isOn && css.spinner_off);
