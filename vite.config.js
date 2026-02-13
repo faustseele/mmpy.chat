@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
-  publicDir: 'static',
+  publicDir: "static",
   plugins: [
     VitePWA({
       registerType: "autoUpdate",
@@ -14,8 +14,8 @@ export default defineConfig({
         name: "MMPY Messenger",
         short_name: "MMPY-Msgr",
         description: "mmpy.messenger 💌 — portfolio pet-project",
-        theme_color: "#ffffff",
-        background_color: "#ffffff",
+        theme_color: "#b9dfa5",
+        background_color: "#101607",
         display: "standalone",
         scope: "/",
         start_url: "/",
@@ -24,19 +24,19 @@ export default defineConfig({
             src: "/logo.ico",
             sizes: "any",
             type: "image/x-icon",
-            purpose: "any maskable",
+            purpose: "any",
           },
           {
             src: "/icon-192.png",
             sizes: "192x192",
             type: "image/png",
-            purpose: "any maskable",
+            purpose: "any",
           },
           {
             src: "/icon-512.png",
             sizes: "512x512",
             type: "image/png",
-            purpose: "any maskable",
+            purpose: "any",
           },
         ],
         screenshots: [

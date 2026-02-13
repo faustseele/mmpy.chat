@@ -6,7 +6,10 @@ import {
 } from "@/shared/api/model/api.types.ts";
 import { ApiError, ApiResponse } from "@/shared/api/model/types.ts";
 import Store from "@app/providers/store/model/Store.ts";
-import { ls_removeLastChatId } from "@shared/lib/LocalStorage/actions.ts";
+import {
+  ls_removeLastChatId,
+  ls_setLoggedIn,
+} from "@shared/lib/LocalStorage/actions.ts";
 import AuthAPI from "../api/AuthAPI.ts";
 
 class AuthService {
@@ -29,6 +32,7 @@ class AuthService {
       }
 
       Store.set("controllers.isLoggedIn", true);
+      ls_setLoggedIn(true);
 
       /* ya-praktikum.tech API strips down surname to 1st char ('Petrov' to 'P'),
         -> updateProfile() & store correct one */
@@ -48,6 +52,8 @@ class AuthService {
 
       return { ok: true, data: user };
     } catch (e) {
+      ls_setLoggedIn(false);
+
       console.error("signUp failed", e);
       return { ok: false, err: e as ApiError };
     }
@@ -61,16 +67,22 @@ class AuthService {
       Store.set("api.auth.user", user);
       if (user) {
         Store.set("controllers.isLoggedIn", true);
+        ls_setLoggedIn(true);
       } else {
         Store.set("controllers.isLoggedIn", false);
+        ls_setLoggedIn(false);
       }
 
       console.log(res, user, Store.getState());
 
       return { ok: !!user, data: user };
     } catch (e: unknown) {
-      console.error("signIn failed", e);
-      return { ok: false, err: e as ApiError };
+      const err = e as ApiError;
+
+      ls_setLoggedIn(false);
+
+      console.error("signIn failed", err);
+      return { ok: false, err };
     }
   }
 
@@ -80,11 +92,13 @@ class AuthService {
       if (user) {
         Store.set("api.auth.user", user);
         Store.set("controllers.isLoggedIn", true);
+        ls_setLoggedIn(true);
         console.log("user-fetch success", user);
         return { ok: true, data: user };
       } else {
         Store.set("api.auth.user", null);
         Store.set("controllers.isLoggedIn", false);
+        ls_setLoggedIn(false);
         return {
           ok: false,
           err: {
@@ -99,9 +113,13 @@ class AuthService {
 
       if (badCookie) {
         console.info("fetchUser failed, probably not logged in", e);
+        ls_setLoggedIn(false);
       } else {
         console.error("fetchUser failed", e);
+        return { ok: false, err: e as ApiError };
       }
+
+      ls_removeLastChatId();
 
       return { ok: false, err: e as ApiError };
     }
@@ -115,6 +133,7 @@ class AuthService {
       Store.set("api.chats.list", null);
 
       Store.set("controllers.isLoggedIn", false);
+      ls_setLoggedIn(false);
 
       /* remove last active chat */
       ls_removeLastChatId();
@@ -123,6 +142,8 @@ class AuthService {
       return { ok: !!res, data: res };
     } catch (e) {
       console.error("logout failed", e);
+
+      ls_setLoggedIn(false);
       return { ok: false, err: e as ApiError };
     }
   }

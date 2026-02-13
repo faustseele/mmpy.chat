@@ -35,7 +35,7 @@ export const mapSettingsState = ({
   return {
     configs: {
       rootTag: "form",
-      profileName: user?.first_name ?? "",
+      profileName: user?.first_name ?? "...",
       user,
     },
     children: {

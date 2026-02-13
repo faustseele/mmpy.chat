@@ -9,7 +9,7 @@ import {
 import DOMService from "@/shared/lib/DOM/DOMService.ts";
 import FragmentService from "@/shared/lib/Fragment/FragmentService.ts";
 import { ComponentFactory } from "@/shared/lib/helpers/factory/types.ts";
-import defaultAvatar from "../../../../static/avatar.png";
+import defaultAvatar from "/avatar.png";
 import css from "./avatar.module.css";
 import { Avatar } from "./Avatar.ts";
 import { AvatarProps, AvatarSize, UpdateAvatarCb } from "./types.ts";

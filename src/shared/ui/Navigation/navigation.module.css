@@ -9,7 +9,5 @@
 }
 
 nav > a {
- font-family: inherit;
- font-size: 14px;
  color: var(--color-content-darkest);
 }

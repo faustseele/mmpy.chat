@@ -1,5 +1,6 @@
 import Component from "@shared/lib/Component/model/Component.ts";
 import { ComponentProps } from "@shared/lib/Component/model/types.ts";
+import { handleAttachImage } from "../model/actions.ts";
 import { MessageFieldProps } from "../model/types.ts";
 import css from "./messageField.module.css";
 
@@ -8,27 +9,28 @@ export class MessageField extends Component<MessageFieldProps> {
     super(props);
   }
 
-  public componentDidMount(): void {
-    this.setProps({
-      on: {
-        submit: (e: Event) => {
-          e.preventDefault();
+  public componentDidRender(): void {
+    this._wireAttach();
+  }
 
-          const el = e.target as HTMLFormElement;
-          const input = el.querySelector("input");
-          const text = (input as HTMLInputElement)?.value?.trim();
+  private _wireAttach(): void {
+    const attach = this.element?.querySelector<HTMLInputElement>(
+      `#${css.attachInput}`,
+    );
 
-          if (text) {
-            this.on.sendMessage?.(text);
-            (input as HTMLInputElement).value = "";
-          }
-        },
-      },
+    if (!attach || attach.dataset.bound) return;
+
+    attach.addEventListener("change", async (e) => {
+      await handleAttachImage(e);
+      attach.value = "";
     });
+    attach.dataset.bound = "true";
   }
 
   public getInnerMarkup(): string {
     return /*html*/ `
+      <label for="${css.attachInput}" class="${css.inputButton} ${css.inputButton_attach}" aria-label="Attach Image"></label>
+      <input id="${css.attachInput}" type="file" name="image"/>
       <input
         class="${css.input}"
         name="{{id}}"
@@ -38,7 +40,7 @@ export class MessageField extends Component<MessageFieldProps> {
         aria-label="{{label}}"
         autocomplete="off"
       />
-      <button type="submit" class="${css.inputButton} ${css.sendButton}" aria-label="Send message"></button>
+      <button type="submit" class="${css.inputButton} ${css.inputButton_send}" aria-label="Send message"></button>
     `;
   }
 }

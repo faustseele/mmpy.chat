@@ -42,10 +42,10 @@ export const messengerPageParams: ComponentParams<MessengerProps> = {
   } satisfies MessengerConfigs["info"]),
   children: {
     nodes: {
-      heading_chats: getHeadingNode("heading_chats", "Чаты 👥") as any,
+      heading_chats: getHeadingNode("heading_chats", "чаты 👥") as any,
       heading_goToSettings: getHeadingNode(
         "heading_goToSettings",
-        "Профиль ➛",
+        "️⚙️ профиль",
         {
           isClickable: true,
           on: { click: handleGoToSettings },
@@ -58,7 +58,7 @@ export const messengerPageParams: ComponentParams<MessengerProps> = {
       }) as any,
       findUserChatButton: getButtonNode(
         "findUserChatButton",
-        "Найти пользователя 👤",
+        "Найти юзера 👤",
         { tooltip: "Найти пользователя по логину" },
       ) as any,
       closeChatButton: getButtonNode("closeChatButton", "❌", {

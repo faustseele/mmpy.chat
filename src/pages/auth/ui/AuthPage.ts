@@ -8,6 +8,7 @@ import FormValidator from "@shared/lib/validation/FormValidator.ts";
 import { Button } from "@shared/ui/Button/Button.ts";
 import { Input } from "@shared/ui/Input/Input.ts";
 import { InputProps } from "@shared/ui/Input/types.ts";
+import { handleGuestClick } from "../model/actions.ts";
 import { AuthNodes, AuthProps } from "../model/types.ts";
 import { onBadForm, onGoodForm } from "../model/utils.ts";
 import css from "./auth.module.css";
@@ -40,14 +41,24 @@ export class AuthPage extends Page<AuthProps> {
     }
 
     /* --- getting instances --- */
-    const { buttonFormSubmit } = this.children.nodes as AuthNodes;
+    const { buttonFormSubmit, buttonGuest } = this.children.nodes as AuthNodes;
     const inputs = getInstances<InputProps, Input>(this.children, "inputs");
     this.submit = buttonFormSubmit.runtime?.instance as Button;
+    const guest = buttonGuest.runtime?.instance as Button;
     this.validator = new FormValidator(inputs);
 
     /* --- setting events --- */
     this._wireSubmit(this.validator, this.submit);
     this._vivifyInputs(inputs, this.validator);
+    this._wireGuestClick(guest);
+  }
+
+  private _wireGuestClick(guest: Button): void {
+    guest.setProps({
+      on: {
+        click: () => handleGuestClick(guest),
+      },
+    });
   }
 
   private _wireSubmit(validator: FormValidator, submit: Button): void {

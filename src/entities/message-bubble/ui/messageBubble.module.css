@@ -7,9 +7,6 @@
 
   padding: 8px;
   border-radius: 4px;
-
-  font-family: var(--font-family);
-  font-size: inherit;
 }
 
 .message:first-of-type {
@@ -67,7 +64,6 @@
   margin: 0;
   max-width: 400px;
   
-  font-size: 14px;
   color: inherit;
 
   text-overflow: ellipsis;

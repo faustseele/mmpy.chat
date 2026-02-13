@@ -1,13 +1,13 @@
 import { isMobile } from "@/shared/lib/browser/isMobile.ts";
+import { ls_getLoggedIn } from "@/shared/lib/LocalStorage/actions.ts";
 import { getNavigationNode } from "@/shared/ui/Navigation/factory.ts";
 import { getToastNode } from "@/shared/ui/Toast/factory.ts";
 import { handleFetchChats } from "@entities/chat/model/actions.ts";
 import { handleFetchUser } from "@features/authenticate/model/actions.ts";
-import Store from "../providers/store/model/Store.ts";
 
 /* initilizes application; keeps Router separate */
 export const initApp = async () => {
-  await bootstrapAuth();
+  bootstrapAuth();
 
   const root = document.getElementsByTagName("body")[0];
 
@@ -17,11 +17,16 @@ export const initApp = async () => {
 
 const bootstrapAuth = async () => {
   try {
-    const user = await handleFetchUser();
-    if (user) await handleFetchChats();
+    const optimisticLoggedIn = ls_getLoggedIn();
 
-    const isLoggedIn = Store.getState().controllers.isLoggedIn;
-    console.log("bootstrapAuth: isLoggedIn?", isLoggedIn);
+    if (optimisticLoggedIn) {
+      const user = await handleFetchUser();
+
+      /* no-'await' bc it's unnecessary for FCP to happen */
+      if (user.ok) handleFetchChats();
+    }
+
+    console.log("bootstrapAuth: isLoggedIn?", optimisticLoggedIn);
   } catch (error) {
     throw new Error("bootstrapAuth failed", { cause: error });
   }

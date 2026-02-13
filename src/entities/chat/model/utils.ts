@@ -1,16 +1,8 @@
-import { ChatId } from "@/shared/api/model/api.types.ts";
-import ChatService from "./ChatService.ts";
+import { ZERO_WIDTH_SPACE } from "@/shared/config/const.ts";
+import { ChatType } from "./types.ts";
 
-export const isChatNotes = async (id: ChatId): Promise<boolean> => {
-  const resChatParticipants = await ChatService.getUsers(id);
+export const getChatType = (title: string): ChatType => {
+  if (title.includes(ZERO_WIDTH_SPACE)) return "notes";
 
-  if (!resChatParticipants.ok) return false;
-
-  const userOnly = resChatParticipants.data!.length < 2;
-
-  if (userOnly) {
-    return true;
-  } else {
-    return false;
-  }
+  return "chat";
 };

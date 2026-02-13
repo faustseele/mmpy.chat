@@ -50,15 +50,15 @@ export const settingsPageParams: ComponentParams<SettingsProps> = {
     rootTag: "form",
     classNames: cx(cssPage.moduleWindow, css.moduleWindow_settings),
     type: "change-info",
-    profileName: "Loading..",
+    profileName: "...",
     user: null,
   },
   children: {
     nodes: {
       ...(editorNodes_info as any),
       ...(editorNodes_psw as any),
-      heading_profile: getHeadingNode("heading_profile", "Профиль 👤") as any,
-      heading_backToChats: getHeadingNode("heading_backToChats", "⮘ Назад", {
+      heading_profile: getHeadingNode("heading_profile", "профиль 👤") as any,
+      heading_backToChats: getHeadingNode("heading_backToChats", "🗨️ к чатам", {
         isClickable: true,
         on: { click: handleMessengerClick },
       }) as any,
@@ -82,17 +82,17 @@ export const settingsPageParams: ComponentParams<SettingsProps> = {
         "subheading_form",
         "Ваши данные:",
       ) as any,
-      buttonEditInfo: getButtonNode("buttonEditInfo", "Изменить данные", {
+      buttonEditInfo: getButtonNode("buttonEditInfo", "Изменить данные 📝", {
         type: "submit",
       }) as any,
       buttonEditPassword: getButtonNode(
         "buttonEditPassword",
-        "Изменить пароль",
+        "Изменить пароль 🔑",
         {
           isSilent: true,
         },
       ) as any,
-      buttonLogout: getButtonNode("buttonLogout", "Выйти", {
+      buttonLogout: getButtonNode("buttonLogout", "Выйти 🕳️", {
         isSilent: true,
       }) as any,
     },

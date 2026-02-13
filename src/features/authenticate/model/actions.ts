@@ -6,7 +6,6 @@ import {
   handleCreateChat,
   handleFetchChats,
 } from "@entities/chat/model/actions.ts";
-import { ls_removeLastChatId } from "@shared/lib/LocalStorage/actions.ts";
 import { RouteLink } from "@shared/types/universal.ts";
 import { GUEST_CREDS } from "../config/guest.ts";
 import AuthService from "./AuthService.ts";
@@ -14,7 +13,13 @@ import { SignInData, SignUpData } from "./types.ts";
 
 export const handleFetchUser = async (): Promise<ApiResponse<UserResponse>> => {
   const res = await AuthService.fetchUser();
-  if (!res.ok) ls_removeLastChatId();
+
+  if (!res.ok && res.err?.status === 408) {
+    globalBus.emit("toast", {
+      msg: "Request Timeout. Try Again.",
+      type: "error",
+    });
+  }
   return res;
 };
 
@@ -45,11 +50,15 @@ export const handleSignIn = async (
     /* fetch chats on successful login */
     handleFetchChats();
     Router.go(RouteLink.Messenger);
+  } else {
+    if (res.err?.status === 400) handlePresentSession(res);
   }
   return res;
 };
 
-export const handleGuestMode = async (): Promise<ApiResponse<UserResponse>> => {
+export const handleGuestSignIn = async (): Promise<
+  ApiResponse<UserResponse>
+> => {
   globalBus.emit("toast", { msg: "Launching Guest Mode..." });
   const res = await AuthService.signIn(GUEST_CREDS);
 
@@ -62,13 +71,25 @@ export const handleGuestMode = async (): Promise<ApiResponse<UserResponse>> => {
       type: "success",
     });
   } else {
+    if (res.err?.status === 400) handlePresentSession(res);
+
     console.error("Guest Login Failed", res);
     globalBus.emit("toast", {
-      msg: `Dev-Error: ${res.err?.reason}`,
+      msg: res.err?.reason,
       type: "error",
     });
   }
   return res;
+};
+
+export const handlePresentSession = async (res: ApiResponse<UserResponse>) => {
+  if (res.err?.reason === "User already in system") {
+    await handleLogout();
+    globalBus.emit("toast", {
+      msg: "Another session is active, logging out. Try again.",
+      type: "error",
+    });
+  }
 };
 
 export const handleLogout = async (): Promise<ApiResponse<boolean>> => {
@@ -85,7 +106,7 @@ export const handleLogout = async (): Promise<ApiResponse<boolean>> => {
     Router.go(RouteLink.Error);
     console.error("Logout Failed", res);
     globalBus.emit("toast", {
-      msg: `Dev-Error: ${res.err?.reason}`,
+      msg: res.err?.reason,
       type: "error",
     });
   }

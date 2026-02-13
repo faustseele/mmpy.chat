@@ -174,7 +174,19 @@ export class SettingsPage extends Page<SettingsProps> {
       on: {
         click: async (e: Event) => {
           e.preventDefault();
-          handleLogout();
+          logoutBtn.setProps({
+            configs: {
+              showSpinner: true,
+            },
+          });
+          
+          await handleLogout();
+
+          logoutBtn.setProps({
+            configs: {
+              showSpinner: false,
+            },
+          });
         },
       },
     });

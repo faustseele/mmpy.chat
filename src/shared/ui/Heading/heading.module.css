@@ -11,8 +11,6 @@
   box-sizing: border-box;
 
   font-size: 25px;
-  line-height: 15px;
-  font-family: var(--font-family);
   font-weight: 300;
   letter-spacing: -0.02em;
   color: var(--color-acc);
@@ -22,6 +20,7 @@
 
 .heading__text_clickable {
  border-bottom: 1px solid var(--color-universal-br);
+ opacity: 0.8;
 
  cursor: pointer;
  transition: var(--transition);
@@ -29,6 +28,7 @@
 
 .heading__text_clickable:hover {
   border-bottom: 1px solid var(--color-acc-bold);
+  opacity: 1;
 }
 
 .heading__text_drama {

@@ -131,4 +131,21 @@ export class ChatWebsocket {
 
     this.setMessages(chatId, [...list, message]);
   }
+
+  public sendFile(resourceId: number) {
+    const chatId = Store.getState().api.chats.activeId;
+
+    if (!chatId) return;
+    const ws = this.sockets.get(chatId);
+
+    if (!ws || ws.readyState !== WebSocket.OPEN) {
+      console.error("WS is not open");
+      return;
+    }
+
+    ws.send(JSON.stringify({ type: "file", content: String(resourceId) }));
+
+    /* update the chats list */
+    setTimeout(() => handleFetchChats(), 100);
+  }
 }

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { handleGuestMode } from "@/features/authenticate/model/actions.ts";
 import { cx } from "@/shared/lib/helpers/formatting/classnames.ts";
 import { getButtonNode } from "@/shared/ui/Button/factory.ts";
 import { getHeadingNode } from "@/shared/ui/Heading/factory.ts";
@@ -15,7 +14,7 @@ import { handleReroute } from "../model/actions.ts";
 import { buildAuthPage } from "../model/factory.ts";
 import { AuthProps } from "../model/types.ts";
 import type { AuthPage } from "../ui/AuthPage.ts";
-import css from "../ui/auth.module.css"
+import css from "../ui/auth.module.css";
 
 const iptIds = [
   "input-name",
@@ -51,14 +50,10 @@ const authPageParams_signIn: ComponentParams<AuthProps> = {
     nodes: {
       ...(inputs_signIn as any),
       heading: getHeadingNode("heading", "Вход 🚪"),
-      buttonFormSubmit: getButtonNode("buttonFormSubmit", "Войти ✓", {
+      buttonFormSubmit: getButtonNode("buttonFormSubmit", "Войти 🔑", {
         type: "submit",
       }),
-      buttonGuest: getButtonNode("buttonGuest", "👻 Guest", {
-        on: {
-          click: handleGuestMode,
-        },
-      }),
+      buttonGuest: getButtonNode("buttonGuest", "Гость 👻"),
       buttonReroute: getButtonNode("buttonReroute", "Впервые?", {
         isSilent: true,
         on: {
@@ -89,15 +84,12 @@ const authPageParams_signUp: ComponentParams<AuthProps> = {
       heading: getHeadingNode("heading", "Регистрация 🎀"),
       buttonFormSubmit: getButtonNode(
         "buttonFormSubmit",
-        "Зарегистрироваться ✓", {
+        "Зарегистрироваться ✒️",
+        {
           type: "submit",
-        }
-      ),
-      buttonGuest: getButtonNode("buttonGuest", "👻 Guest", {
-        on: {
-          click: handleGuestMode,
         },
-      }),
+      ),
+      buttonGuest: getButtonNode("buttonGuest", "Гость 👻"),
       buttonReroute: getButtonNode("buttonReroute", "Я свой!", {
         isSilent: true,
         on: {

@@ -25,10 +25,10 @@ export const errorPageParams_404: ComponentParams<ErrorProps> = {
       heading: getHeadingNode("heading", "⛔ Ошибка 404", {
         isDrama: true,
       }) as any,
-      subheading: getSubheadingNode("subheading", "🌑 Не туда попали", {
+      subheading: getSubheadingNode("subheading", " не туда попали", {
         isDrama: true,
       }) as any,
-      button_back: getButtonNode("button_back", "Назад к чатам", {
+      button_back: getButtonNode("button_back", "Назад к чатам 🗨️", {
         on: { click: handleBack },
       }) as any,
     },
@@ -52,10 +52,10 @@ export const errorPageParams_500: ComponentParams<ErrorProps> = {
       heading: getHeadingNode("heading", "🪜 Ошибка 500", {
         isDrama: true,
       }) as any,
-      subheading: getSubheadingNode("subheading", "🔧 Мы уже фиксим", {
+      subheading: getSubheadingNode("subheading", "мы уже фиксим..", {
         isDrama: true,
       }) as any,
-      button_back: getButtonNode("button_back", "Назад к чатам", {
+      button_back: getButtonNode("button_back", "Назад к чатам 🗨️", {
         on: { click: handleBack },
       }) as any,
     },

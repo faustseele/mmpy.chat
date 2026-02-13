@@ -1,4 +1,5 @@
 import Store from "@app/providers/store/model/Store.ts";
+import ResourcesAPI from "@shared/api/ResourcesAPI.ts";
 import {
   ChildGraph,
   ChildrenEdges,
@@ -39,6 +40,7 @@ export function getMessagesGraph(): ChildGraph {
 
     const messageNode = getMessageNode(id, type, tinyDate(msg.time), {
       text: msg.content,
+      image: msg.file ? ResourcesAPI.getResourcePath(msg.file.path) : undefined,
     });
 
     /* populating */

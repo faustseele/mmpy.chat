@@ -37,13 +37,19 @@
   opacity: 1;
 }
 
-.attachButton {
-  mask-image: url('../../../../static/attach.svg');
+.inputButton_attach {
+  mask-image: url('/attach.svg');
+  width: 17px;
 }
 
-.sendButton {
-  mask-image: url('../../../../static/send-msg.svg');
+.inputButton_send {
+  mask-image: url('/send-msg.svg');
   width: 17px;
+}
+
+/* hidin the default file-input completely */
+#attachInput {
+  display: none;
 }
 
 .input {
@@ -56,10 +62,7 @@
   outline: none;
   background-color: var(--color-item-bg);
 
-  font-size: 14px;
-  line-height: 15px;
   letter-spacing: 0.02em;
-  font-family: inherit;
   color: var(--color-content);
 
   transition: var(--transition);
