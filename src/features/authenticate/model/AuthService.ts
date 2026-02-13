@@ -99,6 +99,7 @@ class AuthService {
         Store.set("api.auth.user", null);
         Store.set("controllers.isLoggedIn", false);
         ls_setLoggedIn(false);
+
         return {
           ok: false,
           err: {
@@ -109,16 +110,6 @@ class AuthService {
         };
       }
     } catch (e) {
-      const badCookie = (e as ApiError).status === 401;
-
-      if (badCookie) {
-        console.info("fetchUser failed, probably not logged in", e);
-        ls_setLoggedIn(false);
-      } else {
-        console.error("fetchUser failed", e);
-        return { ok: false, err: e as ApiError };
-      }
-
       ls_removeLastChatId();
 
       return { ok: false, err: e as ApiError };

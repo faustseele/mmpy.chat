@@ -14,12 +14,27 @@ import { SignInData, SignUpData } from "./types.ts";
 export const handleFetchUser = async (): Promise<ApiResponse<UserResponse>> => {
   const res = await AuthService.fetchUser();
 
-  if (!res.ok && res.err?.status === 408) {
-    globalBus.emit("toast", {
-      msg: "Request Timeout. Try Again.",
-      type: "error",
-    });
+  if (!res.ok) {
+    const status = res.err?.status;
+
+    if (status === 408) {
+      globalBus.emit("toast", {
+        msg: "Request Timeout. Try Again.",
+        type: "error",
+      });
+      return res;
+    }
+
+    if (status === 401) {
+      handlePresentSession(res);
+      return res;
+    }
+
+    console.warn("Unhandled Error-response", res);
+
+    return res;
   }
+
   return res;
 };
 
@@ -83,13 +98,32 @@ export const handleGuestSignIn = async (): Promise<
 };
 
 export const handlePresentSession = async (res: ApiResponse<UserResponse>) => {
-  if (res.err?.reason === "User already in system") {
-    await handleLogout();
+  const reason = res.err?.reason;
+
+  if (reason === "User already in system") {
     globalBus.emit("toast", {
-      msg: "Another session is active, logging out. Try again.",
+      msg: "You are already logged in. Use Profile page to log out.",
+      type: "info",
+    });
+
+    Router.go(RouteLink.Settings);
+    return;
+  }
+
+  if (reason === "Cookie is not valid") {
+    /* straight logout & cookie removal; bypassing full handleLogout() */
+    await AuthService.logout();
+
+    globalBus.emit("toast", {
+      msg: "This session is invalid, logging out. Try again.",
       type: "error",
     });
+
+    Router.go(RouteLink.SignIn);
+    return;
   }
+
+  console.warn("Unhandled Error-response", res);
 };
 
 export const handleLogout = async (): Promise<ApiResponse<boolean>> => {
