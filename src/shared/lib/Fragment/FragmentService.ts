@@ -18,6 +18,7 @@ import { ComponentNode } from "../Component/model/types.ts";
  */
 export default class FragmentService<C extends BaseConfigs> {
   private templateCache = new Map<string, HandlebarsTemplateDelegate>();
+  private _template = document.createElement("template");
 
   public compile(sourceMarkup: string, configs: C): DocumentFragment {
     let template = this.templateCache.get(sourceMarkup);
@@ -100,7 +101,11 @@ export default class FragmentService<C extends BaseConfigs> {
    * Creates a DocumentFragment from a raw HTML string.
    */
   private _createFragmentFromString(htmlString: string): DocumentFragment {
-    return document.createRange().createContextualFragment(htmlString);
+    /* sets the HTML of the inert template */
+    this._template.innerHTML = htmlString;
+
+    /* a deep clone of the template's content (DocumentFragment) */
+    return this._template.content.cloneNode(true) as DocumentFragment;
   }
 
   /**

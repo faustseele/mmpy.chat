@@ -35,7 +35,7 @@ export class MessageBubble extends Component<MessageProps> {
       {{else}}
         <div class="${css.content}">
           {{#if image}}
-            <img class="${css.content__image}" src="{{image}}" alt="MessageBubble image" />
+            <img class="${css.content__image}" src="{{image}}" alt="MessageBubble image" fetchpriority="high" />
           {{/if}}
           {{#unless image}}
             {{#if text}}

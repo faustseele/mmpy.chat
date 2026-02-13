@@ -40,9 +40,6 @@ export class Toast extends Component<ToastProps> {
   public showToast({ msg, type = "info" }: ToastPayload): void {
     if (!this.element) return;
 
-    console.log("Toast: showing", msg);
-    console.trace()
-
     /* clear timer if toast active */
     if (this.timerId) {
       clearTimeout(this.timerId);
