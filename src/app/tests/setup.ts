@@ -1,6 +1,6 @@
 import { vi } from "vitest";
 
-const localStorageMock = (function () {
+function localStorageMock() {
   let ls: Record<string, string> = {};
   return {
     /* wrapping in vi.fn(), so we can verify the behavior 
@@ -17,7 +17,26 @@ const localStorageMock = (function () {
       delete ls[key];
     }),
   };
-})();
+}
+
+function xhrMock(): Partial<XMLHttpRequest> {
+  return {
+    open: vi.fn(),
+    send: vi.fn(),
+    setRequestHeader: vi.fn(),
+    readyState: 4,
+    status: 200,
+    response: { success: true },
+    /* these need to be accessible so the test can trigger them */
+    onload: vi.fn(),
+    onerror: vi.fn(),
+    onabort: vi.fn(),
+    ontimeout: vi.fn(),
+  };
+}
 
 /* stubs the global object */
-vi.stubGlobal("localStorage", localStorageMock);
+/* mocks a singleton instance of 'localStorage' */
+vi.stubGlobal("localStorage", localStorageMock());
+/* vi.fn() is used to track 'new XMLHttpRequest()' and mock it w/ xhrMock() */
+vi.stubGlobal("XMLHttpRequest", vi.fn(xhrMock));
