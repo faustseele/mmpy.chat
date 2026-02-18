@@ -1,5 +1,5 @@
-import { isMobile } from "@/shared/lib/browser/isMobile.ts";
-import { cx } from "@/shared/lib/helpers/formatting/classnames.ts";
+import { isMobile } from "@shared/lib/browser/isMobile.ts";
+import { cx } from "@shared/lib/helpers/formatting/classnames.ts";
 import { handleUpdateAvatar } from "@entities/user/model/actions.ts";
 import { handleLogout } from "@features/authenticate/model/actions.ts";
 import { InputEditor } from "@features/edit-profile/ui/InputEditor.ts";

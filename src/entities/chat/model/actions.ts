@@ -3,9 +3,9 @@ import {
   ChatResponse,
   CreateChatResponse,
   GetChatsQuery,
-} from "@/shared/api/model/api.types.ts";
-import { ApiResponse } from "@/shared/api/model/types.ts";
-import { globalBus } from "@/shared/lib/EventBus/EventBus.ts";
+} from "@shared/api/model/api.types.ts";
+import { ApiResponse } from "@shared/api/model/types.ts";
+import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
 import { ls_getLastChatId } from "@shared/lib/LocalStorage/actions.ts";
 import ChatService from "./ChatService.ts";
 

@@ -1,6 +1,6 @@
-import Component from "@/shared/lib/Component/model/Component.ts";
-import { ComponentProps } from "@/shared/lib/Component/model/types.ts";
-import { cx } from "@/shared/lib/helpers/formatting/classnames.ts";
+import Component from "@shared/lib/Component/model/Component.ts";
+import { ComponentProps } from "@shared/lib/Component/model/types.ts";
+import { cx } from "@shared/lib/helpers/formatting/classnames.ts";
 import css from "./avatar.module.css";
 import { AvatarConfigs, AvatarProps } from "./types.ts";
 import { avatarId } from "./utils.ts";

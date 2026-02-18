@@ -1,14 +1,14 @@
-import { ChatId } from "@/shared/api/model/api.types.ts";
-import { API_URL_RESOURCES } from "@/shared/config/urls.ts";
+import { ChatId } from "@shared/api/model/api.types.ts";
+import { API_URL_RESOURCES } from "@shared/config/urls.ts";
 import {
   ComponentDeps,
   ComponentId,
   ComponentNode,
   ComponentParams,
-} from "@/shared/lib/Component/model/types.ts";
-import DOMService from "@/shared/lib/DOM/DOMService.ts";
-import FragmentService from "@/shared/lib/Fragment/FragmentService.ts";
-import { ComponentFactory } from "@/shared/lib/helpers/factory/types.ts";
+} from "@shared/lib/Component/model/types.ts";
+import DOMService from "@shared/lib/DOM/DOMService.ts";
+import FragmentService from "@shared/lib/Fragment/FragmentService.ts";
+import { ComponentFactory } from "@shared/lib/helpers/factory/types.ts";
 import defaultAvatar from "/avatar.png";
 import css from "./avatar.module.css";
 import { Avatar } from "./Avatar.ts";

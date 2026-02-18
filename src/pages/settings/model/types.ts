@@ -1,4 +1,4 @@
-import { UserResponse } from "@/shared/api/model/api.types";
+import { UserResponse } from "@shared/api/model/api.types";
 import { PageId } from "@pages/page/config/const.ts";
 import { BaseProps } from "@shared/lib/Component/model/base.types.ts";
 import { ChildrenNodes } from "@shared/lib/Component/model/children.types.ts";

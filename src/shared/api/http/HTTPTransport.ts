@@ -1,4 +1,4 @@
-import { globalBus } from "@/shared/lib/EventBus/EventBus.ts";
+import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
 import { API_URL } from "../../config/urls.ts";
 import {
   HttpMethod,

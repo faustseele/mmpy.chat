@@ -1,5 +1,5 @@
-import { UserResponse } from "@/shared/api/model/api.types.ts";
-import { ApiResponse } from "@/shared/api/model/types.ts";
+import { UserResponse } from "@shared/api/model/api.types.ts";
+import { ApiResponse } from "@shared/api/model/types.ts";
 import { UpdatePasswordData, UpdateProfileData } from "./types.ts";
 import UserService from "./UserService.ts";
 

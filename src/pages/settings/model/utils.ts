@@ -1,7 +1,7 @@
-import { UserResponse } from "@/shared/api/model/api.types.ts";
-import { ApiResponse } from "@/shared/api/model/types.ts";
-import { globalBus } from "@/shared/lib/EventBus/EventBus.ts";
-import { ToastType } from "@/shared/ui/Toast/types.ts";
+import { UserResponse } from "@shared/api/model/api.types.ts";
+import { ApiResponse } from "@shared/api/model/types.ts";
+import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
+import { ToastType } from "@shared/ui/Toast/types.ts";
 import {
   handleUpdatePassword,
   handleUpdateProfile,

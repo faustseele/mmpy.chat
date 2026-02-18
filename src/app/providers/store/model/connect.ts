@@ -6,7 +6,7 @@ import { getProjection } from "../lib/patch.ts";
 import { merge } from "../lib/utils.ts";
 import Store from "./Store.ts";
 import { MapStateToProps } from "./types.ts";
-import { isEqual } from "@/shared/lib/helpers/object/utils.ts";
+import { isEqual } from "@shared/lib/helpers/object/utils.ts";
 
 /* bridges Store <-> Page blueprint */
 export function connect<P extends BaseProps, C extends Page<P>>(

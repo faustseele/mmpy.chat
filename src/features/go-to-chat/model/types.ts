@@ -1,6 +1,6 @@
-import { ChatType } from "@/entities/chat/model/types.ts";
-import { ChatId, ISODateString } from "@/shared/api/model/api.types";
-import { ChildrenNodes } from "@/shared/lib/Component/model/children.types.ts";
+import { ChatType } from "@entities/chat/model/types.ts";
+import { ChatId, ISODateString } from "@shared/api/model/api.types";
+import { ChildrenNodes } from "@shared/lib/Component/model/children.types.ts";
 import {
   BaseConfigs,
   BaseProps,

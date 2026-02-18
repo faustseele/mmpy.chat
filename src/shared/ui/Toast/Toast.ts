@@ -1,5 +1,5 @@
-import { globalBus } from "@/shared/lib/EventBus/EventBus.ts";
-import { cx } from "@/shared/lib/helpers/formatting/classnames.ts";
+import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
+import { cx } from "@shared/lib/helpers/formatting/classnames.ts";
 import Component from "@shared/lib/Component/model/Component.ts";
 import { ComponentProps } from "@shared/lib/Component/model/types.ts";
 import css from "./toast.module.css";

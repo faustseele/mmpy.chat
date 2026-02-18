@@ -1,10 +1,10 @@
-import { ChatId, UserResponse } from "@/shared/api/model/api.types.ts";
+import { ChatId, UserResponse } from "@shared/api/model/api.types.ts";
 import {
   BaseConfigs,
   BaseProps,
 } from "../../lib/Component/model/base.types.ts";
 import { RootTag } from "../../lib/DOM/types.ts";
-import { ApiResponse } from "@/shared/api/model/types.ts";
+import { ApiResponse } from "@shared/api/model/types.ts";
 
 export interface AvatarProps extends BaseProps {
   configs: AvatarConfigs;

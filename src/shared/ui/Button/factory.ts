@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BaseProps } from "@/shared/lib/Component/model/base.types.ts";
+import { BaseProps } from "@shared/lib/Component/model/base.types.ts";
 import {
   ComponentDeps,
   ComponentId,

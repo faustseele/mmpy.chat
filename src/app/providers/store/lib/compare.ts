@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { isEqual } from "@/shared/lib/helpers/object/utils.ts";
+import { isEqual } from "@shared/lib/helpers/object/utils.ts";
 import { BaseProps } from "@shared/lib/Component/model/base.types.ts";
 import { ComponentId, ComponentNode } from "@shared/lib/Component/model/types.ts";
 

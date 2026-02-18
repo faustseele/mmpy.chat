@@ -1,7 +1,7 @@
 import ChatService from "@entities/chat/model/ChatService.ts";
 import ResourcesAPI from "@shared/api/ResourcesAPI.ts";
 import css from "../ui/messageField.module.css";
-import { globalBus } from "@/shared/lib/EventBus/EventBus.ts";
+import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
 
 export const handleSendMessage = (e: Event) => {
   e.preventDefault()

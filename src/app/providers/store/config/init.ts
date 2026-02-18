@@ -1,4 +1,4 @@
-import { ls_getLoggedIn } from "@/shared/lib/LocalStorage/actions.ts";
+import { ls_getLoggedIn } from "@shared/lib/LocalStorage/actions.ts";
 import { AppState } from "../model/Store.ts";
 import { APIState } from "../model/types.ts";
 

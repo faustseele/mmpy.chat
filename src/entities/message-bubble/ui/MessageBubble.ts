@@ -1,4 +1,4 @@
-import { cx } from "@/shared/lib/helpers/formatting/classnames.ts";
+import { cx } from "@shared/lib/helpers/formatting/classnames.ts";
 import Component from "@shared/lib/Component/model/Component.ts";
 import { ComponentProps } from "@shared/lib/Component/model/types.ts";
 import { MessageProps } from "../model/types.ts";

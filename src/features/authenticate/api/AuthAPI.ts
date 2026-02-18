@@ -4,7 +4,7 @@ import {
   SignInRequest,
   SignUpRequest,
   UserResponse,
-} from "@/shared/api/model/api.types";
+} from "@shared/api/model/api.types";
 
 const authAPIInstance = new HTTPTransport("/auth");
 
