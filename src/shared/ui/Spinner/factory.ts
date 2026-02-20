@@ -2,14 +2,14 @@ import {
   ComponentDeps,
   ComponentNode,
   ComponentParams,
-} from "@/shared/lib/Component/model/types.ts";
-import DOMService from "@/shared/lib/DOM/DOMService.ts";
-import FragmentService from "@/shared/lib/Fragment/FragmentService.ts";
-import { ComponentFactory } from "@/shared/lib/helpers/factory/types.ts";
+} from "@shared/lib/Component/model/types.ts";
+import DOMService from "@shared/lib/DOM/DOMService.ts";
+import FragmentService from "@shared/lib/Fragment/FragmentService.ts";
+import { ComponentFactory } from "@shared/lib/helpers/factory/types.ts";
 import css from "./spinner.module.css";
 import { Spinner } from "./Spinner.ts";
 import { SpinnerProps } from "./types.ts";
-import { cx } from "@/shared/lib/helpers/formatting/classnames.ts";
+import { cx } from "@shared/lib/helpers/formatting/classnames.ts";
 
 export const getSpinnerNode = (
   isBig: boolean = false,

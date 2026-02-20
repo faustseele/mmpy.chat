@@ -1,5 +1,5 @@
-import { ChatId, ChatMessage } from "@/shared/api/model/api.types";
-import { ApiResponse } from "@/shared/api/model/types.ts";
+import { ChatId, ChatMessage } from "@shared/api/model/api.types";
+import { ApiResponse } from "@shared/api/model/types.ts";
 import Store from "@app/providers/store/model/Store.ts";
 import { WSS_CHATS } from "@shared/config/urls.ts";
 import { handleFetchChats } from "../model/actions.ts";

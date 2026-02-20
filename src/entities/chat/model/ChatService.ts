@@ -6,8 +6,8 @@ import {
   CreateChatResponse,
   GetChatsQuery,
   UpdateChatAvatarResponse,
-} from "@/shared/api/model/api.types.ts";
-import { ApiError, ApiResponse } from "@/shared/api/model/types.ts";
+} from "@shared/api/model/api.types.ts";
+import { ApiError, ApiResponse } from "@shared/api/model/types.ts";
 import Store from "@app/providers/store/model/Store.ts";
 import { ls_removeLastChatId, ls_storeLastChatId } from "@shared/lib/LocalStorage/actions.ts";
 import ChatAPI from "../api/ChatAPI.ts";

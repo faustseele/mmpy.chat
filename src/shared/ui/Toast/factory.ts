@@ -2,10 +2,10 @@ import {
   ComponentDeps,
   ComponentNode,
   ComponentParams,
-} from "@/shared/lib/Component/model/types.ts";
-import DOMService from "@/shared/lib/DOM/DOMService.ts";
-import FragmentService from "@/shared/lib/Fragment/FragmentService.ts";
-import { ComponentFactory } from "@/shared/lib/helpers/factory/types.ts";
+} from "@shared/lib/Component/model/types.ts";
+import DOMService from "@shared/lib/DOM/DOMService.ts";
+import FragmentService from "@shared/lib/Fragment/FragmentService.ts";
+import { ComponentFactory } from "@shared/lib/helpers/factory/types.ts";
 import css from "./toast.module.css";
 import { Toast } from "./Toast.ts";
 import { ToastProps, ToastType } from "./types.ts";

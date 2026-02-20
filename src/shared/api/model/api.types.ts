@@ -3,7 +3,7 @@
  * Clean, reusable, and exported for use across features/entities.
  */
 
-import { ChatType } from "@/entities/chat/model/types.ts";
+import { ChatType } from "@entities/chat/model/types.ts";
 
 // Common aliases
 export type UserId = number;

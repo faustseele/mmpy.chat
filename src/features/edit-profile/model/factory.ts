@@ -1,4 +1,4 @@
-import { getInputTypeByFieldId } from "@/shared/ui/Input/utils.ts";
+import { getInputTypeByFieldId } from "@shared/ui/Input/utils.ts";
 import { BaseProps } from "@shared/lib/Component/model/base.types.ts";
 import {
   ComponentDeps,

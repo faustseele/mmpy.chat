@@ -1,8 +1,8 @@
-import Store from "@/app/providers/store/model/Store.ts";
-import { ChatType } from "@/entities/chat/model/types.ts";
-import { ChatResponse, ISODateString } from "@/shared/api/model/api.types.ts";
-import { cx } from "@/shared/lib/helpers/formatting/classnames.ts";
-import { getAvatarNode } from "@/shared/ui/Avatar/factory.ts";
+import Store from "@app/providers/store/model/Store.ts";
+import { ChatType } from "@entities/chat/model/types.ts";
+import { ChatResponse, ISODateString } from "@shared/api/model/api.types.ts";
+import { cx } from "@shared/lib/helpers/formatting/classnames.ts";
+import { getAvatarNode } from "@shared/ui/Avatar/factory.ts";
 import {
   handleSelectChat
 } from "@entities/chat/model/actions.ts";

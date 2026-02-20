@@ -1,8 +1,8 @@
-import Router from "@/app/providers/router/Router.ts";
-import { Button } from "@/shared/ui/Button/Button.ts";
+import Router from "@app/providers/router/Router.ts";
+import { Button } from "@shared/ui/Button/Button.ts";
 import { RouteLink } from "@shared/types/universal.ts";
 import { AuthType } from "./types.ts";
-import { handleGuestSignIn } from "@/features/authenticate/model/actions.ts";
+import { handleGuestSignIn } from "@features/authenticate/model/actions-guest.ts";
 
 export const handleReroute = (type: AuthType): void => {
   Router.go(type === "sign-up" ? RouteLink.SignIn : RouteLink.SignUp);

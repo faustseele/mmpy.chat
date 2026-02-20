@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { cx } from "@/shared/lib/helpers/formatting/classnames.ts";
-import { getAvatarNode } from "@/shared/ui/Avatar/factory.ts";
-import { getButtonNode } from "@/shared/ui/Button/factory.ts";
-import { getHeadingNode } from "@/shared/ui/Heading/factory.ts";
-import { getInputNode } from "@/shared/ui/Input/factory.ts";
-import { getSpinnerNode } from "@/shared/ui/Spinner/factory.ts";
+import { cx } from "@shared/lib/helpers/formatting/classnames.ts";
+import { getAvatarNode } from "@shared/ui/Avatar/factory.ts";
+import { getButtonNode } from "@shared/ui/Button/factory.ts";
+import { getHeadingNode } from "@shared/ui/Heading/factory.ts";
+import { getInputNode } from "@shared/ui/Input/factory.ts";
+import { getSpinnerNode } from "@shared/ui/Spinner/factory.ts";
 import { RouteConfigs } from "@app/providers/router/types.ts";
 import {
   handleAddUser,

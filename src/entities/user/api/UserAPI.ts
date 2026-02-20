@@ -5,7 +5,7 @@ import {
   FindUserResponse,
   UpdateUserPassword,
   UserResponse,
-} from "@/shared/api/model/api.types";
+} from "@shared/api/model/api.types";
 
 const userAPIInstance = new HTTPTransport("/user");
 

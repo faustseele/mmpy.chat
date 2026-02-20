@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { cx } from "@/shared/lib/helpers/formatting/classnames.ts";
-import { getButtonNode } from "@/shared/ui/Button/factory.ts";
-import { getHeadingNode } from "@/shared/ui/Heading/factory.ts";
-import { getSubheadingNode } from "@/shared/ui/Subheading/factory.ts";
+import { cx } from "@shared/lib/helpers/formatting/classnames.ts";
+import { getButtonNode } from "@shared/ui/Button/factory.ts";
+import { getHeadingNode } from "@shared/ui/Heading/factory.ts";
+import { getSubheadingNode } from "@shared/ui/Subheading/factory.ts";
 import { RouteConfigs } from "@app/providers/router/types.ts";
 import { PageId } from "@pages/page/config/const.ts";
 import cssPage from "@pages/page/ui/page.module.css";

@@ -1,5 +1,5 @@
-import { UpdateUserPassword, UserResponse } from "@/shared/api/model/api.types";
-import { ApiError, ApiResponse } from "@/shared/api/model/types.ts";
+import { UpdateUserPassword, UserResponse } from "@shared/api/model/api.types";
+import { ApiError, ApiResponse } from "@shared/api/model/types.ts";
 import Store from "@app/providers/store/model/Store.ts";
 import UserAPI from "@entities/user/api/UserAPI.ts";
 

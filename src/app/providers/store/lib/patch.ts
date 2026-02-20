@@ -1,4 +1,4 @@
-import { isPlainObject } from "@/shared/lib/helpers/object/utils.ts";
+import { isPlainObject } from "@shared/lib/helpers/object/utils.ts";
 
 export function getProjection<TShape extends Record<string, unknown>>(
   current: unknown,

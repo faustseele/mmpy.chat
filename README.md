@@ -27,7 +27,7 @@ Component dependencies (**DI**) are explicit and minimal:
 ---
 
 ### Deployed at Netlify
-**The link**: https://dynamic-smakager-a6d4a4.netlify.app
+**The link**: https://mmpy-messenger.netlify.app/
 
 ---
 

@@ -4,19 +4,15 @@ import {
   SignInRequest,
   SignUpRequest,
   UserResponse,
-} from "@/shared/api/model/api.types";
+} from "@shared/api/model/api.types";
 
 const authAPIInstance = new HTTPTransport("/auth");
 
 class AuthAPI extends BaseAPI {
   public signUp(data: SignUpRequest): Promise<{ id: number }> {
-    try {
-      return authAPIInstance.post("/signUp", { data }) as Promise<{
-        id: number;
-      }>;
-    } catch (error) {
-      throw new Error("AuthAPI: signUp failed", { cause: error });
-    }
+    return authAPIInstance.post("/signUp", { data }) as Promise<{
+      id: number;
+    }>;
   }
 
   public signIn(data: SignInRequest): Promise<string> {
@@ -30,7 +26,7 @@ class AuthAPI extends BaseAPI {
   public async logout(): Promise<boolean> {
     /* def returning is 'null', so using try-catch */
     try {
-      (await authAPIInstance.post("/logout")) as Promise<string>;
+      await authAPIInstance.post("/logout");
       return true;
     } catch (_) {
       return false;

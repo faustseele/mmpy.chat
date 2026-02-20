@@ -1,7 +1,7 @@
-import { isMobile } from "@/shared/lib/browser/isMobile.ts";
-import { ls_getLoggedIn } from "@/shared/lib/LocalStorage/actions.ts";
-import { getNavigationNode } from "@/shared/ui/Navigation/factory.ts";
-import { getToastNode } from "@/shared/ui/Toast/factory.ts";
+import { isMobile } from "@shared/lib/browser/isMobile.ts";
+import { ls_getLoggedIn } from "@shared/lib/LocalStorage/actions.ts";
+import { getNavigationNode } from "@shared/ui/Navigation/factory.ts";
+import { getToastNode } from "@shared/ui/Toast/factory.ts";
 import { handleFetchChats } from "@entities/chat/model/actions.ts";
 import { handleFetchUser } from "@features/authenticate/model/actions.ts";
 

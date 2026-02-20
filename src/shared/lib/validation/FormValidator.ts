@@ -1,4 +1,4 @@
-import { ApiResponse } from "@/shared/api/model/types.ts";
+import { ApiResponse } from "@shared/api/model/types.ts";
 import { InputEditor } from "@features/edit-profile/ui/InputEditor.ts";
 import { Input } from "../../ui/Input/Input.ts";
 import { FieldType } from "../../ui/Input/types.ts";

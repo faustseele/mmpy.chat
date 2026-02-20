@@ -1,4 +1,20 @@
 import { FieldType } from "../../ui/Input/types.ts";
+import {
+  DISPLAY_NAME_ERROR,
+  DISPLAY_NAME_REGEX,
+  EMAIL_ERROR,
+  EMAIL_REGEX,
+  LOGIN_ERROR,
+  LOGIN_REGEX,
+  NAME_ERROR,
+  NAME_REGEX,
+  PASSWORD_ERROR,
+  PASSWORD_REGEX,
+  PHONE_ERROR,
+  PHONE_REGEX,
+  SURNAME_ERROR,
+  SURNAME_REGEX,
+} from "./consts.ts";
 
 /** 'Ё' Char has U+0401, whereas 'А-Я' range includes
  * symbols from U+0410 up to U+042F. Same thing for 'ё'!
@@ -7,34 +23,25 @@ import { FieldType } from "../../ui/Input/types.ts";
 // eslint-disable-next-line no-unused-vars
 const getRegex: Record<FieldType, (value: string) => string> = {
   name: (value: string): string => {
-    const regex = /^[A-ZА-ЯЁ][a-zA-Zа-яА-ЯЁё-]*$/;
-    return regex.test(value) ? "" : "Странное имя.";
+    return NAME_REGEX.test(value) ? "" : NAME_ERROR;
   },
   surname: (value: string): string => {
-    const regex = /^[A-ZА-ЯЁ][a-zA-Zа-яА-ЯЁё-]*$/;
-    return regex.test(value) ? "" : "Странная у вас фамилия.";
+    return SURNAME_REGEX.test(value) ? "" : SURNAME_ERROR;
   },
   login: (value: string): string => {
-    const regex = /^(?!^\d+$)[a-zA-Z0-9_-]{3,20}$/;
-    return regex.test(value) ? "" : "Плохой логин.";
+    return LOGIN_REGEX.test(value) ? "" : LOGIN_ERROR;
   },
   email: (value: string): string => {
-    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    return regex.test(value) ? "" : "Невалидная почта.";
+    return EMAIL_REGEX.test(value) ? "" : EMAIL_ERROR;
   },
   password: (value: string): string => {
-    const regex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
-    return regex.test(value)
-      ? ""
-      : "8-40 символов, минимум 1 цифра и заглавная буква.";
+    return PASSWORD_REGEX.test(value) ? "" : PASSWORD_ERROR;
   },
   phone: (value: string): string => {
-    const regex = /^\+?\d{10,15}$/;
-    return regex.test(value) ? "" : "Неправильный номер телефона.";
+    return PHONE_REGEX.test(value) ? "" : PHONE_ERROR;
   },
   display_name: (value: string): string => {
-    const regex = /^[A-ZА-ЯЁ][a-zA-Zа-яА-ЯЁё-]*$/;
-    return regex.test(value) ? "" : "Странный ник.";
+    return DISPLAY_NAME_REGEX.test(value) ? "" : DISPLAY_NAME_ERROR;
   },
   message: (value: string): string => {
     return value.length > 0 ? "" : "Напишите что-нибудь.";
@@ -43,16 +50,10 @@ const getRegex: Record<FieldType, (value: string) => string> = {
     return value.length > 0 ? "" : "Напишите что-нибудь.";
   },
   oldPassword: (value: string): string => {
-    const regex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
-    return regex.test(value)
-      ? ""
-      : "8-40 символов, минимум 1 цифра и заглавная буква.";
+    return PASSWORD_REGEX.test(value) ? "" : PASSWORD_ERROR;
   },
   newPassword: (value: string): string => {
-    const regex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
-    return regex.test(value)
-      ? ""
-      : "8-40 символов, минимум 1 цифра и заглавная буква.";
+    return PASSWORD_REGEX.test(value) ? "" : PASSWORD_ERROR;
   },
 };
 

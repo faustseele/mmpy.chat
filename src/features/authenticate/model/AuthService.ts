@@ -1,10 +1,10 @@
-import UserAPI from "@/entities/user/api/UserAPI.ts";
+import UserAPI from "@entities/user/api/UserAPI.ts";
 import {
   SignInRequest,
   SignUpRequest,
   UserResponse,
-} from "@/shared/api/model/api.types.ts";
-import { ApiError, ApiResponse } from "@/shared/api/model/types.ts";
+} from "@shared/api/model/api.types.ts";
+import { ApiError, ApiResponse } from "@shared/api/model/types.ts";
 import Store from "@app/providers/store/model/Store.ts";
 import {
   ls_removeLastChatId,

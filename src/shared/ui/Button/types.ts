@@ -1,4 +1,4 @@
-import { ChildrenNodes } from "@/shared/lib/Component/model/children.types.ts";
+import { ChildrenNodes } from "@shared/lib/Component/model/children.types.ts";
 import {
   BaseConfigs,
   BaseProps,

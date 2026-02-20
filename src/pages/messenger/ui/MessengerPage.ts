@@ -1,8 +1,8 @@
-import Store from "@/app/providers/store/model/Store.ts";
-import { MessageField } from "@/features/send-message/ui/MessageField.ts";
-import { isMobile } from "@/shared/lib/browser/isMobile.ts";
-import { cx } from "@/shared/lib/helpers/formatting/classnames.ts";
-import { Spinner } from "@/shared/ui/Spinner/Spinner.ts";
+import Store from "@app/providers/store/model/Store.ts";
+import { MessageField } from "@features/send-message/ui/MessageField.ts";
+import { isMobile } from "@shared/lib/browser/isMobile.ts";
+import { cx } from "@shared/lib/helpers/formatting/classnames.ts";
+import { Spinner } from "@shared/ui/Spinner/Spinner.ts";
 import cssPage from "@pages/page/ui/page.module.css";
 import { Page } from "@pages/page/ui/Page.ts";
 import { ComponentProps } from "@shared/lib/Component/model/types.ts";

@@ -1,5 +1,5 @@
-import { handleUpdateAvatar } from "@/entities/user/model/actions.ts";
-import { getAvatarNode } from "@/shared/ui/Avatar/factory.ts";
+import { handleUpdateAvatar } from "@entities/user/model/actions.ts";
+import { getAvatarNode } from "@shared/ui/Avatar/factory.ts";
 import { AppState } from "@app/providers/store/model/Store.ts";
 import { ComponentPatch } from "@shared/lib/Component/model/types.ts";
 import { SettingsProps } from "./types.ts";

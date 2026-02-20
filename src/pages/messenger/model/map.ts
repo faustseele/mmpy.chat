@@ -1,5 +1,5 @@
-import { handleUpdateChatAvatar } from "@/entities/chat/model/actions.ts";
-import { getAvatarNode } from "@/shared/ui/Avatar/factory.ts";
+import { handleUpdateChatAvatar } from "@entities/chat/model/actions.ts";
+import { getAvatarNode } from "@shared/ui/Avatar/factory.ts";
 import { AppState } from "@app/providers/store/model/Store.ts";
 import { getMessagesGraph } from "@entities/message-bubble/model/factory.ts";
 import { getGoToChatGraph } from "@features/go-to-chat/model/factory.ts";

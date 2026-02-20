@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { handleUpdateAvatar } from "@/entities/user/model/actions.ts";
-import { cx } from "@/shared/lib/helpers/formatting/classnames.ts";
-import { getAvatarNode } from "@/shared/ui/Avatar/factory.ts";
-import { getButtonNode } from "@/shared/ui/Button/factory.ts";
-import { getHeadingNode } from "@/shared/ui/Heading/factory.ts";
-import { getSubheadingNode } from "@/shared/ui/Subheading/factory.ts";
+import { handleUpdateAvatar } from "@entities/user/model/actions.ts";
+import { cx } from "@shared/lib/helpers/formatting/classnames.ts";
+import { getAvatarNode } from "@shared/ui/Avatar/factory.ts";
+import { getButtonNode } from "@shared/ui/Button/factory.ts";
+import { getHeadingNode } from "@shared/ui/Heading/factory.ts";
+import { getSubheadingNode } from "@shared/ui/Subheading/factory.ts";
 import { RouteConfigs } from "@app/providers/router/types.ts";
 import { getEditorNode } from "@features/edit-profile/model/factory.ts";
 import { PageId } from "@pages/page/config/const.ts";

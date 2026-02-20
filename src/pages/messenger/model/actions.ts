@@ -1,7 +1,7 @@
-import { ZERO_WIDTH_SPACE } from "@/shared/config/const.ts";
-import { API_URL_RESOURCES } from "@/shared/config/urls.ts";
-import { globalBus } from "@/shared/lib/EventBus/EventBus.ts";
-import { urlToFile } from "@/shared/lib/helpers/file.ts";
+import { ZERO_WIDTH_SPACE } from "@shared/config/const.ts";
+import { API_URL_RESOURCES } from "@shared/config/urls.ts";
+import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
+import { urlToFile } from "@shared/lib/helpers/file.ts";
 import Router from "@app/providers/router/Router.ts";
 import UserService from "@entities/user/model/UserService.ts";
 import { RouteLink } from "@shared/types/universal.ts";

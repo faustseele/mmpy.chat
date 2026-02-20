@@ -1,6 +1,6 @@
-import FormValidator from "@/shared/lib/validation/FormValidator.ts";
-import { Button } from "@/shared/ui/Button/Button.ts";
-import { Subheading } from "@/shared/ui/Subheading/Subheading.ts";
+import FormValidator from "@shared/lib/validation/FormValidator.ts";
+import { Button } from "@shared/ui/Button/Button.ts";
+import { Subheading } from "@shared/ui/Subheading/Subheading.ts";
 import Router from "@app/providers/router/Router.ts";
 import { RouteLink } from "@shared/types/universal.ts";
 import { SettingsPage } from "../ui/SettingsPage.ts";
