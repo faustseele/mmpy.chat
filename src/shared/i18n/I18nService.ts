@@ -1,3 +1,4 @@
+import Store from "@/app/providers/store/model/Store.ts";
 import { ls_getLocale, ls_setLocale } from "../lib/LocalStorage/actions.ts";
 import { Dictionary, Locale, resolveKey } from "./dictionary.ts";
 
@@ -41,6 +42,9 @@ class I18nService {
 
     /* load new dictionary */
     await this.init();
+
+    /* only after set store state */
+    Store.set("controllers.language", lang);
   }
 }
 

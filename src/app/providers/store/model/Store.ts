@@ -6,10 +6,12 @@ import EventBus from "@shared/lib/EventBus/EventBus.ts";
 import { initialState } from "../config/init.ts";
 import { set } from "../lib/utils.ts";
 import { APIState, StoreEventBusEvents } from "./types.ts";
+import { Locale } from "@/shared/i18n/dictionary.ts";
 
 export interface AppState {
   api: APIState;
   controllers: {
+    language: Locale;
     isLoggedIn: boolean;
   };
   pageNodes: Record<ComponentId, PageNode<BaseProps, Page<BaseProps>>>;

@@ -1,4 +1,4 @@
-import { ls_getLoggedIn } from "@shared/lib/LocalStorage/actions.ts";
+import { ls_getLocale, ls_getLoggedIn } from "@shared/lib/LocalStorage/actions.ts";
 import { AppState } from "../model/Store.ts";
 import { APIState } from "../model/types.ts";
 
@@ -18,6 +18,7 @@ const apiInitialState: APIState = {
 export const initialState: AppState = {
   api: apiInitialState,
   controllers: {
+    language: ls_getLocale(),
     isLoggedIn: ls_getLoggedIn(),
   },
   pageNodes: {},
