@@ -1,3 +1,4 @@
+import { Locale } from "@/shared/i18n/dictionary.ts";
 import { ChatId } from "../../api/model/api.types.ts";
 
 /* --- Auth (optimistic) --- */
@@ -23,10 +24,10 @@ export function ls_removeLastChatId(): void {
 }
 
 /* --- Locale --- */
-export function ls_setLocale(locale: string): void {
+export function ls_setLocale(locale: Locale): void {
   localStorage.setItem("locale", locale);
 }
 
-export function ls_getLocale(): string {
-  return localStorage.getItem("locale") || "en";
+export function ls_getLocale(): Locale {
+  return localStorage.getItem("locale") as Locale || "en";
 }
