@@ -27,7 +27,7 @@ Component dependencies (**DI**) are explicit and minimal:
 ---
 
 ### Deployed at Netlify
-**The link**: https://mmpy-messenger.netlify.app/
+**The link**: 
 
 ---
 
