@@ -1,4 +1,4 @@
-import { Locale } from "@shared/i18n/dictionary.ts";
+import { Locale } from "@shared/i18n/types.ts";
 import { ChatId } from "../../api/model/api.types.ts";
 
 /* --- Auth (optimistic) --- */
