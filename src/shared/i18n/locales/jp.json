@@ -1,0 +1,185 @@
+{
+  "auth": {
+    "signin": {
+      "heading": "サインイン 🚪",
+      "submit": "サインイン 🔑",
+      "guest": "ゲスト 👻",
+      "newHere": "新規ですか？"
+    },
+    "signup": {
+      "heading": "サインアップ 🎀",
+      "submit": "サインアップ ✒️",
+      "guest": "ゲスト 👻",
+      "haveAccount": "アカウントをお持ちです！"
+    },
+    "inputs": {
+      "name": {
+        "label": "名前"
+      },
+      "surname": {
+        "label": "姓"
+      },
+      "login": {
+        "label": "ユーザー名"
+      },
+      "email": {
+        "label": "メール"
+      },
+      "password": {
+        "label": "パスワード"
+      },
+      "phone": {
+        "label": "電話"
+      }
+    }
+  },
+  "errors": {
+    "404": {
+      "heading": "⛔ 404 エラー",
+      "subheading": "道に迷いました",
+      "back": "チャットに戻る 🗨️"
+    },
+    "500": {
+      "heading": "🪜 500 エラー",
+      "subheading": "修正中です..",
+      "back": "チャットに戻る 🗨️"
+    }
+  },
+  "messenger": {
+    "actions": {
+      "findUserPrompt": "ユーザーのログイン名（またはこれらから選択）：",
+      "newNotesPrompt": "メモのタイトル：",
+      "deletionEnsuring": "削除してもよろしいですか"
+    },
+    "header": {
+      "chats": "チャット 👥",
+      "profile": "⚙️ プロフィール"
+    },
+    "search": {
+      "placeholder": "検索"
+    },
+    "buttons": {
+      "addNote": "メモ ✏️",
+      "addNoteTooltip": "新しいメモを追加",
+      "findUser": "ユーザーを探す 👤",
+      "findUserTooltip": "ログイン名でユーザーを探す",
+      "closeChat": "❌",
+      "closeChatTooltip": "チャットを閉じる",
+      "deleteNotes": "メモを削除 🔥",
+      "deleteNotesTooltip": "メモを消去",
+      "deleteChat": "チャットを削除 👤",
+      "deleteChatTooltip": "ユーザーとのチャットを削除"
+    },
+    "message": {
+      "notePlaceholder": "メモ：",
+      "chatPlaceholder": "メッセージ...",
+      "noNotes": "メモなし",
+      "noMessages": "メッセージなし"
+    },
+    "notes": {
+      "personal": "個人 👤",
+      "finance": "財務 💰",
+      "ideas": "アイデア 💡",
+      "projects": "プロジェクト 🧩",
+      "work": "仕事 💼",
+      "study": "勉強 🎓",
+      "health": "健康 🩺",
+      "family": "家族 👨‍👩‍👧‍👦",
+      "shopping": "ショッピング 🛍️",
+      "travel": "旅行 ✈️",
+      "reading": "読書 📚",
+      "recipes": "レシピ 🍳",
+      "dailyPlan": "デイリープラン 🗓️",
+      "journal": "日記 📓",
+      "archive": "アーカイブ 🗃️"
+    }
+  },
+  "settings": {
+    "header": {
+      "profile": "プロフィール 👤",
+      "backToChats": "🗨️ チャットへ"
+    },
+    "form": {
+      "subheadingInfo": "あなたのデータ：",
+      "subheadingPsw": "あなたのパスワード：",
+      "editInfo": "データを編集 📝",
+      "changePassword": "パスワードを変更 🔑",
+      "logout": "ログアウト 🕳️"
+    },
+    "inputs": {
+      "email": {
+        "label": "メール"
+      },
+      "name": {
+        "label": "名前"
+      },
+      "surname": {
+        "label": "姓"
+      },
+      "login": {
+        "label": "ログイン"
+      },
+      "displayName": {
+        "label": "チャット名"
+      },
+      "phone": {
+        "label": "電話番号"
+      },
+      "oldPassword": {
+        "label": "古いパスワード"
+      },
+      "newPassword": {
+        "label": "新しいパスワード"
+      }
+    }
+  },
+  "toasts": {
+    "auth": {
+      "timeout": "リクエストタイムアウト。再試行してください。",
+      "alreadyLogged": "すでにログインしています。プロフィールページでログアウトしてください。",
+      "invalidSession": "このセッションは無効です、ログアウト。再試行してください。",
+      "loggingOut": "ログアウト中...",
+      "logoutSuccess": "またね！ 👋",
+      "signupSuccess": "アカウントが正常に作成されました。",
+      "signinSuccess": "おかえりなさい！",
+      "guestLoading": "ゲストモードを起動中...",
+      "guestSuccess": "ゲストログイン成功！ 👻"
+    },
+    "chats": {
+      "creatingStub": "作成中 ",
+      "createSuccessStub": " が正常に作成されました！",
+      "deleteSuccessStub": " が正常に削除されました。",
+      "createLoading": "チャットを作成中..",
+      "createSuccess": "チャットが作成されました！",
+      "deleteLoading": "チャットを削除中...",
+      "deleteSuccess": "チャットが正常に削除されました。",
+      "devErrorStub": "開発者エラー: ",
+      "fetchErrorStub": "フェッチエラー: ",
+      "addUserLoading": "ユーザーを追加中...",
+      "addUserNotFoundStub": " ユーザーが見つかりませんでした。",
+      "addUserErrorStub": " ユーザーを追加できませんでした。",
+      "addUserSuccessStub": " ユーザーが正常に追加されました。"
+    },
+    "settings": {
+      "changeSuccess": "あなたのプロフィールが正常に変更されました。",
+      "changePswSuccess": "あなたのパスワードが正常に変更されました。",
+      "changePswErrorStub": "あなたのパスワードを変更できませんでした。API: "
+    },
+    "dev": {
+      "unhandled": "開発者エラー: 処理されない条件。"
+    },
+    "api": {
+      "httpSendFailed": "HTTPTransport: xhr.send が失敗しました。"
+    },
+    "message": {
+      "uploadImageLoading": "画像をアップロード中..."
+    },
+    "validation": {
+      "badForm": "すべてのフィールドを正しく入力してください。 ",
+      "passwordError": "古いものが間違っているか、新しいパスワードが無効です。"
+    }
+  },
+  "validation": {
+    "noValue": "フィールドを入力してください。"
+  }
+}

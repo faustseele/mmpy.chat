@@ -1,0 +1,185 @@
+{
+  "auth": {
+    "signin": {
+      "heading": "เข้าสู่ระบบ 🚪",
+      "submit": "เข้าสู่ระบบ 🔑",
+      "guest": "ผู้เยี่ยมชม 👻",
+      "newHere": "ใหม่ที่นี่?"
+    },
+    "signup": {
+      "heading": "สมัครสมาชิก 🎀",
+      "submit": "สมัครสมาชิก ✒️",
+      "guest": "ผู้เยี่ยมชม 👻",
+      "haveAccount": "ฉันมีบัญชีแล้ว!"
+    },
+    "inputs": {
+      "name": {
+        "label": "ชื่อ"
+      },
+      "surname": {
+        "label": "นามสกุล"
+      },
+      "login": {
+        "label": "ชื่อผู้ใช้"
+      },
+      "email": {
+        "label": "อีเมล"
+      },
+      "password": {
+        "label": "รหัสผ่าน"
+      },
+      "phone": {
+        "label": "โทรศัพท์"
+      }
+    }
+  },
+  "errors": {
+    "404": {
+      "heading": "⛔ ข้อผิดพลาด 404",
+      "subheading": "คุณหลงทาง",
+      "back": "กลับไปที่แชท 🗨️"
+    },
+    "500": {
+      "heading": "🪜 ข้อผิดพลาด 500",
+      "subheading": "เรากำลังแก้ไข..",
+      "back": "กลับไปที่แชท 🗨️"
+    }
+  },
+  "messenger": {
+    "actions": {
+      "findUserPrompt": "ชื่อผู้ใช้ของผู้ใช้ (หรือเลือกหนึ่งจากเหล่านี้):",
+      "newNotesPrompt": "หัวข้อบันทึก:",
+      "deletionEnsuring": "คุณแน่ใจหรือไม่ว่าต้องการลบ"
+    },
+    "header": {
+      "chats": "แชท 👥",
+      "profile": "⚙️ โปรไฟล์"
+    },
+    "search": {
+      "placeholder": "ค้นหา"
+    },
+    "buttons": {
+      "addNote": "บันทึก ✏️",
+      "addNoteTooltip": "เพิ่มบันทึกใหม่",
+      "findUser": "ค้นหาผู้ใช้ 👤",
+      "findUserTooltip": "ค้นหาผู้ใช้ตามชื่อผู้ใช้",
+      "closeChat": "❌",
+      "closeChatTooltip": "ปิดแชท",
+      "deleteNotes": "ลบบันทึก 🔥",
+      "deleteNotesTooltip": "ลบบันทึก",
+      "deleteChat": "ลบแชท 👤",
+      "deleteChatTooltip": "ลบแชทกับผู้ใช้"
+    },
+    "message": {
+      "notePlaceholder": "บันทึก:",
+      "chatPlaceholder": "ข้อความ...",
+      "noNotes": "ไม่มีบันทึก",
+      "noMessages": "ไม่มีข้อความ"
+    },
+    "notes": {
+      "personal": "ส่วนตัว 👤",
+      "finance": "การเงิน 💰",
+      "ideas": "ไอเดีย 💡",
+      "projects": "โปรเจกต์ 🧩",
+      "work": "งาน 💼",
+      "study": "การศึกษา 🎓",
+      "health": "สุขภาพ 🩺",
+      "family": "ครอบครัว 👨‍👩‍👧‍👦",
+      "shopping": "การช็อปปิ้ง 🛍️",
+      "travel": "การเดินทาง ✈️",
+      "reading": "การอ่าน 📚",
+      "recipes": "สูตรอาหาร 🍳",
+      "dailyPlan": "แผนประจำวัน 🗓️",
+      "journal": "บันทึกประจำวัน 📓",
+      "archive": "คลังเก็บ 🗃️"
+    }
+  },
+  "settings": {
+    "header": {
+      "profile": "โปรไฟล์ 👤",
+      "backToChats": "🗨️ ไปที่แชท"
+    },
+    "form": {
+      "subheadingInfo": "ข้อมูลของคุณ:",
+      "subheadingPsw": "รหัสผ่านของคุณ:",
+      "editInfo": "แก้ไขข้อมูล 📝",
+      "changePassword": "เปลี่ยนรหัสผ่าน 🔑",
+      "logout": "ออกจากระบบ 🕳️"
+    },
+    "inputs": {
+      "email": {
+        "label": "อีเมล"
+      },
+      "name": {
+        "label": "ชื่อ"
+      },
+      "surname": {
+        "label": "นามสกุล"
+      },
+      "login": {
+        "label": "เข้าสู่ระบบ"
+      },
+      "displayName": {
+        "label": "ชื่อแชท"
+      },
+      "phone": {
+        "label": "หมายเลขโทรศัพท์"
+      },
+      "oldPassword": {
+        "label": "รหัสผ่านเดิม"
+      },
+      "newPassword": {
+        "label": "รหัสผ่านใหม่"
+      }
+    }
+  },
+  "toasts": {
+    "auth": {
+      "timeout": "หมดเวลาคำขอ ลองอีกครั้ง.",
+      "alreadyLogged": "คุณเข้าสู่ระบบแล้ว ใช้หน้ากโปรไฟล์เพื่อออกจากระบบ.",
+      "invalidSession": "เซสชันนี้ไม่ถูกต้อง กำลังออกจากระบบ ลองอีกครั้ง.",
+      "loggingOut": "กำลังออกจากระบบ...",
+      "logoutSuccess": "ลาก่อน! 👋",
+      "signupSuccess": "สร้างบัญชีสำเร็จแล้ว.",
+      "signinSuccess": "ยินดีต้อนรับกลับ!",
+      "guestLoading": "กำลังเปิดโหมดผู้เยี่ยมชม...",
+      "guestSuccess": "เข้าสู่ระบบผู้เยี่ยมชมสำเร็จ! 👻"
+    },
+    "chats": {
+      "creatingStub": "กำลังสร้าง ",
+      "createSuccessStub": " สร้างสำเร็จแล้ว!",
+      "deleteSuccessStub": " ลบสำเร็จแล้ว.",
+      "createLoading": "กำลังสร้างแชท..",
+      "createSuccess": "สร้างแชทแล้ว!",
+      "deleteLoading": "กำลังลบแชท...",
+      "deleteSuccess": "ลบแชทสำเร็จแล้ว.",
+      "devErrorStub": "ข้อผิดพลาดนักพัฒนา: ",
+      "fetchErrorStub": "ข้อผิดพลาดการดึงข้อมูล: ",
+      "addUserLoading": "กำลังเพิ่มผู้ใช้...",
+      "addUserNotFoundStub": " ไม่พบผู้ใช้.",
+      "addUserErrorStub": " ไม่สามารถเพิ่มผู้ใช้.",
+      "addUserSuccessStub": " เพิ่มผู้ใช้สำเร็จแล้ว."
+    },
+    "settings": {
+      "changeSuccess": "โปรไฟล์ของคุณถูกเปลี่ยนสำเร็จแล้ว.",
+      "changePswSuccess": "รหัสผ่านของคุณถูกเปลี่ยนสำเร็จแล้ว.",
+      "changePswErrorStub": "ไม่สามารถเปลี่ยนรหัสผ่านของคุณได้. API: "
+    },
+    "dev": {
+      "unhandled": "ข้อผิดพลาดนักพัฒนา: เงื่อนไขที่ไม่ได้รับการจัดการ."
+    },
+    "api": {
+      "httpSendFailed": "HTTPTransport: xhr.send ล้มเหลว."
+    },
+    "message": {
+      "uploadImageLoading": "กำลังอัปโหลดภาพ..."
+    },
+    "validation": {
+      "badForm": "กรุณากรอกข้อมูลในทุกช่องให้ถูกต้อง. ",
+      "passwordError": "รหัสผ่านเดิมผิด หรือรหัสผ่านใหม่ไม่ถูกต้อง."
+    }
+  },
+  "validation": {
+    "noValue": "กรุณากรอกข้อมูลในช่องนี้."
+  }
+}
