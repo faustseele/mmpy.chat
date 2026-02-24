@@ -50,7 +50,7 @@ export const onGoodForm = (
         dispatchToast(i18n.t("toasts.settings.changePswSuccess"));
       } else {
         dispatchToast(
-          i18n.t("toasts.settings.changePswErrorStub") + resApi.err?.reason,
+          i18n.t("toasts.settings.changePswErrorStub").replace('${}', resApi.err?.reason || ''),
           "error",
         );
       }

@@ -33,7 +33,7 @@ export const handleAddChat = async (on: MessengerOn) => {
   if (!resUser.ok || !resUser.data) {
     console.error("ChatService: addUser failed:", resUser);
     globalBus.emit("toast", {
-      msg: i18n.t("toasts.chats.addUserNotFoundStub") + login,
+      msg: i18n.t("toasts.chats.addUserNotFoundStub").replace('${}', login),
       type: "error",
     });
     return;
@@ -48,7 +48,7 @@ export const handleAddChat = async (on: MessengerOn) => {
   if (!newChatRes.ok) {
     console.error("ChatService: addUser failed:", newChatRes);
     globalBus.emit("toast", {
-      msg: i18n.t("toasts.chats.addUserErrorStub") + user.login,
+      msg: i18n.t("toasts.chats.addUserErrorStub").replace('${}', user.login),
       type: "error",
     });
     return;
@@ -60,12 +60,12 @@ export const handleAddChat = async (on: MessengerOn) => {
 
   if (resAddUser.ok) {
     globalBus.emit("toast", {
-      msg: user.login + i18n.t("toasts.chats.addUserSuccessStub"),
+      msg: i18n.t("toasts.chats.addUserSuccessStub").replace('${}', user.login),
     });
   } else {
     console.error("ChatService: addUser failed:", resAddUser);
     globalBus.emit("toast", {
-      msg: user.login + i18n.t("toasts.chats.addUserErrorStub"),
+      msg: i18n.t("toasts.chats.addUserErrorStub").replace('${}', user.login),
       type: "error",
     });
     return;

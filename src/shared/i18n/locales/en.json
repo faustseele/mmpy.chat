@@ -146,24 +146,24 @@
       "guestSuccess": "Guest Login Success! 👻"
     },
     "chats": {
-      "creatingStub": "Creating ",
-      "createSuccessStub": " successfully created!",
-      "deleteSuccessStub": " deleted successfully.",
+      "creatingStub": "Creating ${}...",
+      "createSuccessStub": "${} successfully created!",
+      "deleteSuccessStub": "${} deleted successfully.",
       "createLoading": "Creating chat..",
       "createSuccess": "Chat created!",
       "deleteLoading": "Deleting chat...",
       "deleteSuccess": "Chat deleted successfully.",
-      "devErrorStub": "Dev-Error: ",
-      "fetchErrorStub": "Fetch-Error: ",
+      "devErrorStub": "Dev-Error: ${}",
+      "fetchErrorStub": "Fetch-Error: ${}",
       "addUserLoading": "Adding user...",
-      "addUserNotFoundStub": " user has not been found.",
-      "addUserErrorStub": " user could not be added.",
-      "addUserSuccessStub": " user added successfully."
+      "addUserNotFoundStub": "User '${}' has not been found.",
+      "addUserErrorStub": "User '${}' could not be added.",
+      "addUserSuccessStub": "User '${}' added successfully."
     },
     "settings": {
       "changeSuccess": "Your profile has been changed successfully.",
       "changePswSuccess": "Your password has been changed successfully.",
-      "changePswErrorStub": "Your password could not be changed. API: "
+      "changePswErrorStub": "Your password could not be changed. API: ${}"
     },
     "dev": {
       "unhandled": "Developer error: unhandled condition."

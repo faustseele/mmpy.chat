@@ -146,24 +146,24 @@
       "guestSuccess": "เข้าสู่ระบบผู้เยี่ยมชมสำเร็จ! 👻"
     },
     "chats": {
-      "creatingStub": "กำลังสร้าง ",
-      "createSuccessStub": " สร้างสำเร็จแล้ว!",
-      "deleteSuccessStub": " ลบสำเร็จแล้ว.",
+      "creatingStub": "กำลังสร้าง ${}...",
+      "createSuccessStub": "${} สร้างสำเร็จแล้ว!",
+      "deleteSuccessStub": "${} ลบสำเร็จแล้ว.",
       "createLoading": "กำลังสร้างแชท..",
       "createSuccess": "สร้างแชทแล้ว!",
       "deleteLoading": "กำลังลบแชท...",
       "deleteSuccess": "ลบแชทสำเร็จแล้ว.",
-      "devErrorStub": "ข้อผิดพลาดนักพัฒนา: ",
-      "fetchErrorStub": "ข้อผิดพลาดการดึงข้อมูล: ",
+      "devErrorStub": "ข้อผิดพลาดนักพัฒนา: ${}",
+      "fetchErrorStub": "ข้อผิดพลาดการดึงข้อมูล: ${}",
       "addUserLoading": "กำลังเพิ่มผู้ใช้...",
-      "addUserNotFoundStub": " ไม่พบผู้ใช้.",
-      "addUserErrorStub": " ไม่สามารถเพิ่มผู้ใช้.",
-      "addUserSuccessStub": " เพิ่มผู้ใช้สำเร็จแล้ว."
+      "addUserNotFoundStub": "ไม่พบผู้ใช้ '${}'.",
+      "addUserErrorStub": "ไม่สามารถเพิ่มผู้ใช้ '${}'.",
+      "addUserSuccessStub": "เพิ่มผู้ใช้ '${}' สำเร็จแล้ว."
     },
     "settings": {
       "changeSuccess": "โปรไฟล์ของคุณถูกเปลี่ยนสำเร็จแล้ว.",
       "changePswSuccess": "รหัสผ่านของคุณถูกเปลี่ยนสำเร็จแล้ว.",
-      "changePswErrorStub": "ไม่สามารถเปลี่ยนรหัสผ่านของคุณได้. API: "
+      "changePswErrorStub": "ไม่สามารถเปลี่ยนรหัสผ่านของคุณได้. API: ${}"
     },
     "dev": {
       "unhandled": "ข้อผิดพลาดนักพัฒนา: เงื่อนไขที่ไม่ได้รับการจัดการ."

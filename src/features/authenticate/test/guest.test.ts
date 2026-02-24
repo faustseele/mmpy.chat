@@ -101,7 +101,7 @@ describe("@Features/Auth: Guest", () => {
 
     /* checking for the last-fired Toast */
     expect(spiedToast).toHaveBeenLastCalledWith("toast", {
-      msg: i18n.t("toasts.dev.devErrorStub") + badGuest.err?.reason,
+      msg: i18n.t("toasts.dev.devErrorStub").replace('${}', badGuest.err?.reason || ''),
       type: "error",
     });
 

@@ -27,7 +27,7 @@ export const handleCreateChat = async (
 ): Promise<ApiResponse<CreateChatResponse>> => {
   if (!noToast)
     globalBus.emit("toast", {
-      msg: `${i18n.t("toasts.chats.creatingStub")}'${title}' ..`,
+      msg: i18n.t("toasts.chats.creatingStub").replace('${}', title),
     });
 
   const res = await ChatService.createChat(title);
@@ -37,14 +37,14 @@ export const handleCreateChat = async (
     await ChatService.selectChat(res.data!.id);
     if (!noToast)
       globalBus.emit("toast", {
-        msg: `'${title}'` + i18n.t("toasts.chats.createSuccessStub"),
+        msg: i18n.t("toasts.chats.createSuccessStub").replace('${}', title),
       });
   } else {
     console.error("ChatService: createChat failed:", res);
     globalBus.emit(
       "toast",
       {
-        msg: i18n.t("toasts.dev.devErrorStub") + res.err?.reason,
+        msg: i18n.t("toasts.dev.devErrorStub").replace('${}', res.err?.reason || ''),
       },
       "error",
     );
@@ -61,14 +61,14 @@ export const handleDeleteChat = async (id: number, chatTitle: string) => {
     await ChatService.fetchChats();
 
     globalBus.emit("toast", {
-      msg: `'${chatTitle}'` + i18n.t("toasts.chats.deleteSuccessStub"),
+      msg: i18n.t("toasts.chats.deleteSuccessStub").replace('${}', chatTitle),
       type: "success",
     });
     ChatService.deselectChat();
   } else {
     console.error("ChatService: deleteChat failed:", res);
     globalBus.emit("toast", {
-      msg: i18n.t("toasts.dev.devErrorStub") + res.err?.reason,
+      msg: i18n.t("toasts.dev.devErrorStub").replace('${}', res.err?.reason || ''),
       type: "error",
     });
   }
@@ -82,7 +82,7 @@ export const handleFetchChats = async (
   if (!resList.ok) {
     console.error("fetchChats failed:", resList.err?.response);
     globalBus.emit("toast", {
-      msg: i18n.t("toasts.chats.fetchErrorStub") + resList.err?.reason,
+      msg: i18n.t("toasts.chats.fetchErrorStub").replace('${}', resList.err?.reason || ''),
       type: "error",
     });
     return resList;

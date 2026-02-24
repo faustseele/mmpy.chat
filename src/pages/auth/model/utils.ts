@@ -13,7 +13,7 @@ const emitToast = (res: ApiResponse<UserResponse>, type: SubmitTypes) => {
   if (!res.ok) {
     const err = res.err;
     const msg = `${err?.reason}`;
-    globalBus.emit("toast", { msg: i18n.t("toasts.dev.devErrorStub") + msg, type: "error" });
+    globalBus.emit("toast", { msg: i18n.t("toasts.dev.devErrorStub").replace('${}', msg), type: "error" });
     return;
   }
 

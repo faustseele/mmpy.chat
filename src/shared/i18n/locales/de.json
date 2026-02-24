@@ -146,24 +146,24 @@
       "guestSuccess": "Gast-Anmeldung erfolgreich! 👻"
     },
     "chats": {
-      "creatingStub": "Erstelle ",
-      "createSuccessStub": " erfolgreich erstellt!",
-      "deleteSuccessStub": " erfolgreich gelöscht.",
+      "creatingStub": "Erstelle ${}...",
+      "createSuccessStub": "${} erfolgreich erstellt!",
+      "deleteSuccessStub": "${} erfolgreich gelöscht.",
       "createLoading": "Chat erstellen..",
       "createSuccess": "Chat erstellt!",
       "deleteLoading": "Chat löschen...",
       "deleteSuccess": "Chat erfolgreich gelöscht.",
-      "devErrorStub": "Entwickler-Fehler: ",
-      "fetchErrorStub": "Abruf-Fehler: ",
+      "devErrorStub": "Entwickler-Fehler: ${}",
+      "fetchErrorStub": "Abruf-Fehler: ${}",
       "addUserLoading": "Benutzer hinzufügen...",
-      "addUserNotFoundStub": " Benutzer wurde nicht gefunden.",
-      "addUserErrorStub": " Benutzer konnte nicht hinzugefügt werden.",
-      "addUserSuccessStub": " Benutzer erfolgreich hinzugefügt."
+      "addUserNotFoundStub": "Benutzer '${}' wurde nicht gefunden.",
+      "addUserErrorStub": "Benutzer '${}' konnte nicht hinzugefügt werden.",
+      "addUserSuccessStub": "Benutzer '${}' erfolgreich hinzugefügt."
     },
     "settings": {
       "changeSuccess": "Dein Profil wurde erfolgreich geändert.",
       "changePswSuccess": "Dein Passwort wurde erfolgreich geändert.",
-      "changePswErrorStub": "Dein Passwort konnte nicht geändert werden. API: "
+      "changePswErrorStub": "Dein Passwort konnte nicht geändert werden. API: ${}"
     },
     "dev": {
       "unhandled": "Entwickler-Fehler: unbehandelte Bedingung."

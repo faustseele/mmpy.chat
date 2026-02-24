@@ -114,7 +114,7 @@ export const handleLogout = async (): Promise<ApiResponse<boolean>> => {
     Router.go(RouteLink.Error);
     console.error("Logout Failed", res);
     globalBus.emit("toast", {
-      msg: i18n.t("toasts.dev.devErrorStub") + res.err?.reason,
+      msg: i18n.t("toasts.dev.devErrorStub").replace('${}', res.err?.reason || ''),
       type: "error",
     });
   }

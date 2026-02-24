@@ -28,7 +28,7 @@ export const handleGuestSignIn = async (): Promise<
 
     console.error("Guest Login Failed", res);
     globalBus.emit("toast", {
-      msg: i18n.t("toasts.dev.devErrorStub") + res.err?.reason,
+      msg: i18n.t("toasts.dev.devErrorStub").replace('${}', res.err?.reason || ''),
       type: "error",
     });
   }
