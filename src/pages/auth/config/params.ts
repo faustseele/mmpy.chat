@@ -15,6 +15,7 @@ import { buildAuthPage } from "../model/factory.ts";
 import { AuthProps } from "../model/types.ts";
 import type { AuthPage } from "../ui/AuthPage.ts";
 import css from "../ui/auth.module.css";
+import { i18n } from "@shared/i18n/I18nService.ts";
 
 const iptIds = [
   "input-name",
@@ -49,7 +50,7 @@ const authPageParams_signIn: ComponentParams<AuthProps> = {
   children: {
     nodes: {
       ...(inputs_signIn as any),
-      heading: getHeadingNode("heading", "Вход 🚪"),
+      heading: getHeadingNode("heading", i18n.t("pages.auth.signin.heading")),
       buttonFormSubmit: getButtonNode("buttonFormSubmit", "Войти 🔑", {
         type: "submit",
       }),

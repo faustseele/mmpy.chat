@@ -1,7 +1,7 @@
-import Router from "@/app/providers/router/Router.ts";
-import { handleFetchChats } from "@/entities/chat/model/actions.ts";
-import { globalBus } from "@/shared/lib/EventBus/EventBus.ts";
-import { RouteLink } from "@/shared/types/universal.ts";
+import Router from "@app/providers/router/Router.ts";
+import { handleFetchChats } from "@entities/chat/model/actions.ts";
+import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
+import { RouteLink } from "@shared/types/universal.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { handleGuestSignIn } from "../model/actions-guest.ts";
 import AuthService from "../model/AuthService.ts";

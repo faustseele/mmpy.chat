@@ -28,6 +28,6 @@ export const resolveKey = (dictionary: Dictionary, path: string): string => {
 
   if (typeof current === "string") return current;
 
-  console.warn(`unresolved translation key: ${path}`);
+  console.error(`unresolved translation key: ${path}`);
   return path;
 };

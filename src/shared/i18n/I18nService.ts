@@ -1,4 +1,4 @@
-import Store from "@/app/providers/store/model/Store.ts";
+import Store from "@app/providers/store/model/Store.ts";
 import { ls_getLocale, ls_setLocale } from "../lib/LocalStorage/actions.ts";
 import { Dictionary, Locale, resolveKey } from "./dictionary.ts";
 
@@ -27,7 +27,19 @@ class I18nService {
    * @returns {string} resolved string or the path if not found
    */
   public t(path: string): string {
+    if (!Object.keys(this._dict).length) {
+      console.error("i18n.t: dictionary not loaded");
+      return path;
+    };
     return resolveKey(this._dict, path);
+  }
+
+  /**
+   * returns the active language
+   * @returns {Locale} active language
+   */
+  public getLanguage(): Locale {
+    return this._lang;
   }
 
   /**

@@ -12,6 +12,7 @@ import { handleGuestClick } from "../model/actions.ts";
 import { AuthNodes, AuthProps } from "../model/types.ts";
 import { onBadForm, onGoodForm } from "../model/utils.ts";
 import css from "./auth.module.css";
+import { i18n } from "@shared/i18n/I18nService.ts";
 
 export class AuthPage extends Page<AuthProps> {
   private footerModifier: string = "";
