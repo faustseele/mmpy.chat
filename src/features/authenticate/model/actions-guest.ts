@@ -7,11 +7,12 @@ import { RouteLink } from "@shared/types/universal.ts";
 import { GUEST_CREDS } from "../config/guest.ts";
 import { handlePresentSession } from "./actions.ts";
 import AuthService from "./AuthService.ts";
+import { i18n } from "@shared/i18n/I18nService.ts";
 
 export const handleGuestSignIn = async (): Promise<
   ApiResponse<UserResponse>
 > => {
-  globalBus.emit("toast", { msg: "Launching Guest Mode..." });
+  globalBus.emit("toast", { msg: i18n.t("toasts.auth.guestLoading") });
   const res = await AuthService.signIn(GUEST_CREDS);
 
   if (res.ok) {
@@ -19,7 +20,7 @@ export const handleGuestSignIn = async (): Promise<
     handleFetchChats();
     Router.go(RouteLink.Messenger);
     globalBus.emit("toast", {
-      msg: "👻 Guest Login Success!",
+      msg: i18n.t("toasts.auth.guestSuccess"),
       type: "success",
     });
   } else {
@@ -27,7 +28,7 @@ export const handleGuestSignIn = async (): Promise<
 
     console.error("Guest Login Failed", res);
     globalBus.emit("toast", {
-      msg: res.err?.reason,
+      msg: i18n.t("toasts.dev.devErrorStub") + res.err?.reason,
       type: "error",
     });
   }

@@ -146,22 +146,37 @@
       "guestSuccess": "Guest Login Success! 👻"
     },
     "chats": {
+      "creatingStub": "Creating ",
+      "createSuccessStub": " successfully created!",
+      "deleteSuccessStub": " deleted successfully.",
       "createLoading": "Creating chat..",
       "createSuccess": "Chat created!",
       "deleteLoading": "Deleting chat...",
       "deleteSuccess": "Chat deleted successfully.",
-      "devError": "Dev-Error: {reason}",
-      "fetchError": "{reason}",
+      "devErrorStub": "Dev-Error: ",
+      "fetchErrorStub": "Fetch-Error: ",
       "addUserLoading": "Adding user...",
-      "addUserNotFound": "User with '{login}' login is not found",
-      "addUserError": "Cannot add the user, {reason}",
-      "addUserSuccess": "User added successfully."
+      "addUserNotFoundStub": " user has not been found.",
+      "addUserErrorStub": " user could not be added.",
+      "addUserSuccessStub": " user added successfully."
     },
-    "validation": {
-      "badForm": "Please fill all the fields correctly."
+    "settings": {
+      "changeSuccess": "Your profile has been changed successfully.",
+      "changePswSuccess": "Your password has been changed successfully.",
+      "changePswErrorStub": "Your password could not be changed. API: "
     },
     "dev": {
       "unhandled": "Developer error: unhandled condition."
+    },
+    "api": {
+      "httpSendFailed": "HTTPTransport: xhr.send failed."
+    },
+    "message": {
+      "uploadImageLoading": "Uploading image..."
+    },
+    "validation": {
+      "badForm": "Please fill all the fields correctly. ",
+      "passwordError": "Either the old is incorrect or the new password is not valid."
     }
   },
   "validation": {

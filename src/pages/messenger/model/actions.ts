@@ -24,7 +24,7 @@ export const handleAddChat = async (on: MessengerOn) => {
   const input = window.prompt(explanation, "");
   if (input === null) return;
 
-  globalBus.emit("toast", { msg: "Adding user..." });
+  globalBus.emit("toast", { msg: i18n.t("toasts.chats.addUserLoading") });
 
   const login = input.trim();
   if (!login) return;
@@ -33,7 +33,7 @@ export const handleAddChat = async (on: MessengerOn) => {
   if (!resUser.ok || !resUser.data) {
     console.error("ChatService: addUser failed:", resUser);
     globalBus.emit("toast", {
-      msg: `User with '${login}' login is not found`,
+      msg: i18n.t("toasts.chats.addUserNotFoundStub") + login,
       type: "error",
     });
     return;
@@ -48,7 +48,7 @@ export const handleAddChat = async (on: MessengerOn) => {
   if (!newChatRes.ok) {
     console.error("ChatService: addUser failed:", newChatRes);
     globalBus.emit("toast", {
-      msg: `Cannot add the user, ${newChatRes.err?.reason}`,
+      msg: i18n.t("toasts.chats.addUserErrorStub") + user.login,
       type: "error",
     });
     return;
@@ -59,11 +59,13 @@ export const handleAddChat = async (on: MessengerOn) => {
   const resAddUser = await on.addUser(chatId, user.id);
 
   if (resAddUser.ok) {
-    globalBus.emit("toast", { msg: "User added successfully." });
+    globalBus.emit("toast", {
+      msg: user.login + i18n.t("toasts.chats.addUserSuccessStub"),
+    });
   } else {
     console.error("ChatService: addUser failed:", resAddUser);
     globalBus.emit("toast", {
-      msg: `Cannot add the user, ${resAddUser.err?.reason}`,
+      msg: user.login + i18n.t("toasts.chats.addUserErrorStub"),
       type: "error",
     });
     return;
@@ -79,7 +81,10 @@ export const handleAddChat = async (on: MessengerOn) => {
 
 export const handleAddNotes = async (on: MessengerOn) => {
   const chatName = randomNoteLabel();
-  const input = window.prompt(i18n.t("messenger.actions.newNotesPrompt"), chatName);
+  const input = window.prompt(
+    i18n.t("messenger.actions.newNotesPrompt"),
+    chatName,
+  );
   if (input === null) return;
 
   const title = input.trim() + ZERO_WIDTH_SPACE;

@@ -146,22 +146,37 @@
       "guestSuccess": "Вы вошли как Гость! 👻"
     },
     "chats": {
+      "creatingStub": "Создаём ",
+      "createSuccessStub": " создана!",
+      "deleteSuccessStub": " успешно удалён.",
       "createLoading": "Создаём чат...",
       "createSuccess": "Чат создан!",
       "deleteLoading": "Удаляем чат...",
       "deleteSuccess": "Чат успешно удалён.",
-      "devError": "Ошибка разработки: {reason}",
-      "fetchError": "{reason}",
+      "devErrorStub": "Ошибка разработки: ",
+      "fetchErrorStub": "Ошибка получения данных: ",
       "addUserLoading": "Добавляем пользователя...",
-      "addUserNotFound": "Пользователь с логином '{login}' не найден",
-      "addUserError": "Не удалось добавить пользователя, {reason}",
-      "addUserSuccess": "Пользователь успешно добавлен."
+      "addUserNotFoundStub": "— пользователь не найден с таким логином.",
+      "addUserErrorStub": "— не удалось добавить пользователя с таким логином.",
+      "addUserSuccessStub": "— пользователь успешно добавлен."
     },
-    "validation": {
-      "badForm": "Пожалуйста, заполните все поля корректно."
+    "settings": {
+      "changeSuccess": "Ваш профиль успешно изменён.",
+      "changePswSuccess": "Ваш пароль успешно изменён.",
+      "changePswErrorStub": "Ваш пароль не может быть изменён. API: "
     },
     "dev": {
       "unhandled": "Ошибка разработчика: необработанное состояние."
+    },
+    "api": {
+      "httpSendFailed": "HTTPTransport: ошибка xhr.send"
+    },
+    "message": {
+      "uploadImageLoading": "Загрузка изображения..."
+    },
+    "validation": {
+      "passwordError": "Либо старый пароль неверный, либо новый пароль невалиден.",
+      "badForm": "Пожалуйста, заполните все поля корректно. "
     }
   },
   "validation": {

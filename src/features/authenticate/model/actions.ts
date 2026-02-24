@@ -8,6 +8,7 @@ import {
 } from "@entities/chat/model/actions.ts";
 import { RouteLink } from "@shared/types/universal.ts";
 import AuthService from "./AuthService.ts";
+import { i18n } from "@shared/i18n/I18nService.ts";
 import { SignInData, SignUpData } from "./types.ts";
 
 export const handleFetchUser = async (): Promise<ApiResponse<UserResponse>> => {
@@ -18,7 +19,7 @@ export const handleFetchUser = async (): Promise<ApiResponse<UserResponse>> => {
 
     if (status === 408) {
       globalBus.emit("toast", {
-        msg: "Request Timeout. Try Again.",
+        msg: i18n.t("toasts.auth.timeout"),
         type: "error",
       });
       return res;
@@ -75,7 +76,7 @@ export const handlePresentSession = async (res: ApiResponse<UserResponse>) => {
 
   if (reason === "User already in system") {
     globalBus.emit("toast", {
-      msg: "You are already logged in. Use Profile page to log out.",
+      msg: i18n.t("toasts.auth.alreadyLogged"),
       type: "info",
     });
 
@@ -88,7 +89,7 @@ export const handlePresentSession = async (res: ApiResponse<UserResponse>) => {
     await AuthService.logout();
 
     globalBus.emit("toast", {
-      msg: "This session is invalid, logging out. Try again.",
+      msg: i18n.t("toasts.auth.invalidSession"),
       type: "error",
     });
 
@@ -100,20 +101,20 @@ export const handlePresentSession = async (res: ApiResponse<UserResponse>) => {
 };
 
 export const handleLogout = async (): Promise<ApiResponse<boolean>> => {
-  globalBus.emit("toast", { msg: "Logging out..." });
+  globalBus.emit("toast", { msg: i18n.t("toasts.auth.loggingOut") });
 
   const res = await AuthService.logout();
   if (res.ok) {
     Router.go(RouteLink.SignIn);
     globalBus.emit("toast", {
-      msg: "👋 See you!",
+      msg: i18n.t("toasts.auth.logoutSuccess"),
       type: "success",
     });
   } else {
     Router.go(RouteLink.Error);
     console.error("Logout Failed", res);
     globalBus.emit("toast", {
-      msg: res.err?.reason,
+      msg: i18n.t("toasts.dev.devErrorStub") + res.err?.reason,
       type: "error",
     });
   }

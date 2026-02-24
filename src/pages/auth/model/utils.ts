@@ -6,19 +6,20 @@ import {
   handleSignIn,
   handleSignUp,
 } from "@features/authenticate/model/actions.ts";
+import { i18n } from "@shared/i18n/I18nService.ts";
 
 const emitToast = (res: ApiResponse<UserResponse>, type: SubmitTypes) => {
   /* guard clause */
   if (!res.ok) {
     const err = res.err;
     const msg = `${err?.reason}`;
-    globalBus.emit("toast", { msg: msg, type: "error" });
+    globalBus.emit("toast", { msg: i18n.t("toasts.dev.devErrorStub") + msg, type: "error" });
     return;
   }
 
   if (type === "sign-up") {
     globalBus.emit("toast", {
-      msg: "Account created successfully.",
+      msg: i18n.t("toasts.auth.signupSuccess"),
       type: "success",
     });
     return;
@@ -26,14 +27,14 @@ const emitToast = (res: ApiResponse<UserResponse>, type: SubmitTypes) => {
 
   if (type === "sign-in") {
     globalBus.emit("toast", {
-      msg: "Welcome back!",
+      msg: i18n.t("toasts.auth.signinSuccess"),
       type: "success",
     });
     return;
   }
 
   globalBus.emit("toast", {
-    msg: "Developer error: unhandled condition.",
+    msg: i18n.t("toasts.dev.unhandled"),
     type: "error",
   });
   console.error("AuthPage: unhandled condition.", this);
@@ -41,7 +42,7 @@ const emitToast = (res: ApiResponse<UserResponse>, type: SubmitTypes) => {
 
 export const onBadForm = (msg?: string) => {
   globalBus.emit("toast", {
-    msg: msg ?? "Please fill all the fields correctly.",
+    msg: i18n.t("toasts.validation.badForm") + msg,
     type: "error",
   });
 };

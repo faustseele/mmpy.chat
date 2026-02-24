@@ -5,6 +5,7 @@ import { RouteLink } from "@shared/types/universal.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { handleGuestSignIn } from "../model/actions-guest.ts";
 import AuthService from "../model/AuthService.ts";
+import { i18n } from "@shared/i18n/I18nService.ts";
 
 /* vi.hoisted() here bc vi.mocks() are auto-hoisted to the top by vitest */
 const goodGuest = vi.hoisted(() => ({
@@ -63,7 +64,7 @@ describe("@Features/Auth: Guest", () => {
     vi.clearAllMocks();
 
     /* silencing console.error */
-    vi.spyOn(console, "error").mockImplementation(() => {})
+    vi.spyOn(console, "error").mockImplementation(() => {});
   });
 
   it("should navigate to Messenger-Page and fetch chats on success", async () => {
@@ -79,7 +80,7 @@ describe("@Features/Auth: Guest", () => {
     toHaveBeenCalledWith instead of toHaveBeenCalledExactlyOnceWith
     bc we call 2 toasts in Guest-Flow */
     expect(spiedToast).toHaveBeenCalledWith("toast", {
-      msg: "👻 Guest Login Success!",
+      msg: i18n.t("toasts.auth.guestSuccess"),
       type: "success",
     });
 
@@ -100,7 +101,7 @@ describe("@Features/Auth: Guest", () => {
 
     /* checking for the last-fired Toast */
     expect(spiedToast).toHaveBeenLastCalledWith("toast", {
-      msg: badGuest.err?.reason,
+      msg: i18n.t("toasts.dev.devErrorStub") + badGuest.err?.reason,
       type: "error",
     });
 

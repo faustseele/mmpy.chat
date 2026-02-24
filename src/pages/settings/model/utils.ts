@@ -7,6 +7,7 @@ import {
   handleUpdateProfile,
 } from "@entities/user/model/actions.ts";
 import { SettingsType } from "./types.ts";
+import { i18n } from "@shared/i18n/I18nService.ts";
 
 export const onGoodForm = (
   submitType: SettingsType,
@@ -29,7 +30,7 @@ export const onGoodForm = (
       });
 
       if (resApi.ok) {
-        dispatchToast("Your profile has been changed successfully.");
+        dispatchToast(i18n.t("toasts.settings.changeSuccess"));
       } else {
         dispatchToast(resApi.err?.reason ?? "Unknown error", "error");
       }
@@ -46,10 +47,10 @@ export const onGoodForm = (
       });
 
       if (resApi.ok) {
-        dispatchToast("Your password has been changed successfully.");
+        dispatchToast(i18n.t("toasts.settings.changePswSuccess"));
       } else {
         dispatchToast(
-          "Your password could not be changed. API: " + resApi.err?.reason,
+          i18n.t("toasts.settings.changePswErrorStub") + resApi.err?.reason,
           "error",
         );
       }
@@ -77,14 +78,14 @@ export const onBadForm = (submitType: SettingsType): (() => void) => {
   if (submitType === "change-info") {
     return () => {
       globalBus.emit("toast", {
-        msg: "The field seems incorrect.",
+        msg: i18n.t("toasts.validation.fieldError"),
         type: "error",
       });
     };
   } else {
     return () => {
       globalBus.emit("toast", {
-        msg: "Either the old is incorrect or the new password is not valid.",
+        msg: i18n.t("toasts.validation.passwordError"),
         type: "error",
       });
     };

@@ -9,6 +9,7 @@ import {
   QueryDataType,
 } from "./types.ts";
 import { queryStringify } from "./utils.ts";
+import { i18n } from "@shared/i18n/I18nService.ts";
 
 /**
  * @class HTTPTransport
@@ -146,7 +147,7 @@ export default class HTTPTransport {
     } catch (e) {
       const err = e as ErrorOptions;
       globalBus.emit("toast", {
-        msg: "HTTPTransport: xhr.send failed.",
+        msg: i18n.t("toasts.api.httpSendFailed"),
         type: "error",
       });
       throw new Error("HTTPTransport: xhr.send failed", { cause: err });
