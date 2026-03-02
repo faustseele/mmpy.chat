@@ -41,7 +41,3 @@
   flex-direction: row;
   column-gap: 6px;
 }
-
-.authFooter_signUp {
-  justify-content: center;
-}

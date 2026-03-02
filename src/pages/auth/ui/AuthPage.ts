@@ -14,15 +14,11 @@ import { onBadForm, onGoodForm } from "../model/utils.ts";
 import css from "./auth.module.css";
 
 export class AuthPage extends Page<AuthProps> {
-  private footerModifier: string = "";
   private validator: FormValidator | null = null;
   private submit: Button | null = null;
 
   constructor(props: ComponentProps<AuthProps, AuthPage>) {
     super(props);
-
-    this.footerModifier =
-      props.node.params.configs.type === "sign-up" ? css.authFooter_signUp : "";
   }
 
   public getRootTagCx(): string {
@@ -137,7 +133,7 @@ export class AuthPage extends Page<AuthProps> {
         {{{ inputs }}}
       </main>
 
-      <footer class="${css.authFooter} ${this.footerModifier}">
+      <footer class="${css.authFooter}">
         {{{ ${buttonReroute.params.configs.id} }}}
         <div class="${css.authFooter__submits}">
           {{{ ${buttonGuest.params.configs.id} }}}
