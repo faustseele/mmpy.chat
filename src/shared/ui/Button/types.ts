@@ -13,8 +13,8 @@ export interface ButtonConfigs extends BaseConfigs {
   rootTag: Extract<RootTag, "button">;
   classNames: string;
   type: ButtonType;
-  text: string;
-  tooltip: string;
+  i18nKey: string;
+  i18nTooltipKey: string;
   isSilent?: boolean;
   showSpinner?: boolean;
 }

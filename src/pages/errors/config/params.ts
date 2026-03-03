@@ -12,8 +12,6 @@ import { RouteLink } from "@shared/types/universal.ts";
 import { handleBack } from "../model/actions.ts";
 import { ErrorProps } from "../model/types.ts";
 import css from "../ui/errors.module.css";
-import { i18n } from "@shared/i18n/I18nService.ts";
-
 export const errorPageParams_404: ComponentParams<ErrorProps> = {
   configs: {
     id: PageId.Error404,
@@ -29,7 +27,7 @@ export const errorPageParams_404: ComponentParams<ErrorProps> = {
       subheading: getSubheadingNode("subheading", "errors.404.subheading", {
         isDrama: true,
       }) as any,
-      button_back: getButtonNode("button_back", i18n.t("errors.404.back"), {
+      button_back: getButtonNode("button_back", "errors.404.back", {
         on: { click: handleBack },
       }) as any,
     },
@@ -56,7 +54,7 @@ export const errorPageParams_500: ComponentParams<ErrorProps> = {
       subheading: getSubheadingNode("subheading", "errors.500.subheading", {
         isDrama: true,
       }) as any,
-      button_back: getButtonNode("button_back", i18n.t("errors.500.back"), {
+      button_back: getButtonNode("button_back", "errors.500.back", {
         on: { click: handleBack },
       }) as any,
     },

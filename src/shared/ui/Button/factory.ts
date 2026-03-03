@@ -16,20 +16,20 @@ import { ButtonProps, ButtonType } from "./types.ts";
 
 export const getButtonNode = (
   id: ComponentId,
-  text: string,
+  i18nKey: string,
   {
     type,
     isSilent,
-    tooltip,
+    i18nTooltipKey,
     on,
   }: {
     type?: ButtonType;
     isSilent?: boolean;
-    tooltip?: string;
+    i18nTooltipKey?: string;
     on?: BaseProps["on"];
   } = {},
-): ComponentNode<ButtonProps> => {
-  const params = getButtonProps(id, text, type, tooltip, isSilent, on);
+): ComponentNode<ButtonProps, Button> => {
+  const params = getButtonProps(id, i18nKey, type, i18nTooltipKey, isSilent, on);
   return {
     params,
     factory: buildButton,
@@ -41,9 +41,9 @@ export const getButtonNode = (
 
 const getButtonProps = (
   id: ComponentId,
-  text: string,
+  i18nKey: string,
   type: ButtonType = "button",
-  tooltip: string = "",
+  i18nTooltipKey: string = "",
   isSilent: boolean = false,
   on: BaseProps["on"],
 ): ComponentParams<ButtonProps> => {
@@ -53,8 +53,8 @@ const getButtonProps = (
       rootTag: "button",
       classNames: css.button,
       type,
-      text,
-      tooltip,
+      i18nKey,
+      i18nTooltipKey,
       isSilent,
     },
     on,

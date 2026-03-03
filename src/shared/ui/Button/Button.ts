@@ -1,3 +1,4 @@
+import { i18n } from "@shared/i18n/I18nService.ts";
 import Component from "@shared/lib/Component/model/Component.ts";
 import { ComponentProps } from "@shared/lib/Component/model/types.ts";
 import css from "./button.module.css";
@@ -30,7 +31,7 @@ export class Button extends Component<ButtonProps> {
     {{#if showSpinner}}
       {{{ ${nodes.spinner.params.configs.id} }}}
     {{else}}
-      {{ text }}
+      ${i18n.t(this.configs.i18nKey)}
     {{/if}}
     `;
   }

@@ -112,7 +112,7 @@ export const settingsPageParams: ComponentParams<SettingsProps> = {
       ) as any,
       buttonEditInfo: getButtonNode(
         "buttonEditInfo",
-        i18n.t("settings.form.editInfo"),
+        "settings.form.editInfo",
         {
           type: "submit",
         },
@@ -126,7 +126,7 @@ export const settingsPageParams: ComponentParams<SettingsProps> = {
       ) as any,
       buttonLogout: getButtonNode(
         "buttonLogout",
-        i18n.t("settings.form.logout"),
+        "settings.form.logout",
         {
           isSilent: true,
         },

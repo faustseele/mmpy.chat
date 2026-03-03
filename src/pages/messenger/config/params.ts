@@ -54,26 +54,26 @@ export const messengerPageParams: ComponentParams<MessengerProps> = {
       ) as any,
       searchInput: getInputNode("searchInput", "search", i18n.t("messenger.search.placeholder")) as any,
       chatAvatar: getAvatarNode("chatAvatar", 0) as any,
-      addNotesButton: getButtonNode("addNotesButton", i18n.t("messenger.buttons.addNote"), {
-        tooltip: i18n.t("messenger.buttons.addNoteTooltip"),
+      addNotesButton: getButtonNode("addNotesButton", "messenger.buttons.addNote", {
+        i18nTooltipKey: "messenger.buttons.addNoteTooltip",
       }) as any,
       findUserChatButton: getButtonNode(
         "findUserChatButton",
-        i18n.t("messenger.buttons.findUser"),
-        { tooltip: i18n.t("messenger.buttons.findUserTooltip") },
+        "messenger.buttons.findUser",
+        { i18nTooltipKey: "messenger.buttons.findUserTooltip" },
       ) as any,
-      closeChatButton: getButtonNode("closeChatButton", i18n.t("messenger.buttons.closeChat"), {
-        tooltip: i18n.t("messenger.buttons.closeChatTooltip"),
+      closeChatButton: getButtonNode("closeChatButton", "messenger.buttons.closeChat", {
+        i18nTooltipKey: "messenger.buttons.closeChatTooltip",
         isSilent: true,
         on: { click: handleCloseChat },
       }) as any,
       deleteNotesButton: getButtonNode(
         "deleteNotesButton",
-        i18n.t("messenger.buttons.deleteNotes"),
-        { tooltip: i18n.t("messenger.buttons.deleteNotesTooltip"), isSilent: true },
+        "messenger.buttons.deleteNotes",
+        { i18nTooltipKey: "messenger.buttons.deleteNotesTooltip", isSilent: true },
       ) as any,
-      deleteChatButton: getButtonNode("deleteChatButton", i18n.t("messenger.buttons.deleteChat"), {
-        tooltip: i18n.t("messenger.buttons.deleteChatTooltip"),
+      deleteChatButton: getButtonNode("deleteChatButton", "messenger.buttons.deleteChat", {
+        i18nTooltipKey: "messenger.buttons.deleteChatTooltip",
         isSilent: true,
       }) as any,
       spinner: getSpinnerNode(true) as any,

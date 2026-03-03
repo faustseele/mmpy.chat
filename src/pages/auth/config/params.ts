@@ -83,7 +83,7 @@ const authPageParams_signIn: ComponentParams<AuthProps> = {
     nodes: {
       ...(inputs_signIn as any),
       heading: getHeadingNode("heading", "auth.signin.heading"),
-      buttonLanguage: getButtonNode("buttonLanguage", "🇬🇧", {
+      buttonLanguage: getButtonNode("buttonLanguage", "languageEmoji", {
         type: "button",
         on: {
           click: () => i18n.cycleLanguages(),
@@ -91,15 +91,15 @@ const authPageParams_signIn: ComponentParams<AuthProps> = {
       }),
       buttonFormSubmit: getButtonNode(
         "buttonFormSubmit",
-        i18n.t("auth.signin.submit"),
+        "auth.signin.submit",
         {
           type: "submit",
         },
       ),
-      buttonGuest: getButtonNode("buttonGuest", i18n.t("auth.signin.guest")),
+      buttonGuest: getButtonNode("buttonGuest", "auth.signin.guest"),
       buttonReroute: getButtonNode(
         "buttonReroute",
-        i18n.t("auth.signin.newHere"),
+        "auth.signin.newHere",
         {
           isSilent: true,
           on: {
@@ -130,7 +130,7 @@ const authPageParams_signUp: ComponentParams<AuthProps> = {
     nodes: {
       ...(inputs_signUp as any),
       heading: getHeadingNode("heading", "auth.signup.heading"),
-      buttonLanguage: getButtonNode("buttonLanguage", "🇬🇧", {
+      buttonLanguage: getButtonNode("buttonLanguage", "languageEmoji", {
         type: "button",
         on: {
           click: () => i18n.cycleLanguages(),
@@ -138,15 +138,15 @@ const authPageParams_signUp: ComponentParams<AuthProps> = {
       }),
       buttonFormSubmit: getButtonNode(
         "buttonFormSubmit",
-        i18n.t("auth.signup.submit"),
+        "auth.signup.submit",
         {
           type: "submit",
         },
       ),
-      buttonGuest: getButtonNode("buttonGuest", i18n.t("auth.signup.guest")),
+      buttonGuest: getButtonNode("buttonGuest", "auth.signup.guest"),
       buttonReroute: getButtonNode(
         "buttonReroute",
-        i18n.t("auth.signup.haveAccount"),
+        "auth.signup.haveAccount",
         {
           isSilent: true,
           on: {
