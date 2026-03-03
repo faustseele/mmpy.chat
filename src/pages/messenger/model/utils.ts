@@ -1,5 +1,8 @@
-import { noteLabels } from "../config/const.ts";
+import { i18n } from "@shared/i18n/I18nService.ts";
+import { noteLabelsI18nKeys } from "../config/const.ts";
 
 export function randomNoteLabel() {
-  return noteLabels[Math.floor(Math.random() * noteLabels.length)];
+  const randomKey =
+    noteLabelsI18nKeys[Math.floor(Math.random() * noteLabelsI18nKeys.length)];
+  return i18n.t(randomKey);
 }

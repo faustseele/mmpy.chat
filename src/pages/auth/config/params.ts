@@ -83,7 +83,7 @@ const authPageParams_signIn: ComponentParams<AuthProps> = {
     nodes: {
       ...(inputs_signIn as any),
       heading: getHeadingNode("heading", "auth.signin.heading"),
-      buttonLanguage: getButtonNode("buttonLanguage", "languageEmoji", {
+      buttonLanguage: getButtonNode("buttonLanguage", "langSwitch", {
         type: "button",
         on: {
           click: () => i18n.cycleLanguages(),
@@ -130,7 +130,7 @@ const authPageParams_signUp: ComponentParams<AuthProps> = {
     nodes: {
       ...(inputs_signUp as any),
       heading: getHeadingNode("heading", "auth.signup.heading"),
-      buttonLanguage: getButtonNode("buttonLanguage", "languageEmoji", {
+      buttonLanguage: getButtonNode("buttonLanguage", "langSwitch", {
         type: "button",
         on: {
           click: () => i18n.cycleLanguages(),

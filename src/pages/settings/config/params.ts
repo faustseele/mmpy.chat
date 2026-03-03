@@ -123,7 +123,7 @@ export const settingsPageParams: ComponentParams<SettingsProps> = {
           isSilent: true,
         },
       ) as any,
-      buttonLanguage: getButtonNode("buttonLanguage", "languageEmoji", {
+      buttonLanguage: getButtonNode("buttonLanguage", "langSwitch", {
         type: "button",
         on: {
           click: () => i18n.cycleLanguages(),
