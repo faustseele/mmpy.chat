@@ -22,8 +22,6 @@ import { RouteLink } from "@shared/types/universal.ts";
 import { handleFindUser, handleGoToSettings } from "../model/actions.ts";
 import { MessengerConfigs, MessengerProps } from "../model/types.ts";
 import css from "../ui/messenger.module.css";
-import { i18n } from "@shared/i18n/I18nService.ts";
-
 export const getBaseMessengerConfigs = (
   info: MessengerConfigs["info"],
   isLoadingMessages = false,
@@ -52,7 +50,7 @@ export const messengerPageParams: ComponentParams<MessengerProps> = {
           on: { click: handleGoToSettings },
         },
       ) as any,
-      searchInput: getInputNode("searchInput", "search", i18n.t("messenger.search.placeholder")) as any,
+      searchInput: getInputNode("searchInput", "search", "messenger.search.placeholder") as any,
       chatAvatar: getAvatarNode("chatAvatar", 0) as any,
       addNotesButton: getButtonNode("addNotesButton", "messenger.buttons.addNote", {
         i18nTooltipKey: "messenger.buttons.addNoteTooltip",

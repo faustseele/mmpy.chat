@@ -1,3 +1,4 @@
+import { i18n } from "@shared/i18n/I18nService.ts";
 import Component from "../../lib/Component/model/Component.ts";
 import { ComponentProps } from "../../lib/Component/model/types.ts";
 import { setTextSafe } from "../../lib/security/sanitize.ts";
@@ -82,7 +83,7 @@ export class Input extends Component<InputProps> {
         name="{{fieldId}}"
         type="{{type}}"
         id="{{fieldId}}"
-        placeholder="{{placeholder}}"
+        placeholder="${i18n.t(this.configs.i18nPlaceholderKey)}"
         autocomplete="on"
       />
       <span class="${css.errorLabel}"></span>

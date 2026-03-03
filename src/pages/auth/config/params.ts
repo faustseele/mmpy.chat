@@ -30,32 +30,32 @@ const inputs_signUp = {
   "input-name": getInputNode(
     iptIds[0],
     "name",
-    i18n.t("auth.inputs.name.label"),
+    "auth.inputs.name.label",
   ),
   "input-surname": getInputNode(
     iptIds[1],
     "surname",
-    i18n.t("auth.inputs.surname.label"),
+    "auth.inputs.surname.label",
   ),
   "input-login": getInputNode(
     iptIds[2],
     "login",
-    i18n.t("auth.inputs.login.label"),
+    "auth.inputs.login.label",
   ),
   "input-email": getInputNode(
     iptIds[3],
     "email",
-    i18n.t("auth.inputs.email.label"),
+    "auth.inputs.email.label",
   ),
   "input-password": getInputNode(
     iptIds[4],
     "password",
-    i18n.t("auth.inputs.password.label"),
+    "auth.inputs.password.label",
   ),
   "input-phone": getInputNode(
     iptIds[5],
     "phone",
-    i18n.t("auth.inputs.phone.label"),
+    "auth.inputs.phone.label",
   ),
 };
 
@@ -63,12 +63,12 @@ const inputs_signIn = {
   "input-login": getInputNode(
     iptIds[2],
     "login",
-    i18n.t("auth.inputs.login.label"),
+    "auth.inputs.login.label",
   ),
   "input-password": getInputNode(
     iptIds[4],
     "password",
-    i18n.t("auth.inputs.password.label"),
+    "auth.inputs.password.label",
   ),
 };
 

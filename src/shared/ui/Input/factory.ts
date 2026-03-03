@@ -16,15 +16,15 @@ import { getInputTypeByFieldId } from "./utils.ts";
 export const getInputNode = (
   id: ComponentId,
   fieldId: FieldType,
-  label: string,
+  i18nLabelKey: string,
   {
-    placeholder,
+    i18nPlaceholderKey,
     isError,
     errorMessage,
     autocomplete,
     on,
   }: {
-    placeholder?: string;
+    i18nPlaceholderKey?: string;
     isError?: boolean;
     isSearch?: boolean;
     errorMessage?: string;
@@ -35,8 +35,8 @@ export const getInputNode = (
   const params = getInputProps(
     id,
     fieldId,
-    label,
-    placeholder,
+    i18nLabelKey,
+    i18nPlaceholderKey,
     isError,
     errorMessage,
     autocomplete,
@@ -55,8 +55,8 @@ export const getInputNode = (
 const getInputProps = (
   id: ComponentId,
   fieldId: FieldType,
-  label: string,
-  placeholder: string = label,
+  i18nLabelKey: string,
+  i18nPlaceholderKey: string = i18nLabelKey,
   isError: boolean = false,
   errorMessage: string = "",
   autocomplete: "on" | "off" = "on",
@@ -68,9 +68,9 @@ const getInputProps = (
       rootTag: "label",
       classNames: css.inputLabelWrap,
       fieldId,
-      label,
+      i18nLabelKey,
       type: getInputTypeByFieldId(fieldId),
-      placeholder,
+      i18nPlaceholderKey,
       for: fieldId,
       isError,
       errorMessage,

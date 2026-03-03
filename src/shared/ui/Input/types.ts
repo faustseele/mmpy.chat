@@ -13,9 +13,9 @@ export interface InputProps extends BaseProps {
 export interface InputConfigs extends BaseConfigs {
   rootTag: Extract<RootTag, "label">;
   fieldId: FieldType;
-  label: string;
+  i18nLabelKey: string;
   type: InputType;
-  placeholder: string;
+  i18nPlaceholderKey: string;
   for: FieldType;
   isError?: boolean;
   errorMessage?: string;
