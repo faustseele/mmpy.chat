@@ -1,4 +1,3 @@
-import { cx } from "@shared/lib/helpers/formatting/classnames.ts";
 import {
   ComponentDeps,
   ComponentId,
@@ -13,13 +12,13 @@ import { Subheading } from "./Subheading.ts";
 import { SubheadingProps } from "./types.ts";
 
 export const getSubheadingNode = (
-  id: ComponentId,
-  text: string,
+  id: string,
+  i18nKey: string,
   {
     isDrama,
   }: { isDrama?: boolean } = {},
-): ComponentNode<SubheadingProps> => {
-  const params = getSubheadingProps( id, text, isDrama );
+): ComponentNode<SubheadingProps, Subheading> => {
+  const params = getSubheadingProps(id, i18nKey, isDrama);
   return {
     params,
     factory: buildSubheading,
@@ -30,16 +29,17 @@ export const getSubheadingNode = (
 };
 
 const getSubheadingProps = (
-  id: string,
-  text: string,
+  id: ComponentId,
+  i18nKey: string,
   isDrama: boolean = false,
 ): ComponentParams<SubheadingProps> => {
   return {
     configs: {
       id,
       rootTag: "h2",
-      classNames: cx(cssSubheading.subheading, isDrama ? cssSubheading.subheading_drama : ""),
-      text,
+      classNames: cssSubheading.subheading,
+      i18nKey,
+      isDrama,
     },
   };
 };

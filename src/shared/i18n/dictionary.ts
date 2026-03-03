@@ -7,6 +7,10 @@ import { Dictionary } from "./types.ts";
  * @returns {string} resolved translation or the original path if unresolved
  */
 export const resolveKey = (dictionary: Dictionary, path: string): string => {
+  if (!path) {
+    console.error("i18n.resolveKey: path is empty");
+    return path;
+  }
   const keys = path.split(".");
 
   let current: Dictionary | string | undefined = dictionary;

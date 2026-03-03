@@ -15,6 +15,7 @@ export interface AvatarProps extends BaseProps {
 
 export interface AvatarConfigs extends BaseConfigs {
   rootTag: Extract<RootTag, "label" | "div">;
+  i18nAltKey: string;
   title: string;
   chatId: ChatId;
   src: string;

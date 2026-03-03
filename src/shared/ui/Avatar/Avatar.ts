@@ -1,3 +1,4 @@
+import { i18n } from "@shared/i18n/I18nService.ts";
 import Component from "@shared/lib/Component/model/Component.ts";
 import { ComponentProps } from "@shared/lib/Component/model/types.ts";
 import { cx } from "@shared/lib/helpers/formatting/classnames.ts";
@@ -62,23 +63,22 @@ export class Avatar extends Component<AvatarProps> {
   }
 
   public getInnerMarkup(): string {
+    const { src, noAvatar, letter, hasInput } = this.configs;
     const inputId = avatarId(this.configs.chatId);
 
     /* fetchpriority="high" for optimal LCP timing */
     return /*html*/ `
-      <img class="${css.avatarWrap__img}" src="{{src}}" alt="Participant's avatar" fetchpriority="high"/>
+      <img class="${css.avatarWrap__img}" src="${src}" alt="${i18n.t(this.configs.i18nAltKey)}" fetchpriority="high"/>
 
-      {{#if noAvatar }}
-        <span class="${css.avatarWrap__letter}"> {{letter}} </span>
-      {{/if}}
+      ${noAvatar ? `<span class="${css.avatarWrap__letter}"> ${letter} </span>` : ""}
 
-      {{#if hasInput}}
+      ${hasInput ? `
         <div class="${css.avatarWrap__inputOverlay}">
           <span>🔄</span>
         </div>
 
         <input id="${inputId}" type="file" name="avatar" class="${css.avatarFileInput}" />
-      {{/if}}
+      ` : ""}
     `;
   }
 }

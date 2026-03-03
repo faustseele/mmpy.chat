@@ -182,5 +182,8 @@
   },
   "validation": {
     "noValue": "Bitte fülle das Feld aus."
+  },
+  "avatar": {
+    "alt": "Avatar des Teilnehmers"
   }
 }

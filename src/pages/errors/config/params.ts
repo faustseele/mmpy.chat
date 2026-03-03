@@ -26,13 +26,9 @@ export const errorPageParams_404: ComponentParams<ErrorProps> = {
       heading: getHeadingNode("heading", "errors.404.heading", {
         isDrama: true,
       }) as any,
-      subheading: getSubheadingNode(
-        "subheading",
-        i18n.t("errors.404.subheading"),
-        {
-          isDrama: true,
-        },
-      ) as any,
+      subheading: getSubheadingNode("subheading", "errors.404.subheading", {
+        isDrama: true,
+      }) as any,
       button_back: getButtonNode("button_back", i18n.t("errors.404.back"), {
         on: { click: handleBack },
       }) as any,
@@ -57,13 +53,9 @@ export const errorPageParams_500: ComponentParams<ErrorProps> = {
       heading: getHeadingNode("heading", "errors.500.heading", {
         isDrama: true,
       }) as any,
-      subheading: getSubheadingNode(
-        "subheading",
-        i18n.t("errors.500.subheading"),
-        {
-          isDrama: true,
-        },
-      ) as any,
+      subheading: getSubheadingNode("subheading", "errors.500.subheading", {
+        isDrama: true,
+      }) as any,
       button_back: getButtonNode("button_back", i18n.t("errors.500.back"), {
         on: { click: handleBack },
       }) as any,

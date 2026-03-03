@@ -8,6 +8,6 @@
   row-gap: 8px;
 }
 
-nav > a {
+nav > a, nav > p {
  color: var(--color-content-darkest);
 }

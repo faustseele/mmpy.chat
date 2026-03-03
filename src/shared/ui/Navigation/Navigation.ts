@@ -1,9 +1,10 @@
+import Router from "@app/providers/router/Router.ts";
+import { handleLogout } from "@features/authenticate/model/actions.ts";
+import { i18n } from "@shared/i18n/I18nService.ts";
+import { RouteLink } from "@shared/types/universal.ts";
 import Component from "../../lib/Component/model/Component.ts";
 import { ComponentProps } from "../../lib/Component/model/types.ts";
 import { NavigationProps } from "./types.ts";
-import Router from "@app/providers/router/Router.ts";
-import { handleLogout } from "@features/authenticate/model/actions.ts";
-import { RouteLink } from "@shared/types/universal.ts";
 
 /* nav-bar on the left for quick page-travel */
 export class Navigation extends Component<NavigationProps> {
@@ -13,8 +14,13 @@ export class Navigation extends Component<NavigationProps> {
 
   public componentDidRender(): void {
     const navs = this.element?.getElementsByClassName("navLink");
+    const langSwitch = this.element?.getElementsByClassName("langSwitch")[0];
 
-    if (!navs) return;
+    if (!navs || !langSwitch) return;
+
+    langSwitch.addEventListener("click", () => {
+      i18n.cycleLanguages()
+    });
 
     for (const a of Array.from(navs) as HTMLAnchorElement[]) {
       a.addEventListener("click", async (e: MouseEvent) => {
@@ -39,6 +45,7 @@ export class Navigation extends Component<NavigationProps> {
       <a href="/404" class="navLink">404 🡽</a>
       <a href="/500" class="navLink">500 🡽</a>
       <a href="/logout" class="navLink">[ выход ]</a>
+      <button class="langSwitch">lang-switch</button>
     `;
   }
 }

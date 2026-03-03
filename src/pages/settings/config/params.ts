@@ -108,7 +108,7 @@ export const settingsPageParams: ComponentParams<SettingsProps> = {
       ),
       subheading_form: getSubheadingNode(
         "subheading_form",
-        i18n.t("settings.form.subheadingInfo"),
+        "settings.form.subheadingInfo",
       ) as any,
       buttonEditInfo: getButtonNode(
         "buttonEditInfo",
@@ -119,7 +119,7 @@ export const settingsPageParams: ComponentParams<SettingsProps> = {
       ) as any,
       buttonEditPassword: getButtonNode(
         "buttonEditPassword",
-        i18n.t("settings.form.changePassword"),
+        "settings.form.changePassword",
         {
           isSilent: true,
         },
