@@ -45,7 +45,7 @@ export class Navigation extends Component<NavigationProps> {
       <a href="/404" class="navLink">404 🡽</a>
       <a href="/500" class="navLink">500 🡽</a>
       <a href="/logout" class="navLink">[ выход ]</a>
-      <button class="langSwitch">lang-switch</button>
+      <button class="langSwitch" style="background: none; color: white; width: 60px;">lang-switch</button>
     `;
   }
 }
