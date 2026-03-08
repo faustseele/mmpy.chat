@@ -75,7 +75,8 @@
       "notePlaceholder": "Note :",
       "chatPlaceholder": "Message...",
       "noNotes": "Pas de notes",
-      "noMessages": "Pas de messages"
+      "noMessages": "Pas de messages",
+      "stub": "⬅️ Sélectionnez une conversation."
     },
     "notes": {
       "personal": "Personnel 👤",

@@ -75,7 +75,8 @@
       "notePlaceholder": "メモ：",
       "chatPlaceholder": "メッセージ...",
       "noNotes": "メモなし",
-      "noMessages": "メッセージなし"
+      "noMessages": "メッセージなし",
+      "stub": "⬅️  チャットを選択します。"
     },
     "notes": {
       "personal": "個人 👤",

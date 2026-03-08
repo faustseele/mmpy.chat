@@ -75,7 +75,8 @@
       "notePlaceholder": "Заметка:",
       "chatPlaceholder": "Cообщение...",
       "noNotes": "Нет заметок",
-      "noMessages": "Нет сообщений"
+      "noMessages": "Нет сообщений",
+      "stub": "⬅️ Выберите чат."
     },
     "notes": {
       "personal": "Личное 👤",

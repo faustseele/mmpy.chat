@@ -75,7 +75,8 @@
       "notePlaceholder": "บันทึก:",
       "chatPlaceholder": "ข้อความ...",
       "noNotes": "ไม่มีบันทึก",
-      "noMessages": "ไม่มีข้อความ"
+      "noMessages": "ไม่มีข้อความ",
+      "stub": "⬅️ เลือกแชท"
     },
     "notes": {
       "personal": "ส่วนตัว 👤",

@@ -14,6 +14,7 @@ import {
 } from "../model/actions.ts";
 import { MessengerNodes, MessengerProps } from "../model/types.ts";
 import css from "./messenger.module.css";
+import { i18n } from "@shared/i18n/I18nService.ts";
 
 export class MessengerPage extends Page<MessengerProps> {
   private prevPlaceholder: string = "";
@@ -231,10 +232,13 @@ export class MessengerPage extends Page<MessengerProps> {
               {{else}}
 
                 {{#unless isLoadingMessages}}
-                  <p class="${css.noMessages}">${isNotes ? "Нет заметок" : "Нет сообщений"}</p>
+                  <p class="${css.chatPlaceholderText}">${i18n.t(isNotes ? "messenger.message.noNotes" : "messenger.message.noMessages")}</p>
                 {{/unless}}
                 
               {{/if}}
+            {{/if}}
+            {{#if ${isStub}}}
+              <p class="${css.chatPlaceholderText}">${i18n.t("messenger.message.stub")}</p>
             {{/if}}
           </div>
 
