@@ -15,7 +15,7 @@ import AuthAPI from "../api/AuthAPI.ts";
 class AuthService {
   public async signUp(data: SignUpRequest): Promise<ApiResponse<UserResponse>> {
     try {
-      const res = await AuthAPI.signUp(data);
+      await AuthAPI.signUp(data);
       let user = await AuthAPI.requestUser();
 
       if (!user) {
@@ -48,8 +48,6 @@ class AuthService {
       })(data.second_name);
 
       Store.set("api.auth.user", user);
-      console.log("", res, user, Store.getState());
-
       return { ok: true, data: user };
     } catch (e) {
       ls_setLoggedIn(false);
@@ -61,7 +59,7 @@ class AuthService {
 
   public async signIn(data: SignInRequest): Promise<ApiResponse<UserResponse>> {
     try {
-      const res = await AuthAPI.signIn(data);
+      await AuthAPI.signIn(data);
       const user = await AuthAPI.requestUser();
 
       Store.set("api.auth.user", user);
@@ -72,8 +70,6 @@ class AuthService {
         Store.set("controllers.isLoggedIn", false);
         ls_setLoggedIn(false);
       }
-
-      console.log(res, user, Store.getState());
 
       return { ok: !!user, data: user };
     } catch (e: unknown) {
@@ -93,7 +89,6 @@ class AuthService {
         Store.set("api.auth.user", user);
         Store.set("controllers.isLoggedIn", true);
         ls_setLoggedIn(true);
-        console.log("user-fetch success", user);
         return { ok: true, data: user };
       } else {
         Store.set("api.auth.user", null);
@@ -129,7 +124,6 @@ class AuthService {
       /* remove last active chat */
       ls_removeLastChatId();
 
-      console.log("", res, Store.getState());
       return { ok: !!res, data: res };
     } catch (e) {
       console.error("logout failed", e);

@@ -37,7 +37,6 @@ class ChatAPI extends BaseAPI {
     const form = new FormData();
     form.append("chatId", String(chatId));
     form.append("avatar", avatar);
-    console.log('', form)
     return chatsAPIInstance.put("/avatar", {
       data: form,
     }) as Promise<UpdateChatAvatarResponse>;

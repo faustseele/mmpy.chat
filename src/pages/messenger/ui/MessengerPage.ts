@@ -40,8 +40,6 @@ export class MessengerPage extends Page<MessengerProps> {
       throw new Error("MessengerPage: Children are not defined");
     }
 
-    console.log(Store.getState());
-
     /* --- getting instances --- */
     const {
       addNotesButton,

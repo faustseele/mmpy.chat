@@ -25,8 +25,6 @@ class ChatService {
       list.map((chat) => (chat.type = getChatType(chat.title)));
 
       Store.set("api.chats.list", list);
-      console.log("chats fetch success !:", list);
-
       return { ok: true, data: list };
     } catch (e) {
       const badCookie = (e as ApiError).status === 401;
@@ -86,7 +84,6 @@ class ChatService {
       const { token } = await ChatAPI.getToken(chatId);
       this.ws.openWS(user.id, chatId, token);
 
-      // console.log("chat select success !, token:", token);
       return { ok: true };
     } catch (e) {
       console.error("chat select failed:", e);
@@ -99,8 +96,6 @@ class ChatService {
   ): Promise<ApiResponse<CreateChatResponse>> {
     try {
       const chat = await ChatAPI.createChat({ title });
-      console.log(`chat ${title} create success !:`, chat);
-
       return { ok: true, data: chat };
     } catch (e) {
       console.error("chat create failed:", e);
@@ -114,9 +109,6 @@ class ChatService {
   ): Promise<ApiResponse<UpdateChatAvatarResponse>> {
     try {
       const updatedChat = await ChatAPI.updateChatAvatar(chatId, avatar);
-
-      console.log("chat avatar update success:", updatedChat);
-
       return { ok: true, data: updatedChat };
     } catch (e) {
       console.error("chat avatar update fail:", e);
@@ -129,7 +121,6 @@ class ChatService {
       const res = await ChatAPI.deleteChat({ chatId });
       this.ws.closeWS(chatId);
 
-      console.log("chat delete success !:", res);
       return { ok: true, data: res };
     } catch (e) {
       console.error("chat delete failed:", e);
@@ -144,7 +135,6 @@ class ChatService {
     try {
       const res = await ChatAPI.addUser({ chatId, users: [user] });
 
-      console.log("user-add success:", res);
       return { ok: true, data: res };
     } catch (e) {
       console.error("user-add failed:", e);
@@ -159,7 +149,6 @@ class ChatService {
     try {
       const res = await ChatAPI.removeUsers({ chatId, users });
 
-      console.log("users-remove success:", res, chatId);
       return { ok: true, data: res };
     } catch (e) {
       console.error("users-remove failed:", e);
@@ -174,7 +163,6 @@ class ChatService {
     try {
       const res = await ChatAPI.getUsers(chatId, query);
 
-      console.log("users-get success:", res);
       return { ok: true, data: res };
     } catch (e) {
       console.error(`users-get failed, chatId=${chatId}, query=${query}`, e);

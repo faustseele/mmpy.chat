@@ -5,11 +5,6 @@ import { FieldType } from "../../ui/Input/types.ts";
 import { SubmitTypes } from "./types.ts";
 import { validateInputField } from "./utils.ts";
 
-const logMessages = {
-  formIsValid: "✅ Form is valid! Here it is 👇",
-  formHasErrors: "❌ Hey! Form has errors.. Please correct them. 👆",
-};
-
 export default class FormValidator {
   private inputs: Input[] | InputEditor[];
 
@@ -50,12 +45,8 @@ export default class FormValidator {
 
     if (isFormValid) {
       const formData = this._getFormData(targetInputs);
-      console.log(logMessages.formIsValid, formData);
-
       return await onGoodForm(formData);
     } else {
-      console.log(logMessages.formHasErrors);
-
       return { ok: false };
     }
   };

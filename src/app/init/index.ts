@@ -30,16 +30,12 @@ const bootstrapAuth = async () => {
       if (user.ok) handleFetchChats();
     }
 
-    console.log("bootstrapAuth: isLoggedIn?", optimisticLoggedIn);
   } catch (error) {
     throw new Error("bootstrapAuth failed", { cause: error });
   }
 };
 
 const handleUA = (root: HTMLBodyElement) => {
-  const ua = navigator.userAgent;
-  console.log("handleUA: ua", ua);
-
   if (!isMobile()) prependNavigation(root);
 };
 

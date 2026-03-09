@@ -87,7 +87,6 @@ export const handleAddChatPrompt = async () => {
     return;
   }
 
-  console.log(`User ${user.login} (id=${user.id}) added to chat`, chatId);
 };
 
 export const handleAddNotesPrompt = async () => {
