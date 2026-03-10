@@ -73,7 +73,7 @@ const bootstrapGuestStarter = async (): Promise<void> => {
   /* seed test notes */
   for (const noteKey of GUEST_STARTER_NOTES) {
     const title = i18n.t(noteKey) + ZERO_WIDTH_SPACE;
-    await handleCreateChat(title, true);
+    await handleCreateChat(title, true, true, true);
   }
 
   /* seed test convos */
@@ -86,7 +86,7 @@ const bootstrapGuestStarter = async (): Promise<void> => {
 
     const user = resUser.data;
     const chatTitle = `${user.first_name} ${user.second_name}`;
-    const resChat = await handleCreateChat(chatTitle, true);
+    const resChat = await handleCreateChat(chatTitle, true, true, true);
 
     if (resChat.ok && resChat.data) {
       const chatId = resChat.data.id;

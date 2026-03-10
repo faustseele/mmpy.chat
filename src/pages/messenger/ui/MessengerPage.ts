@@ -104,8 +104,7 @@ export class MessengerPage extends Page<MessengerProps> {
   private _wireDeleteChat(deleteChat: Button) {
     deleteChat.setProps({
       on: {
-        click: (e: Event) =>
-          handleDeleteChatPrompt(e, this.configs.info),
+        click: (e: Event) => handleDeleteChatPrompt(e, this.configs.info),
       },
     });
   }

@@ -27,6 +27,8 @@ export const handleCloseChat = () => {
 export const handleCreateChat = async (
   title: string,
   noToast = false,
+  noFetch = false,
+  noSelect = false,
 ): Promise<ApiResponse<CreateChatResponse>> => {
   if (!noToast)
     globalBus.emit(GlobalEvent.Toast, {
@@ -36,8 +38,8 @@ export const handleCreateChat = async (
   const res = await ChatService.createChat(title);
 
   if (res.ok) {
-    await ChatService.fetchChats();
-    await ChatService.selectChat(res.data!.id);
+    if (!noFetch) await ChatService.fetchChats();
+    if (!noSelect) await ChatService.selectChat(res.data!.id);
 
     if (!noToast)
       globalBus.emit(GlobalEvent.Toast, {
