@@ -23,6 +23,16 @@ export function ls_removeLastChatId(): void {
   localStorage.removeItem("lastActiveChatId");
 }
 
+/* --- Guest Mode --- */
+export function ls_setGuestMode(isGuest: boolean): void {
+  localStorage.setItem("isGuestMode", String(isGuest));
+}
+
+export function ls_getGuestMode(): boolean {
+  console.log("ls_getGuestMode", localStorage.getItem("isGuestMode"));
+  return localStorage.getItem("isGuestMode") === "true";
+}
+
 /* --- Locale --- */
 export function ls_setLocale(locale: Locale): void {
   localStorage.setItem("locale", locale);

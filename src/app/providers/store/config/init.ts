@@ -1,4 +1,4 @@
-import { ls_getLocale, ls_getLoggedIn } from "@shared/lib/LocalStorage/actions.ts";
+import { ls_getGuestMode, ls_getLocale, ls_getLoggedIn } from "@shared/lib/LocalStorage/actions.ts";
 import { AppState } from "../model/Store.ts";
 import { APIState } from "../model/types.ts";
 
@@ -20,7 +20,7 @@ export const initialState: AppState = {
   controllers: {
     language: ls_getLocale(),
     isLoggedIn: ls_getLoggedIn(),
-    isGuestMode: false,
+    isGuestMode: ls_getGuestMode(),
   },
   pageNodes: {},
 };

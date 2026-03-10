@@ -85,7 +85,8 @@ export class SettingsPage extends Page<SettingsProps> {
     );
 
     /* lock inputs & buttons in guest mode */
-    this._applyGuestLock(editInfo, editPassword);
+
+    this._tryApplyGuestLock(editInfo, editPassword);
   }
 
   public componentDidRender(): void {
@@ -94,18 +95,26 @@ export class SettingsPage extends Page<SettingsProps> {
     /* sets placeholders for inputs from user-res */
     this._hydrateInputPlaceholders();
     /* re-apply guest lock after re-render */
-    this._applyGuestLockDOM();
+    this._tryApplyGuestLockDOM();
   }
 
-  private _applyGuestLock(editInfo: Button, editPassword: Button): void {
+  private _tryApplyGuestLock(editInfo: Button, editPassword: Button): void {
     const isGuest = Store.getState().controllers.isGuestMode;
-    if (!isGuest) return;
-
-    /* swap subheading to guest warning */
     const { subheading_form } = this.children!.nodes as SettingsNodes;
     const subheading = subheading_form.runtime?.instance as Subheading;
+
+    if (!isGuest) {
+      /* restore default subheading (setProps mutates the original params via Proxy,
+         so a prior guest session leaves stale guest text in the blueprint) */
+      subheading.setProps({
+        configs: { i18nKey: "settings.form.subheadingInfo" },
+      });
+      return;
+    }
+
+    /* swap subheading to guest warning */
     subheading.setProps({
-      configs: { i18nKey: "settings.form.guestModeStub", isDrama: true },
+      configs: { i18nKey: "settings.form.guestModeStub" },
     });
 
     /* disable edit buttons */
@@ -118,10 +127,10 @@ export class SettingsPage extends Page<SettingsProps> {
     });
 
     /* disable all inputs */
-    this._applyGuestLockDOM();
+    this._tryApplyGuestLockDOM();
   }
 
-  private _applyGuestLockDOM(): void {
+  private _tryApplyGuestLockDOM(): void {
     const isGuest = Store.getState().controllers.isGuestMode;
     if (!isGuest) return;
 

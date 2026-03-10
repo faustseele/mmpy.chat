@@ -15,6 +15,7 @@ import { API_URL_RESOURCES } from "@shared/config/urls.ts";
 import { i18n } from "@shared/i18n/I18nService.ts";
 import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
 import { GlobalEvent } from "@shared/lib/EventBus/events.ts";
+import { ls_setGuestMode } from "@shared/lib/LocalStorage/actions.ts";
 import { downloadFile } from "@shared/lib/helpers/file.ts";
 import { RouteLink } from "@shared/types/universal.ts";
 import { GUEST_CREDS } from "../config/guest.ts";
@@ -41,6 +42,7 @@ export const handleGuestSignIn = async (): Promise<
     await handleFetchChats();
     Router.go(RouteLink.Messenger);
     Store.set("controllers.isGuestMode", true);
+    ls_setGuestMode(true);
     globalBus.emit(GlobalEvent.Toast, {
       msg: i18n.t("toasts.auth.guestSuccess"),
       type: "success",

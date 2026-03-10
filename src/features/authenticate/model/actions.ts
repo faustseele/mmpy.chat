@@ -1,4 +1,4 @@
-import { UserResponse } from "@shared/api/model/api.types.ts"
+import { UserResponse } from "@shared/api/model/api.types.ts";
 import { ApiResponse } from "@shared/api/model/types.ts";
 import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
 import { GlobalEvent } from "@shared/lib/EventBus/events.ts";
@@ -10,6 +10,7 @@ import {
   hardResetMessenger,
 } from "@entities/chat/model/actions.ts";
 import { RouteLink } from "@shared/types/universal.ts";
+import { ls_setGuestMode } from "@shared/lib/LocalStorage/actions.ts";
 import AuthService from "./AuthService.ts";
 import { i18n } from "@shared/i18n/I18nService.ts";
 import { SignInData, SignUpData } from "./types.ts";
@@ -68,6 +69,8 @@ export const handleSignIn = async (
     /* fetch chats on successful login */
     handleFetchChats();
     Router.go(RouteLink.Messenger);
+    Store.set("controllers.isGuestMode", false);
+    ls_setGuestMode(false);
   } else {
     if (res.err?.status === 400) handlePresentSession(res);
   }
@@ -89,42 +92,48 @@ export const handlePresentSession = async (res: ApiResponse<UserResponse>) => {
 
   if (reason === "Cookie is not valid") {
     /* straight logout & cookie removal; bypassing full handleLogout() */
-    await AuthService.logout();
+    await handleLogout(true);
 
     globalBus.emit(GlobalEvent.Toast, {
       msg: i18n.t("toasts.auth.invalidSession"),
       type: "error",
     });
 
-    Router.go(RouteLink.SignIn);
     return;
   }
 
   console.warn("Unhandled Error-response", res);
 };
 
-export const handleLogout = async (): Promise<ApiResponse<boolean>> => {
+export const handleLogout = async (
+  noToast = false,
+): Promise<ApiResponse<boolean>> => {
   globalBus.emit(GlobalEvent.Toast, { msg: i18n.t("toasts.auth.loggingOut") });
 
-  /* andcleanup on guest mode */
+  /* cleanup on guest mode */
   const isGuest = Store.getState().controllers.isGuestMode;
   if (isGuest) {
     await hardResetMessenger();
     Store.set("controllers.isGuestMode", false);
+    ls_setGuestMode(false);
   }
 
   const res = await AuthService.logout();
   if (res.ok) {
     Router.go(RouteLink.SignIn);
-    globalBus.emit(GlobalEvent.Toast, {
-      msg: i18n.t("toasts.auth.logoutSuccess"),
-      type: "success",
-    });
+    if (!noToast) {
+      globalBus.emit(GlobalEvent.Toast, {
+        msg: i18n.t("toasts.auth.logoutSuccess"),
+        type: "success",
+      });
+    }
   } else {
     Router.go(RouteLink.Error);
     console.error("Logout Failed", res);
     globalBus.emit(GlobalEvent.Toast, {
-      msg: i18n.t("toasts.dev.devErrorStub").replace('${}', res.err?.reason || ''),
+      msg: i18n
+        .t("toasts.dev.devErrorStub")
+        .replace("${}", res.err?.reason || ""),
       type: "error",
     });
   }
