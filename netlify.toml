@@ -8,6 +8,29 @@
 [build]
   publish = "dist"
 
+# index.html must never be cached by the browser — each Netlify deploy
+# generates new content-hashed asset filenames, and a stale cached
+# index.html will reference old hashes that no longer exist, causing
+# the /*→/index.html rewrite to silently serve HTML where the browser
+# expects JS modules, resulting in requests that hang indefinitely.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# SW registration file must also stay fresh so the service worker
+# always reflects the current asset manifest after each deploy.
+[[headers]]
+  for = "/registerSW.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Hashed assets are content-addressed — safe to cache forever.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 # The `from = "/*"` redirect tells Netlify to redirect
 # all pages to the `to = "index.html"` file. Basically, this
 # is a 'rewrite' rule, not a 'redirect' one.
