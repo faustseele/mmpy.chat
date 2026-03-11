@@ -64,7 +64,7 @@ npm install && npm run dev
 | `npm run dev` | Dev server with HMR |
 | `npm run build` | Production build |
 | `npm run lint` | ESLint + TS + Stylelint |
-| `npm test` · `npm test:ui` or `npm test:coverage` | Tests (+ in browser & coverage) |
+| `npm test` · `npm test:ui` · `npm test:coverage` | Tests (+ in browser & coverage) |
 
 **Routes:** `/` `/sign-up` `/messenger` `/settings` `/404` `/500`
 

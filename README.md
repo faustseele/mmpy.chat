@@ -64,7 +64,7 @@ npm install && npm run dev
 | `npm run dev`                                     | Дев-сервер с HMR                 |
 | `npm run build`                                   | Продакшн-сборка                  |
 | `npm run lint`                                    | ESLint + TS + Stylelint          |
-| `npm test` · `npm test:ui` or `npm test:coverage` | Тесты (+ в браузере и по охвату) |
+| `npm test` · `npm test:ui` · `npm test:coverage` | Тесты (+ в браузере и по охвату) |
 
 **Маршруты:** `/` `/sign-up` `/messenger` `/settings` `/404` `/500`
 
