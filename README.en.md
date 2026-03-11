@@ -1,3 +1,5 @@
+**English** | [Русский](README.md)
+
 **mmpy.messenger** 💌 — chat app in TypeScript from scratch, no React/Vue
 
 *Custom component system, reactive store, router, WebSocket, i18n — all hand-written.*
