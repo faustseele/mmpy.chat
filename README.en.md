@@ -4,7 +4,7 @@
 
 *Custom component system, reactive store, router, WebSocket, i18n — all hand-written.*
 
-**[Live Demo](https://mmpy-messenger.netlify.app/)** &nbsp;·&nbsp; **[Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/middle.messenger.praktikum.yandex?node-id=0-1&p=f)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)** &nbsp;·&nbsp; **[Русский](README.md)**
+**[Live Demo (with guest mode! 👻)](https://mmpy-messenger.netlify.app/)** &nbsp;·&nbsp; **[Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/middle.messenger.praktikum.yandex?node-id=0-1&p=f)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)** &nbsp;·&nbsp; **[Русский](README.md)**
 
 ---
 
