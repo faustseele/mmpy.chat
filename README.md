@@ -1,6 +1,6 @@
 [**English README** ➡️️](README.en.md) | Русский
 
-**mmpy.chat** 💌 — чат с записками на TypeScript с нуля, без React/Vue
+**mmpy.chat** 💌 — чат с заметками на TypeScript с нуля, без React/Vue
 
 *Компонентная система, реактивный стор, роутер, WebSocket, i18n — всё написано руками.*
 
