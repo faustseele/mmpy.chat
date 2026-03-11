@@ -1,10 +1,10 @@
-[English README ➡️️](README.en.md) | **Русский**
+[**English README** ➡️️](README.en.md) | Русский
 
-**mmpy.messenger** 💌 — чат на TypeScript с нуля, без React/Vue
+**mmpy.messenger** 💌 — чат с записками на TypeScript с нуля, без React/Vue
 
 *Компонентная система, реактивный стор, роутер, WebSocket, i18n — всё написано руками.*
 
-**[Демо (с гостевым модом! 👻)](https://mmpy-messenger.netlify.app/)** &nbsp;·&nbsp; **[Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/middle.messenger.praktikum.yandex?node-id=0-1&p=f)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)** &nbsp;·&nbsp; **[English](README.en.md)**
+**[Демо (с гостевым модом! 👻)](https://mmpy-messenger.netlify.app/)** &nbsp;·&nbsp; **[Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/middle.messenger.praktikum.yandex?node-id=0-1&p=f)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
 
 ---
 
@@ -20,7 +20,7 @@
 
 ### Стек
 
-- **Язык:** TypeScript (strict)
+- **Язык:** TypeScript (strict, generics, enums, guards)
 - **Шаблоны:** Handlebars
 - **Стили:** PostCSS + CSS Modules
 - **Сборка:** Vite
@@ -37,10 +37,10 @@
 
 Компоненты создаются через **Factory + DI** — зависимости инжектятся, не импортируются напрямую:
 
-- [`shared/lib/Component/`](src/shared/lib/Component/) — базовый класс с lifecycle на EventBus
+- [`shared/lib/Component/`](src/shared/lib/Component/) — декомпозированный базовый класс с lifecycle на EventBus
 - [`shared/lib/DOM/DOMService.ts`](src/shared/lib/DOM/DOMService.ts) — создание/обновление элементов, управление слушателями
 - [`shared/lib/Fragment/FragmentService.ts`](src/shared/lib/Fragment/FragmentService.ts) — Handlebars → DocumentFragment
-- [`app/providers/store/`](src/app/providers/store/) — реактивный стор + connect
+- [`app/providers/store/`](src/app/providers/store/) — реактивный стор + connect с Page-компонентом
 - [`app/providers/router/`](src/app/providers/router/) — History API роутер с гардами
 
 ---
@@ -48,8 +48,7 @@
 ### Что умеет?
 
 - Авторизация (вход / регистрация) с валидацией форм
-- Сообщения в реальном времени через WebSocket
-- Список чатов с поиском
+- Список чатов & записок, cообщения в реальном времени через WebSocket
 - Редактирование профиля (аватар, данные, пароль)
 - Роутинг с гардами авторизации
 - i18n — 7 языков, переключение на лету

@@ -1,10 +1,10 @@
-**English** | [Русский README ➡️](README.md)
+English | [**Русский README** ➡️](README.md)
 
-**mmpy.messenger** 💌 — chat app in TypeScript from scratch, no React/Vue
+**mmpy.messenger** 💌 — chat + notes app in TypeScript from scratch, no React/Vue
 
 *Custom component system, reactive store, router, WebSocket, i18n — all hand-written.*
 
-**[Live Demo (with guest mode! 👻)](https://mmpy-messenger.netlify.app/)** &nbsp;·&nbsp; **[Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/middle.messenger.praktikum.yandex?node-id=0-1&p=f)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)** &nbsp;·&nbsp; **[Русский](README.md)**
+**[Live Demo (with guest mode! 👻)](https://mmpy-messenger.netlify.app/)** &nbsp;·&nbsp; **[Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/middle.messenger.praktikum.yandex?node-id=0-1&p=f)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
 
 ---
 
@@ -20,7 +20,7 @@
 
 ### Stack
 
-- **Language:** TypeScript (strict)
+- **Language:** TypeScript (strict, generics, enums, guards)
 - **Templating:** Handlebars
 - **Styles:** PostCSS + CSS Modules
 - **Build:** Vite
@@ -37,10 +37,10 @@
 
 Components are created via **Factory + DI** — dependencies are injected, not imported directly:
 
-- [`shared/lib/Component/`](src/shared/lib/Component/) — base class with EventBus-driven lifecycle
+- [`shared/lib/Component/`](src/shared/lib/Component/) — decomposed base class with EventBus-driven lifecycle
 - [`shared/lib/DOM/DOMService.ts`](src/shared/lib/DOM/DOMService.ts) — element creation/updates, listener management
 - [`shared/lib/Fragment/FragmentService.ts`](src/shared/lib/Fragment/FragmentService.ts) — Handlebars → DocumentFragment
-- [`app/providers/store/`](src/app/providers/store/) — reactive store + connect
+- [`app/providers/store/`](src/app/providers/store/) — reactive store + connect with Page-component
 - [`app/providers/router/`](src/app/providers/router/) — History API router with guards
 
 ---
@@ -48,8 +48,7 @@ Components are created via **Factory + DI** — dependencies are injected, not i
 ### Features
 
 - Authentication (sign-in / sign-up) with form validation
-- Real-time messaging via WebSocket
-- Chat list with search
+- Chat & Notes list, real-time messaging via WebSocket
 - Profile editing (avatar, credentials, password)
 - Client-side routing with auth guards
 - i18n — 7 languages, runtime switching
