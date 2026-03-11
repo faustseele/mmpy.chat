@@ -4,7 +4,7 @@
 
 _Компонентная система, реактивный стор, роутер, WebSocket, i18n — всё написано руками._
 
-**[Демо (с гостевым модом! 👻)](https://mmpy-chat.netlify.app/)** &nbsp;·&nbsp; **[Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/middle.messenger.praktikum.yandex?node-id=0-1&p=f)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
+**[Демо (с гостевым модом! 👻)](https://mmpy-chat.netlify.app/)** &nbsp;·&nbsp; **[Собственный дизайн в Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/middle.messenger.praktikum.yandex?node-id=0-1&p=f)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
 
 ---
 
