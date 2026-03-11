@@ -52,7 +52,7 @@ Components are created via **Factory + DI** — dependencies are injected, not i
 - Profile editing (avatar, credentials, password)
 - Client-side routing with auth guards
 - i18n — 7 languages, runtime switching
-- Responsive layout
+- Mobile-first 📱 – responsive layout
 
 ---
 
