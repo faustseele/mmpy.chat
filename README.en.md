@@ -48,7 +48,7 @@ Components are created via **Factory + DI** — dependencies are injected, not i
 - 🗨️ Chats + 📝 Notes list, real-time messaging 🔄 WebSocket
 - ⚙️ Profile editing (avatar, credentials, password)
 - 🗺️ Client-side routing with auth guards
-- 🌐 i18n — 7 languages, runtime switching
+- 🌐 i18n — 7 languages, runtime switching 🔄 Store
 - 📱 Mobile-first – responsive layout
 
 ---
