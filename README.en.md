@@ -1,4 +1,4 @@
-**English** | [Русский](README.md)
+**English** | [Русский README ➡️](README.md)
 
 **mmpy.messenger** 💌 — chat app in TypeScript from scratch, no React/Vue
 
