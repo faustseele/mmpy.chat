@@ -2,7 +2,7 @@
 
 **mmpy.chat** 💌 — чат с заметками на TypeScript с нуля, без React/Vue
 
-*Компонентная система, реактивный стор, роутер, WebSocket, i18n — всё написано руками.*
+_Компонентная система, реактивный стор, роутер, WebSocket, i18n — всё написано руками._
 
 **[Демо (с гостевым модом! 👻)](https://mmpy-chat.netlify.app/)** &nbsp;·&nbsp; **[Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/middle.messenger.praktikum.yandex?node-id=0-1&p=f)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
 
@@ -20,14 +20,11 @@
 
 ### Стек технологий 🧩
 
-- **Язык:** TypeScript (strict, generics, enums, guards)
-- **Шаблоны:** Handlebars
-- **Стили:** PostCSS + CSS Modules
-- **Сборка:** Vite
-- **Тесты:** Vitest, jsdom
-- **Линтинг:** ESLint, Stylelint
-- **API:** REST (XHR) + WebSocket
-- **Деплой:** Netlify
+- **Язык** – TypeScript (strict, generics, enums, guards)
+- **Шаблоны и стили** – Handlebars; PostCSS + CSS Modules
+- **Сборка и тесты** – Vite; Vitest, jsdom
+- **Линтинг** – ESLint, Stylelint
+- **API и деплой** – REST (XHR) + WebSocket; Netlify
 
 ---
 
@@ -62,11 +59,11 @@
 npm install && npm run dev
 ```
 
-| Команда | Что делает |
-|---------|------------|
-| `npm run dev` | Дев-сервер с HMR |
-| `npm run build` | Продакшн-сборка |
-| `npm run lint` | ESLint + TS + Stylelint |
+| Команда                                           | Что делает                       |
+| ------------------------------------------------- | -------------------------------- |
+| `npm run dev`                                     | Дев-сервер с HMR                 |
+| `npm run build`                                   | Продакшн-сборка                  |
+| `npm run lint`                                    | ESLint + TS + Stylelint          |
 | `npm test` · `npm test:ui` or `npm test:coverage` | Тесты (+ в браузере и по охвату) |
 
 **Маршруты:** `/` `/sign-up` `/messenger` `/settings` `/404` `/500`
@@ -79,4 +76,4 @@ UI спроектирован до кода — **[открыть в Figma →](
 
 ---
 
-*Сделан по лекалам 'Middle Web-Developer' [course](https://github.com/yandex-praktikum/middle.messenger.praktikum.yandex) by [Y.Praktikum](practicum.yandex.ru/profile/middle-frontend)*
+_Сделан по лекалам 'Middle Web-Developer' [course](https://github.com/yandex-praktikum/middle.messenger.praktikum.yandex) by [Y.Praktikum](practicum.yandex.ru/profile/middle-frontend)_

@@ -20,14 +20,11 @@ English | [**Русский README** ➡️](README.md)
 
 ### Tech-Stack 🧩
 
-- **Language:** TypeScript (strict, generics, enums, guards)
-- **Templating:** Handlebars
-- **Styles:** PostCSS + CSS Modules
-- **Build:** Vite
-- **Testing:** Vitest, jsdom
-- **Linting:** ESLint, Stylelint
-- **API:** REST (XHR) + WebSocket
-- **Deploy:** Netlify
+- **Language** – TypeScript (strict, generics, enums, guards)
+- **Templating & styles** – Handlebars; PostCSS + CSS Modules
+- **Build & testing** – Vite; Vitest, jsdom
+- **Linting** – ESLint, Stylelint
+- **API & deploy** – REST (XHR) + WebSocket; Netlify
 
 ---
 
@@ -47,12 +44,12 @@ Components are created via **Factory + DI** — dependencies are injected, not i
 
 ### Features ⚡
 
-- Authentication (sign-in / sign-up) with form validation
-- Chat & Notes list, real-time messaging via WebSocket
-- Profile editing (avatar, credentials, password)
-- Client-side routing with auth guards
-- i18n — 7 languages, runtime switching
-- Mobile-first 📱 – responsive layout
+- 🚪 Authentication (sign-in / sign-up) with form validation
+- 🗨️ Chat & Notes list, real-time messaging via WebSocket
+- ✒️ Profile editing (avatar, credentials, password)
+- 🗺️ Client-side routing with auth guards
+- 🌐 i18n — 7 languages, runtime switching
+- 📱 Mobile-first – responsive layout
 
 ---
 
