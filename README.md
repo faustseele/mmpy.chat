@@ -8,6 +8,10 @@
 
 ---
 
+<img width="1360" height="890" alt="combo-1" src="https://github.com/user-attachments/assets/6dc144b7-e88e-41fb-af6d-5bf830a9d3c5" />
+
+---
+
 ### Чем хорош MMPY-Чат? 💌
 
 - Всё с нуля — Компоненты с lifecycle, DI, EventBus, без фреймворков

@@ -8,6 +8,10 @@ English | [**Русский README** ➡️](README.md)
 
 ---
 
+<img width="1360" height="890" alt="combo-1" src="https://github.com/user-attachments/assets/6dc144b7-e88e-41fb-af6d-5bf830a9d3c5" />
+
+---
+
 ### What's so good about MMPY-chat? 💌
 
 - Everything from scratch — components with lifecycle, DI, EventBus, no frameworks
