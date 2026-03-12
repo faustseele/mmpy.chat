@@ -1,10 +1,10 @@
 [**English README** ➡️️](README.en.md) | Русский
 
-**mmpy.chat** 💌 — чат с заметками на TypeScript с нуля, без React/Vue
+**mmpy.chat** — чат с заметками на TypeScript с нуля, без React/Vue.
 
 *Компонентная система, реактивный стор, роутер, WebSocket, i18n — всё написано руками.*
 
-**[Демо (с гостевым модом! 👻)](https://mmpy-chat.netlify.app/)** &nbsp;·&nbsp; **[Собственный дизайн в Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/mmpy-chat?node-id=0-1&t=PrP08m0m5Cfj2EMi-1)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
+**[Демо (с гостевым модом 👻)](https://mmpy-chat.netlify.app/)** &nbsp;·&nbsp; **[Дизайн в Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/mmpy-chat?node-id=0-1&t=PrP08m0m5Cfj2EMi-1)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
 
 ---
 
@@ -12,27 +12,26 @@
 
 ---
 
-### Чем хорош MMPY-Чат? 💌
+### Ключевые решения
 
-- Всё с нуля — Компоненты с lifecycle, DI, EventBus, без фреймворков
-- Feature-Sliced Design — слои, границы, однонаправленные зависимости
-- WebSocket-чат с токен-авторизацией и историей сообщений
-- Figma с собственным дизайном → pixel-perfect вёрстка
-- Lighthouse: 94-100 на всех страницах
+- Всё с нуля — компоненты с lifecycle, DI, EventBus, без фреймворков.
+- Feature-Sliced Design — слои, границы, однонаправленные зависимости.
+- WebSocket-чат с токен-авторизацией и историей сообщений.
+- UI спроектирован до кода в Figma → pixel-perfect вёрстка.
 
 ---
 
-### Стек технологий 🧩
+### Стек
 
-- **Язык** – TypeScript (strict, generics, enums, guards)
+- **Язык** – TypeScript (strict, generics, type guards, utility types)
 - **Шаблоны и стили** – Handlebars; PostCSS + CSS Modules
-- **Сборка и тесты** – Vite; Vitest, jsdom
-- **Линтинг** – ESLint, Stylelint
+- **Сборка** – Vite
+- **Тесты и линтинг** – Vitest (jsdom); ESLint, Stylelint
 - **API и деплой** – REST (XHR) + WebSocket; Netlify
 
 ---
 
-### Архитектура 🕸️
+### Архитектура
 
 **Feature-Sliced Design:** `src/app` → `src/pages` → `src/features` → `src/entities` → `src/shared`
 
@@ -46,34 +45,37 @@
 
 ---
 
-### Что умеет? ⚡
+### Функциональность
 
-- 🚪 Авторизация (вход / регистрация) с валидацией форм
-- 🗨️ Список чатов + 📝 Заметок в реальном времени 🔄 WebSocket
-- ⚙️ Редактирование профиля (аватар, данные, пароль)
-- 🗺️ Роутинг с гардами авторизации
-- 🌐 i18n — 7 языков, переключение на лету 🔄 Store
-- 📱 Адаптивная вёрстка — мобильный UX
+- Авторизация (вход / регистрация) с валидацией форм
+- Список чатов и заметок, обмен сообщениями в реальном времени через WebSocket
+- Редактирование профиля (аватар, данные, пароль)
+- Роутинг с гардами авторизации
+- i18n — 7 языков, переключение на лету через Store
+- Адаптивная вёрстка, мобильный UX
 
 ---
 
-### Запуск 🔑
+### Тестирование и качество
+
+**Unit-тесты** (Vitest + jsdom) покрывают core-модули: EventBus, Store, HTTPTransport, Router. Интеграционный тест на гостевой флоу — авторизация → навигация → отправка сообщения.
+
+**Lighthouse:** 94–100 на всех маршрутах (Performance, Accessibility, Best Practices, SEO).
+
+---
+
+### Запуск
 
 ```bash
 npm install && npm run dev
 ```
 
-| Команда                                           | Что делает                       |
-| ------------------------------------------------- | -------------------------------- |
-| `npm run dev`                                     | Дев-сервер с HMR                 |
-| `npm run build`                                   | Продакшн-сборка                  |
-| `npm run lint`                                    | ESLint + TS + Stylelint          |
-| `npm test` · `npm test:ui` · `npm test:coverage` | Тесты (+ в браузере и по охвату) |
+| Команда             | Что делает                        |
+| ------------------- | --------------------------------- |
+| `npm run dev`       | Дев-сервер с HMR                  |
+| `npm run build`     | Продакшн-сборка                   |
+| `npm run lint`      | ESLint + TS + Stylelint           |
+| `npm test`          | Тесты (watch)                     |
+| `npm test:coverage` | Тесты с отчётом по покрытию       |
 
-**Маршруты:** `/` `/sign-up` `/messenger` `/settings` `/404` `/500`
-
----
-
-### Дизайн 📐
-
-UI спроектирован до кода — **[открыть в Figma →](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/mmpy-chat?node-id=0-1&t=PrP08m0m5Cfj2EMi-1)**
+**Маршруты:** `/` · `/sign-up` · `/messenger` · `/settings` · `/404` · `/500`

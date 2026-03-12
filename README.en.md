@@ -1,10 +1,10 @@
 English | [**Русский README** ➡️](README.md)
 
-**mmpy.chat** 💌 — chat + notes app in TypeScript from scratch, no React/Vue
+**mmpy.chat** — a chat with notes written in TypeScript from scratch, without React/Vue.
 
-*Custom component system, reactive store, router, WebSocket, i18n — all hand-written.*
+*A component system, reactive store, router, WebSocket, i18n — everything written by hand.*
 
-**[Demo (with a guest mode! 👻)](https://mmpy-chat.netlify.app/)** &nbsp;·&nbsp; **[Homemade Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/mmpy-chat?node-id=0-1&t=PrP08m0m5Cfj2EMi-1)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
+**[Demo (with guest mode 👻)](https://mmpy-chat.netlify.app/)** &nbsp;·&nbsp; **[Design in Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/mmpy-chat?node-id=0-1&t=PrP08m0m5Cfj2EMi-1)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
 
 ---
 
@@ -12,68 +12,70 @@ English | [**Русский README** ➡️](README.md)
 
 ---
 
-### What's so good about MMPY-chat? 💌
+### Key decisions
 
-- Everything from scratch — components with lifecycle, DI, EventBus, no frameworks
-- Feature-Sliced Design — layers, boundaries, unidirectional dependencies
-- WebSocket chat with token auth and message history
-- Figma → pixel-perfect implementation
-- Lighthouse: 94-100 on all pages
-
----
-
-### Tech-Stack 🧩
-
-- **Language** – TypeScript (strict, generics, enums, guards)
-- **Templating & styles** – Handlebars; PostCSS + CSS Modules
-- **Build & testing** – Vite; Vitest, jsdom
-- **Linting** – ESLint, Stylelint
-- **API & deploy** – REST (XHR) + WebSocket; Netlify
+- Everything from scratch — components with lifecycle, DI, EventBus, without frameworks.
+- Feature-Sliced Design — layers, boundaries, one-way dependencies.
+- WebSocket chat with token authorization and message history.
+- UI designed before coding in Figma → pixel-perfect layout.
 
 ---
 
-### Architecture 🕸️
+### Stack
+
+- **Language** – TypeScript (strict, generics, type guards, utility types)
+- **Templates and styles** – Handlebars; PostCSS + CSS Modules
+- **Build** – Vite
+- **Tests and linting** – Vitest (jsdom); ESLint, Stylelint
+- **API and deployment** – REST (XHR) + WebSocket; Netlify
+
+---
+
+### Architecture
 
 **Feature-Sliced Design:** `src/app` → `src/pages` → `src/features` → `src/entities` → `src/shared`
 
-Components are created via **Factory + DI** — dependencies are injected, not imported directly:
+Components are created via **Factory + DI** — dependencies are injected rather than imported directly:
 
-- [`shared/lib/Component/`](src/shared/lib/Component/) — decomposed base class with EventBus-driven lifecycle
-- [`shared/lib/DOM/DOMService.ts`](src/shared/lib/DOM/DOMService.ts) — element creation/updates, listener management
+- [`shared/lib/Component/`](src/shared/lib/Component/) — decomposed base class with lifecycle on EventBus
+- [`shared/lib/DOM/DOMService.ts`](src/shared/lib/DOM/DOMService.ts) — element creation/update, listener management
 - [`shared/lib/Fragment/FragmentService.ts`](src/shared/lib/Fragment/FragmentService.ts) — Handlebars → DocumentFragment
-- [`app/providers/store/`](src/app/providers/store/) — reactive store + connect with Page-component
+- [`app/providers/store/`](src/app/providers/store/) — reactive store + connect with Page component
 - [`app/providers/router/`](src/app/providers/router/) — History API router with guards
 
 ---
 
-### Features ⚡
+### Functionality
 
-- 🚪 Authentication (sign-in / sign-up) with form validation
-- 🗨️ Chats + 📝 Notes list, real-time messaging 🔄 WebSocket
-- ⚙️ Profile editing (avatar, credentials, password)
-- 🗺️ Client-side routing with auth guards
-- 🌐 i18n — 7 languages, runtime switching 🔄 Store
-- 📱 Mobile-first – responsive layout
+- Authorization (login / registration) with form validation
+- List of chats and notes, real-time messaging via WebSocket
+- Profile editing (avatar, data, password)
+- Routing with authorization guards
+- i18n — 7 languages, switching on the fly via Store
+- Responsive layout, mobile UX
 
 ---
 
-### Getting started 🔑
+### Testing and quality
+
+**Unit tests** (Vitest + jsdom) cover core modules: EventBus, Store, HTTPTransport, Router. An integration test for the guest flow — authorization → navigation → sending a message.
+
+**Lighthouse:** 94–100 on all routes (Performance, Accessibility, Best Practices, SEO).
+
+---
+
+### Run
 
 ```bash
 npm install && npm run dev
 ```
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Dev server with HMR |
-| `npm run build` | Production build |
-| `npm run lint` | ESLint + TS + Stylelint |
-| `npm test` · `npm test:ui` · `npm test:coverage` | Tests (+ in browser & coverage) |
+| Command             | What it does                     |
+| ------------------- | -------------------------------- |
+| `npm run dev`       | Dev server with HMR              |
+| `npm run build`     | Production build                 |
+| `npm run lint`      | ESLint + TS + Stylelint          |
+| `npm test`          | Tests (watch)                    |
+| `npm test:coverage` | Tests with coverage report       |
 
-**Routes:** `/` `/sign-up` `/messenger` `/settings` `/404` `/500`
-
----
-
-### Design 📐
-
-UI was designed before code — **[open in Figma →](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/mmpy-chat?node-id=0-1&t=PrP08m0m5Cfj2EMi-1)**
+**Routes:** `/` · `/sign-up` · `/messenger` · `/settings` · `/404` · `/500`
