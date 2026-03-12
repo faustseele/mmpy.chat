@@ -79,7 +79,7 @@ export const onBadForm = (submitType: SettingsType): (() => void) => {
   if (submitType === "change-info") {
     return () => {
       globalBus.emit(GlobalEvent.Toast, {
-        msg: i18n.t("toasts.validation.fieldError"),
+        msg: i18n.t("toasts.validation.badForm"),
         type: "error",
       });
     };
