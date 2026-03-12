@@ -3,17 +3,24 @@ on:
   push:
     branches: [ main, master ]
   schedule:
-    - cron: '0 0 * * *' # once a day
-  workflow_dispatch: # manual dispatch
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Lighthouse Badger
         uses: myactionway/lighthouse-badger-action@v2.2
         with:
           urls: 'https://mmpy-chat.netlify.app/'
-          token: ${{ secrets.GIST_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
