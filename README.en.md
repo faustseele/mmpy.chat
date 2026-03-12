@@ -62,6 +62,8 @@ Components are created via **Factory + DI** — dependencies are injected rather
 
 **Lighthouse:** 94–100 on all routes (Performance, Accessibility, Best Practices, SEO).
 
+![Lighthouse Performance](https://img.shields.io/endpoint?url=https://vitals.rest/api/performance/mmpy-chat.netlify.app)
+
 ---
 
 ### Run
