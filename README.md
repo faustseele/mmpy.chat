@@ -62,8 +62,6 @@
 
 **Lighthouse:** 94–100 на всех маршрутах (Performance, Accessibility, Best Practices, SEO).
 
-![Lighthouse Performance](https://img.shields.io/endpoint?url=https://vitals.rest/api/performance/mmpy-chat.netlify.app)
-
 ---
 
 ### Запуск

@@ -1,0 +1,19 @@
+name: Lighthouse Report
+on:
+  push:
+    branches: [ main, master ]
+  schedule:
+    - cron: '0 0 * * *' # once a day
+  workflow_dispatch: # manual dispatch
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lighthouse Badger
+        uses: myactionway/lighthouse-badger-action@v2.2
+        with:
+          urls: 'https://mmpy-chat.netlify.app/'
+          token: ${{ secrets.GIST_TOKEN }}
