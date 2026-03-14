@@ -25,8 +25,8 @@ export class Toast extends Component<ToastProps> {
 
   public componentDidMount(): void {
     /* mounting Toast to globalBus */
-    globalBus.on(GlobalEvent.Toast, (payload: ToastPayload) =>
-      this.showToast(payload),
+    globalBus.on(GlobalEvent.Toast, (payload) =>
+      this.showToast(payload as ToastPayload),
     );
   }
 

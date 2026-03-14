@@ -26,8 +26,9 @@ describe("Shared/Lib: EventBus", () => {
     const bus = new EventBus();
     const mockHandler = vi.fn();
 
-    bus.on("ghost-event", mockHandler);
-    bus.off("ghost-event", mockHandler);
+    const unsubGhost = bus.on("ghost-event", mockHandler);
+    unsubGhost();
+
     bus.emit("ghost-event");
 
     expect(mockHandler).not.toHaveBeenCalled();

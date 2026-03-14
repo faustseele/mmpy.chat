@@ -2,39 +2,63 @@ import { GlobalEvent } from "./events.ts";
 import { EventCallback } from "./types.ts";
 
 /**
- * <TEvents extends string> is used to make the Events generics
- * E.g. ComponentEvent for Component, StoreEvent for Store
+ * generic event bus for sub to, unsub from & emitting events
+ * @template E — string for event names
  */
-export default class EventBus<TEvents extends string> {
-  // eslint-disable-next-line no-unused-vars
-  private _listeners: { [EventName in TEvents]?: EventCallback[] } = {};
+export default class EventBus<E extends string> {
+  private _listeners: Partial<Record<E, EventCallback[]>> = {};
 
-  /* Subscribe to the event */
-  public on(event: TEvents, callback: EventCallback): void {
-    if (!this._listeners[event]?.length) this._listeners[event] = [];
+  /**
+   * subs a cb to an event
+   * @param event — event name
+   * @param cb — fn to execute when the event is emitted
+   * @returns clean-up fn to unsub this specific listener
+   */
+  public on(event: E, cb: EventCallback): () => void {
+    if (!this._listeners[event]) this._listeners[event] = [];
 
-    this._listeners[event].push(callback);
+    this._listeners[event].push(cb);
+
+    return () => this.off(event, cb);
   }
 
-  /* Unsubscribe from the event */
-  public off(event: TEvents, callback: EventCallback): void {
-    if (!this._listeners[event]?.length) this._throwNotFoundError(event, "off");
+  /**
+   * unsub a specific cb from an event
+   * @param event — event name
+   * @param cb — callback fn to remove
+   */
+  public off(event: E, cb: EventCallback): void {
+    const listeners = this._listeners[event];
 
-    this._listeners[event] = this._listeners[event]?.filter(
-      (listener) => listener !== callback,
-    );
+    if (!listeners || listeners.length === 0) {
+      this._logUnmatchedEvent(event, "off");
+      return;
+    }
+
+    this._listeners[event] = listeners.filter((listener) => listener !== cb);
   }
 
-  /** Emit event
-    @param ...args: gathering multiple params for callback
-  */
-  public emit(event: TEvents, ...args: unknown[]): void {
-    if (!this._listeners[event]?.length) this._throwNotFoundError(event, "emit");
+  /**
+   * emits an event, triggering all subbed callbacks
+   * @param event — event name to emit
+   * @param args - arguments to pass to the callbacks
+   */
+  public emit(event: E, ...args: unknown[]): void {
+    const listeners = this._listeners[event];
 
-    this._listeners[event]?.forEach((listener) => listener(...args));
+    if (!listeners || listeners.length === 0) {
+      this._logUnmatchedEvent(event, "emit");
+      return;
+    }
+
+    listeners.forEach((listener) => {
+      /* the void operator 
+        marks the async promise as fire-and-forget */
+      void listener(...args);
+    });
   }
 
-  private _throwNotFoundError(event: TEvents, action: "off" | "emit"): Error {
+  private _logUnmatchedEvent(event: E, action: "off" | "emit"): Error {
     return new Error(`Not found event called '${event}' in '${action}' action`);
   }
 }

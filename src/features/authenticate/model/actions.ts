@@ -119,6 +119,7 @@ export const handleLogout = async (
   }
 
   const res = await AuthService.logout();
+  
   if (res.ok) {
     Router.go(RouteLink.SignIn);
     if (!noToast) {
