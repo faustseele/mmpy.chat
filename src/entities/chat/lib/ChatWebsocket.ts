@@ -1,6 +1,5 @@
-import { ChatId, ChatMessage } from "@shared/api/model/api.types";
-import { ApiResponse } from "@shared/api/model/types.ts";
 import Store from "@app/providers/store/model/Store.ts";
+import { ChatId, ChatMessage } from "@shared/api/model/api.types";
 import { WSS_CHATS } from "@shared/config/urls.ts";
 import { handleFetchChats } from "../model/actions.ts";
 
@@ -9,8 +8,8 @@ export class ChatWebsocket {
   private heartbeats = new Map<ChatId, number>();
 
   public openWS(userId: number, chatId: ChatId, token: string) {
-    /* close prev */
-    this.closeWS(chatId);
+    const existing = this.sockets.get(chatId);
+    if (existing && existing.readyState === WebSocket.OPEN) return;
 
     const ws = new WebSocket(`${WSS_CHATS}/${userId}/${chatId}/${token}`);
     this.sockets.set(chatId, ws);
@@ -29,48 +28,31 @@ export class ChatWebsocket {
       this.heartbeats.set(chatId, timer);
     });
 
-    ws.addEventListener(
-      "message",
-      (event): void | ApiResponse<string | ChatMessage | ChatMessage[]> => {
-        try {
-          const data = JSON.parse(event.data);
+    ws.addEventListener("message", (event) => {
+      try {
+        const data = JSON.parse(event.data);
 
-          if (Array.isArray(data)) {
-            const history = (data as ChatMessage[]).sort(
-              (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime(),
-            );
-            this.setMessages(chatId, history);
-            return { ok: true, data: history };
-          }
-
-          if (data?.type === "message") {
-            const msg = data as ChatMessage;
-            this.appendMessage(chatId, msg);
-            return { ok: true, data: msg };
-          }
-
-          if (data?.type === "pong") return;
-
-          if (data?.type === "error") {
-            console.error("WS error:", data);
-            return {
-              ok: false,
-              err: { status: 0, reason: "Network error", response: data },
-            };
-          }
-        } catch (err) {
-          console.error("WS parse error:", err);
-          return {
-            ok: false,
-            err: {
-              status: 0,
-              reason: "Network error",
-              response: typeof err === "string" ? err : "",
-            },
-          };
+        if (Array.isArray(data)) {
+          const history = (data as ChatMessage[]).sort(
+            (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime(),
+          );
+          this.setMessages(chatId, history);
         }
-      },
-    );
+
+        if (data?.type === "message") {
+          const msg = data as ChatMessage;
+          this.appendMessage(chatId, msg);
+        }
+
+        if (data?.type === "pong") return;
+
+        if (data?.type === "error") {
+          console.error("WS error:", data);
+        }
+      } catch (err) {
+        console.error("WS parse error:", err);
+      }
+    });
 
     ws.addEventListener("close", () => {
       this.stopHeartbeat(chatId);
@@ -102,10 +84,7 @@ export class ChatWebsocket {
     }
   }
 
-  public sendMessage(content: string) {
-    const chatId = Store.getState().api.chats.activeId;
-
-    if (!chatId) return;
+  public sendMessage(chatId: ChatId, content: string) {
     const ws = this.sockets.get(chatId);
 
     if (!ws || ws.readyState !== WebSocket.OPEN) {
@@ -132,10 +111,7 @@ export class ChatWebsocket {
     this.setMessages(chatId, [...list, message]);
   }
 
-  public sendFile(resourceId: number) {
-    const chatId = Store.getState().api.chats.activeId;
-
-    if (!chatId) return;
+  public sendFile(chatId: ChatId, resourceId: number) {
     const ws = this.sockets.get(chatId);
 
     if (!ws || ws.readyState !== WebSocket.OPEN) {

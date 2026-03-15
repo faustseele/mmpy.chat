@@ -1,3 +1,4 @@
+import Store from "@app/providers/store/model/Store.ts";
 import {
   ChatId,
   ChatResponse,
@@ -8,7 +9,6 @@ import {
   UpdateChatAvatarResponse,
 } from "@shared/api/model/api.types.ts";
 import { ApiError, ApiResponse } from "@shared/api/model/types.ts";
-import Store from "@app/providers/store/model/Store.ts";
 import { ls_removeLastChatId, ls_storeLastChatId } from "@shared/lib/LocalStorage/actions.ts";
 import ChatAPI from "../api/ChatAPI.ts";
 import { ChatWebsocket } from "../lib/ChatWebsocket.ts";
@@ -41,6 +41,7 @@ class ChatService {
 
   public async selectChat(chatId: number): Promise<ApiResponse<unknown>> {
     try {
+      /* setting new active chatId */
       Store.set("api.chats.activeId", chatId);
       ls_storeLastChatId(chatId);
 
@@ -77,9 +78,6 @@ class ChatService {
         };
       }
 
-      /* closing prev socket */
-      const prevId = Store.getState().api.chats.activeId;
-      if (prevId && prevId !== chatId) this.ws.closeWS(prevId);
 
       const { token } = await ChatAPI.getToken(chatId);
       this.ws.openWS(user.id, chatId, token);
@@ -174,18 +172,15 @@ class ChatService {
     return Store.getState().api.chats.currentChat?.type === "notes";
   }
 
-  public sendMessage(content: string) {
-    this.ws.sendMessage(content);
+  public sendMessage(chatId: ChatId,content: string) {
+    this.ws.sendMessage(chatId, content);
   }
 
-  public sendFile(resourceId: number) {
-    this.ws.sendFile(resourceId);
+  public sendFile(chatId: ChatId, resourceId: number) {
+    this.ws.sendFile(chatId, resourceId);
   }
 
   public deselectChat() {
-    const currId = Store.getState().api.chats.activeId;
-    if (currId) this.ws.closeWS(currId);
-
     Store.set("api.chats.activeId", null);
     Store.set("api.chats.currentChat", null);
     ls_removeLastChatId();

@@ -21,7 +21,7 @@ export class MessageField extends Component<MessageFieldProps> {
     if (!attach || attach.dataset.bound) return;
 
     attach.addEventListener("change", async (e) => {
-      await handleAttachImage(e);
+      await handleAttachImage(e, this.configs.chatId ?? 0);
       attach.value = "";
     });
     attach.dataset.bound = "true";

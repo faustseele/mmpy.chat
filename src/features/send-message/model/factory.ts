@@ -11,6 +11,7 @@ import css from "../ui/messageField.module.css";
 import { MessageField } from "../ui/MessageField.ts";
 import { handleSendMessage } from "./actions.ts";
 import { MessageFieldProps } from "./types.ts";
+import { ChatId } from "@shared/api/model/api.types.ts";
 
 export const getMessageFieldNode = (
   id: ComponentId,
@@ -27,17 +28,19 @@ export const getMessageFieldNode = (
 
 const getMessageFieldParams = (
   id: ComponentId,
+  chatId?: ChatId
 ): ComponentParams<MessageFieldProps> => {
   return {
     configs: {
       id,
+      chatId,
       rootTag: "form",
       classNames: css.messageField,
       type: "text",
       label: "Message Input",
     },
     on: {
-      submit: (e) => handleSendMessage(e),
+      submit: (e, chatId) => handleSendMessage(e, chatId),
     },
   };
 };

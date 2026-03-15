@@ -1,4 +1,5 @@
 import Store from "@app/providers/store/model/Store.ts";
+import { handleSendMessage } from "@features/send-message/model/actions.ts";
 import { MessageField } from "@features/send-message/ui/MessageField.ts";
 import cssPage from "@pages/page/ui/page.module.css";
 import { Page } from "@pages/page/ui/Page.ts";
@@ -13,7 +14,10 @@ import {
   handleAddNotesPrompt,
   handleDeleteChatPrompt,
 } from "../model/actions.ts";
-import { MessengerNodes, MessengerProps } from "../model/types.ts";
+import {
+  MessengerNodes,
+  MessengerProps
+} from "../model/types.ts";
 import css from "./messenger.module.css";
 
 export class MessengerPage extends Page<MessengerProps> {
@@ -60,14 +64,18 @@ export class MessengerPage extends Page<MessengerProps> {
   }
 
   public componentDidUpdate(): void {
+    const info = this.configs.info;
     const spinner = this.children?.nodes["spinner"].runtime
       ?.instance as Spinner;
     const msgField = this.children?.nodes["messageField"].runtime
       ?.instance as MessageField;
 
     const isLoadingMessages = this.configs.isLoadingMessages ?? false;
-    const placeholder =
-      this.configs.info.type === "notes" ? "Заметка:" : "Cообщение...";
+    const placeholder = i18n.t(
+      info.type === "notes"
+        ? "messenger.message.notePlaceholder"
+        : "messenger.message.chatPlaceholder",
+    );
 
     /* caching placeholder & spinner to avoid unnecessary re-renders */
     if (isLoadingMessages !== this.prevSpinner && spinner) {
@@ -75,7 +83,19 @@ export class MessengerPage extends Page<MessengerProps> {
       this.prevSpinner = isLoadingMessages;
     }
     if (placeholder !== this.prevPlaceholder && msgField) {
-      msgField.setProps({ configs: { placeholder } });
+      if (info.type === "stub") {
+        msgField.setProps({
+          configs: { placeholder },
+        });
+      } else {
+        msgField.setProps({
+          configs: { placeholder, chatId: info.chatId },
+          on: {
+            submit: (e: Event) => handleSendMessage(e, info.chatId),
+          },
+        });
+      }
+
       this.prevPlaceholder = placeholder;
     }
   }

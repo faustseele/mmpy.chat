@@ -1,3 +1,4 @@
+import { ChatId } from "@shared/api/model/api.types.ts";
 import {
   BaseConfigs,
   BaseProps,
@@ -7,12 +8,13 @@ import { RootTag } from "@shared/lib/DOM/types.ts";
 export interface MessageFieldProps extends BaseProps {
   configs: MessageFieldConfigs;
   on: {
-    submit: (e: Event) => void;
+    submit: (e: Event, chatId: ChatId) => void;
   };
 }
 
 export interface MessageFieldConfigs extends BaseConfigs {
   id: string;
+  chatId?: ChatId;
   rootTag: Extract<RootTag, "form">;
   classNames: string;
   label: string;
