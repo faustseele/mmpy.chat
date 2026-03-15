@@ -9,30 +9,12 @@ export class ChatWebsocket {
   private heartbeats = new Map<ChatId, number>();
 
   public openWS(userId: number, chatId: ChatId, token: string) {
-    /* close prev socket */
+    /* close prev */
     this.closeWS(chatId);
 
-    /* concatenating url, userId, chatId and token */
     const ws = new WebSocket(`${WSS_CHATS}/${userId}/${chatId}/${token}`);
-
-    /* setting new chat-socket */
     this.sockets.set(chatId, ws);
 
-    this._setSocketListeners(ws, chatId);
-  }
-
-  public closeWS(chatId: ChatId) {
-    const ws = this.sockets.get(chatId);
-
-    if (ws) {
-      ws.close(1000, "switch");
-      this.sockets.delete(chatId);
-    }
-
-    this._stopHeartbeat(chatId);
-  }
-
-  private _setSocketListeners = (ws: WebSocket, chatId: ChatId) => {
     ws.addEventListener("open", () => {
       /* get history */
       ws.send(JSON.stringify({ type: "get old", content: "0" }));
@@ -57,19 +39,13 @@ export class ChatWebsocket {
             const history = (data as ChatMessage[]).sort(
               (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime(),
             );
-            this._setMessages(chatId, history);
-
-            /* update the chats list */
-            handleFetchChats();
+            this.setMessages(chatId, history);
             return { ok: true, data: history };
           }
 
           if (data?.type === "message") {
             const msg = data as ChatMessage;
-            this._appendMessage(chatId, msg);
-
-            /* update the chats list */
-            handleFetchChats();
+            this.appendMessage(chatId, msg);
             return { ok: true, data: msg };
           }
 
@@ -97,35 +73,33 @@ export class ChatWebsocket {
     );
 
     ws.addEventListener("close", () => {
-      this._stopHeartbeat(chatId);
+      this.stopHeartbeat(chatId);
       /* todo: implement reconnection */
     });
 
     ws.addEventListener("error", (err) => {
       console.error("WS socket error:", err);
     });
-  };
+  }
 
-  private _stopHeartbeat(chatId: ChatId) {
+  public closeWS(chatId: ChatId) {
+    const ws = this.sockets.get(chatId);
+
+    if (ws) {
+      ws.close(1000, "switch");
+      this.sockets.delete(chatId);
+    }
+
+    this.stopHeartbeat(chatId);
+  }
+
+  private stopHeartbeat(chatId: ChatId) {
     const timer = this.heartbeats.get(chatId);
 
     if (timer) {
       window.clearInterval(timer);
       this.heartbeats.delete(chatId);
     }
-  }
-
-  private _setMessages(chatId: ChatId, messages: ChatMessage[]) {
-    const all = Store.getState().api.chats.messagesByChatId || {};
-
-    Store.set("api.chats.messagesByChatId", { ...all, [chatId]: messages });
-  }
-
-  private _appendMessage(chatId: ChatId, message: ChatMessage) {
-    const byChat = Store.getState().api.chats.messagesByChatId || {};
-    const list = byChat[chatId] || [];
-
-    this._setMessages(chatId, [...list, message]);
   }
 
   public sendMessage(content: string) {
@@ -140,6 +114,22 @@ export class ChatWebsocket {
     }
 
     ws.send(JSON.stringify({ type: "message", content }));
+
+    /* update the chats list */
+    setTimeout(() => handleFetchChats(), 100);
+  }
+
+  private setMessages(chatId: ChatId, messages: ChatMessage[]) {
+    const all = Store.getState().api.chats.messagesByChatId || {};
+
+    Store.set("api.chats.messagesByChatId", { ...all, [chatId]: messages });
+  }
+
+  private appendMessage(chatId: ChatId, message: ChatMessage) {
+    const byChat = Store.getState().api.chats.messagesByChatId || {};
+    const list = byChat[chatId] || [];
+
+    this.setMessages(chatId, [...list, message]);
   }
 
   public sendFile(resourceId: number) {
