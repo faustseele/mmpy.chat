@@ -4,6 +4,7 @@ import { WSS_CHATS } from "@shared/config/urls.ts";
 import { handleFetchChats } from "../model/actions.ts";
 import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
 import { GlobalEvent } from "@shared/lib/EventBus/events.ts";
+import { sortMessagesByTime } from "../model/utils.ts";
 
 export class ChatWebsocket {
   private _sockets = new Map<ChatId, WebSocket>();
@@ -37,23 +38,32 @@ export class ChatWebsocket {
     ws.addEventListener("message", (event) => {
       try {
         const data = JSON.parse(event.data);
+        const type = Array.isArray(data) ? data[0].type : data.type;
 
-        if (Array.isArray(data)) {
-          const history = (data as ChatMessage[]).sort(
-            (a, b) => new Date(a.time).getTime() - new Date(b.time).getTime(),
-          );
-          this.setMessages(chatId, history);
-        }
+        const handleMsgsFiles = (data: ChatMessage | ChatMessage[]) => {
+          if (Array.isArray(data)) {
+            const history = sortMessagesByTime(data as ChatMessage[]);
+            this.setMessages(chatId, history as ChatMessage[]);
+          } else {
+            this.setMessages(chatId, [data as ChatMessage]);
+          }
+        };
 
-        if (data?.type === "message") {
-          const msg = data as ChatMessage;
-          this.appendMessage(chatId, msg);
-        }
-
-        if (data?.type === "pong") return;
-
-        if (data?.type === "error") {
-          console.error("WS error:", data);
+        switch (type) {
+          case "message":
+            handleMsgsFiles(data);
+            break;
+          case "file":
+            handleMsgsFiles(data);
+            break;
+          case "pong":
+            break;
+          case "error":
+            console.error("WS error:", data);
+            break;
+          default:
+            console.error("Bad WS event.data:", data);
+            break;
         }
       } catch (err) {
         console.error("WS parse error:", err);
@@ -129,17 +139,14 @@ export class ChatWebsocket {
     setTimeout(() => handleFetchChats(), 100);
   }
 
-  private setMessages(chatId: ChatId, messages: ChatMessage[]) {
-    const all = Store.getState().api.chats.messagesByChatId || {};
+  private setMessages(chatId: ChatId, newMsgs: ChatMessage[]) {
+    const chatsWithMsgs = Store.getState().api.chats.messagesByChatId || {};
+    const updMsgs = [...(chatsWithMsgs[chatId] || []), ...newMsgs];
 
-    Store.set("api.chats.messagesByChatId", { ...all, [chatId]: messages });
-  }
-
-  private appendMessage(chatId: ChatId, message: ChatMessage) {
-    const byChat = Store.getState().api.chats.messagesByChatId || {};
-    const list = byChat[chatId] || [];
-
-    this.setMessages(chatId, [...list, message]);
+    Store.set("api.chats.messagesByChatId", {
+      ...chatsWithMsgs,
+      [chatId]: updMsgs,
+    });
   }
 
   public sendFile(chatId: ChatId, resourceId: number) {

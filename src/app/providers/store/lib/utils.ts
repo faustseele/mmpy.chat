@@ -50,3 +50,4 @@ export function set(
 
   return merge(object as Indexed, result);
 }
+
