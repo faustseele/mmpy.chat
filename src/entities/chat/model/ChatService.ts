@@ -193,7 +193,7 @@ class ChatService {
   }
 
   public sendFile(chatId: ChatId, resourceId: number) {
-    this.ws.sendFile(chatId, resourceId);
+    this.ws.sendMessage(chatId, resourceId);
   }
 
   public deselectChat() {

@@ -9,7 +9,7 @@ import { sortMessagesByTime } from "../model/utils.ts";
 export class ChatWebsocket {
   private _sockets = new Map<ChatId, WebSocket>();
   private _heartbeats = new Map<ChatId, number>();
-  private _queuedMsgsByChats = new Map<ChatId, ChatMessage[]>();
+  private _queuedMsgs = new Map<ChatId, (string | number)[]>();
 
   public openWS(userId: number, chatId: ChatId, token: string) {
     const socket = this._sockets.get(chatId);
@@ -25,6 +25,8 @@ export class ChatWebsocket {
       /* get history */
       ws.send(JSON.stringify({ type: "get old", content: "0" }));
 
+      this._tryDispatchQueued();
+
       /* heartbeat every 30 secs */
       const timer = window.setInterval(() => {
         if (ws.readyState === WebSocket.OPEN) {
@@ -38,7 +40,7 @@ export class ChatWebsocket {
     ws.addEventListener("message", (event) => {
       try {
         const data = JSON.parse(event.data);
-        const type = Array.isArray(data) ? data[0].type : data.type;
+        const type = Array.isArray(data) ? data[0]?.type : data.type;
 
         const handleMsgsFiles = (data: ChatMessage | ChatMessage[]) => {
           if (Array.isArray(data)) {
@@ -78,19 +80,19 @@ export class ChatWebsocket {
     ws.addEventListener("error", (err) => {
       console.error("WS socket error:", err);
     });
-
-    this._tryDispatchQueued();
   }
 
   private _tryDispatchQueued() {
-    const chats = this._queuedMsgsByChats.keys();
+    const chats = this._queuedMsgs.keys();
 
     for (const chatId of chats) {
-      const msgs = this._queuedMsgsByChats.get(chatId);
+      const msgs = this._queuedMsgs.get(chatId);
       if (msgs) {
-        msgs.forEach((msg) => this.sendMessage(chatId, msg.content));
+        msgs.forEach((msg) => this.sendMessage(chatId, msg));
       }
     }
+
+    this._queuedMsgs.clear();
   }
 
   public closeWS(chatId: ChatId) {
@@ -113,27 +115,39 @@ export class ChatWebsocket {
     }
   }
 
-  public sendMessage(chatId: ChatId, content: string) {
+  public sendMessage(chatId: ChatId, content: string | number) {
     const socket = this._sockets.get(chatId);
     if (!socket || !content) return;
 
+    const type = typeof content === "string" ? "message" : "file";
+
+    const pushToQueue = () => {
+      const msgs = this._queuedMsgs.get(chatId);
+      if (!msgs) this._queuedMsgs.set(chatId, [content]);
+      else this._queuedMsgs.set(chatId, [...msgs, content]);
+      this._queuedMsgs.set(chatId, this._queuedMsgs.get(chatId)!);
+    };
+
     switch (socket.readyState) {
       case WebSocket.CONNECTING:
+        pushToQueue();
         globalBus.emit(GlobalEvent.Toast, {
           msg: "Wait a moment, the connection is being established",
         });
         console.error("WS is connecting");
         return;
       case WebSocket.CLOSED:
+        console.error("WS is closed");
+        return;
       case WebSocket.CLOSING:
+        console.error("WS is closing");
         return;
       default:
         break;
     }
-
     this._tryDispatchQueued();
 
-    socket.send(JSON.stringify({ type: "message", content }));
+    socket.send(JSON.stringify({ type, content }));
 
     /* update the chats list */
     setTimeout(() => handleFetchChats(), 100);
@@ -147,20 +161,6 @@ export class ChatWebsocket {
       ...chatsWithMsgs,
       [chatId]: updMsgs,
     });
-  }
-
-  public sendFile(chatId: ChatId, resourceId: number) {
-    const ws = this._sockets.get(chatId);
-
-    if (!ws || ws.readyState !== WebSocket.OPEN) {
-      console.error("WS is not open");
-      return;
-    }
-
-    ws.send(JSON.stringify({ type: "file", content: String(resourceId) }));
-
-    /* update the chats list */
-    setTimeout(() => handleFetchChats(), 100);
   }
 
   public isOpen(chatId: ChatId): boolean {
