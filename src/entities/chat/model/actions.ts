@@ -86,6 +86,7 @@ export const handleDeleteChat = async (id: number, chatTitle: string) => {
 };
 
 export const handleFetchChats = async (
+  restore = false,
   query?: GetChatsQuery,
 ): Promise<ApiResponse<ChatResponse[]>> => {
   const resList = await ChatService.fetchChats(query);
@@ -101,13 +102,14 @@ export const handleFetchChats = async (
     return resList;
   }
 
-  const list = resList.data;
-
-  /* auto-restore last active chat if no active chat */
-  const last = Number(ls_getLastChatId());
-  const activeId = Store.getState().api.chats.activeId;
-  if (!activeId && last && list!.some((chat) => chat.id === last))
-    ChatService.selectChat(last);
+  if (restore) {
+    /* restore last active chat if no active chat */
+    const list = resList.data;
+    const last = Number(ls_getLastChatId());
+    const activeId = Store.getState().api.chats.activeId;
+    if (!activeId && last && list!.some((chat) => chat.id === last))
+      ChatService.selectChat(last);
+  }
 
   return resList;
 };
