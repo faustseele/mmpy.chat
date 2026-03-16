@@ -40,6 +40,12 @@ export class ChatWebsocket {
     ws.addEventListener("message", (event) => {
       try {
         const data = JSON.parse(event.data);
+
+        if (Array.isArray(data) && data.length === 0) {
+          this.setMessages(chatId, []);
+          return;
+        }
+
         const type = Array.isArray(data) ? data[0]?.type : data.type;
 
         const handleMsgsFiles = (data: ChatMessage | ChatMessage[]) => {

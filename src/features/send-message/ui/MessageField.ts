@@ -9,15 +9,23 @@ export class MessageField extends Component<MessageFieldProps> {
     super(props);
   }
 
+  public componentDidMount(): void {
+    this._focusInput();
+  }
+
   public componentDidRender(): void {
     this._wireAttach();
+    this._focusInput();
+  }
 
-    const input = this.element?.querySelector<HTMLInputElement>(
-      `#${this.configs.id}`,
-    )
-
-    console.log(input)
-    input?.focus()
+  private _focusInput(): void {
+    /* runs after the browser has committed the element to the DOM */
+    requestAnimationFrame(() => {
+      const input = this.element?.querySelector<HTMLInputElement>(
+        `#${this.configs.id}`,
+      );
+      input?.focus();
+    });
   }
 
   private _wireAttach(): void {
@@ -46,7 +54,6 @@ export class MessageField extends Component<MessageFieldProps> {
         placeholder="{{placeholder}}"
         aria-label="{{label}}"
         autocomplete="off"
-        autofocus
       />
       <button type="submit" class="${css.inputButton} ${css.inputButton_send}" aria-label="Send message"></button>
     `;
