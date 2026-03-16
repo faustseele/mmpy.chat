@@ -16,7 +16,6 @@ export const handleAddUser = async (
   chatId: ChatId,
   user: number,
 ): Promise<ApiResponse<string>> => {
-
   return await ChatService.addUser(chatId, user);
 };
 
@@ -104,9 +103,10 @@ export const handleFetchChats = async (
 
   const list = resList.data;
 
-  /* auto-restore last active chat */
+  /* auto-restore last active chat if no active chat */
   const last = Number(ls_getLastChatId());
-  if (last && list!.some((chat) => chat.id === last))
+  const activeId = Store.getState().api.chats.activeId;
+  if (!activeId && last && list!.some((chat) => chat.id === last))
     ChatService.selectChat(last);
 
   return resList;

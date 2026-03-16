@@ -9,7 +9,10 @@ import {
   UpdateChatAvatarResponse,
 } from "@shared/api/model/api.types.ts";
 import { ApiError, ApiResponse } from "@shared/api/model/types.ts";
-import { ls_removeLastChatId, ls_storeLastChatId } from "@shared/lib/LocalStorage/actions.ts";
+import {
+  ls_removeLastChatId,
+  ls_storeLastChatId,
+} from "@shared/lib/LocalStorage/actions.ts";
 import ChatAPI from "../api/ChatAPI.ts";
 import { ChatWebsocket } from "../lib/ChatWebsocket.ts";
 import { getChatType } from "./utils.ts";
@@ -25,6 +28,8 @@ class ChatService {
       list.map((chat) => (chat.type = getChatType(chat.title)));
 
       Store.set("api.chats.list", list);
+
+      this._tryLazyWsOpen(list);
       return { ok: true, data: list };
     } catch (e) {
       const badCookie = (e as ApiError).status === 401;
@@ -36,6 +41,18 @@ class ChatService {
       }
 
       return { ok: false, err: e as ApiError };
+    }
+  }
+
+  private async _tryLazyWsOpen(chats: ChatResponse[]) {
+    const userId = Store.getState().api.auth.user!.id;
+
+    for (const chat of chats) {
+      const chatId = chat.id;
+      if (this.ws.isOpen(chatId)) continue;
+
+      const { token } = await ChatAPI.getToken(chatId);
+      this.ws.openWS(userId, chatId, token);
     }
   }
 
@@ -77,7 +94,6 @@ class ChatService {
           },
         };
       }
-
 
       const { token } = await ChatAPI.getToken(chatId);
       this.ws.openWS(user.id, chatId, token);
@@ -172,7 +188,7 @@ class ChatService {
     return Store.getState().api.chats.currentChat?.type === "notes";
   }
 
-  public sendMessage(chatId: ChatId,content: string) {
+  public sendMessage(chatId: ChatId, content: string) {
     this.ws.sendMessage(chatId, content);
   }
 
