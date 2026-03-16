@@ -11,6 +11,13 @@ export class MessageField extends Component<MessageFieldProps> {
 
   public componentDidRender(): void {
     this._wireAttach();
+
+    const input = this.element?.querySelector<HTMLInputElement>(
+      `#${this.configs.id}`,
+    )
+
+    console.log(input)
+    input?.focus()
   }
 
   private _wireAttach(): void {
@@ -39,6 +46,7 @@ export class MessageField extends Component<MessageFieldProps> {
         placeholder="{{placeholder}}"
         aria-label="{{label}}"
         autocomplete="off"
+        autofocus
       />
       <button type="submit" class="${css.inputButton} ${css.inputButton_send}" aria-label="Send message"></button>
     `;

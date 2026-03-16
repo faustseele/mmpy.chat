@@ -125,7 +125,6 @@ export class ChatWebsocket {
       const msgs = this._queuedMsgs.get(chatId);
       if (!msgs) this._queuedMsgs.set(chatId, [content]);
       else this._queuedMsgs.set(chatId, [...msgs, content]);
-      this._queuedMsgs.set(chatId, this._queuedMsgs.get(chatId)!);
     };
 
     switch (socket.readyState) {
@@ -145,7 +144,6 @@ export class ChatWebsocket {
       default:
         break;
     }
-    this._tryDispatchQueued();
 
     socket.send(JSON.stringify({ type, content }));
 
