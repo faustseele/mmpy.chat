@@ -4,6 +4,8 @@ English | [**Русский README** ➡️](README.md)
 
 *A component system, reactive store, router, WebSocket, i18n — everything written by hand.*
 
+![Performance](https://img.shields.io/badge/Performance-98-brightgreen) ![Accessibility](https://img.shields.io/badge/Accessibility-100-brightgreen) ![Best Practices](https://img.shields.io/badge/Best_Practices-100-brightgreen) ![SEO](https://img.shields.io/badge/SEO-100-brightgreen)
+
 **[Demo (with guest mode 👻)](https://mmpy-chat.netlify.app/)** &nbsp;·&nbsp; **[Design in Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/mmpy-chat?node-id=0-1&t=PrP08m0m5Cfj2EMi-1)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
 
 ---
@@ -37,7 +39,18 @@ English | [**Русский README** ➡️](README.md)
 
 Components are created via **Factory + DI** — dependencies are injected rather than imported directly:
 
-- [`shared/lib/Component/`](src/shared/lib/Component/) — decomposed base class with lifecycle on EventBus
+```mermaid
+graph LR
+    F["Factory"] -- "creates" --> C["Component"]
+    C -- "DI" --> DOM["DOMService"]
+    C -- "DI" --> Frag["FragmentService"]
+    C -- "EventBus" --> LC["Render → Mount → Update"]
+    S["Store"] -- "connect + emit" --> P["Page"]
+    P -- "setProps" --> C
+    R["Router"] -- "guards → render" --> P
+```
+
+- [`shared/lib/Component/`](src/shared/lib/Component/) — base class with lifecycle on EventBus (Render → Mount → Update → Unmount)
 - [`shared/lib/DOM/DOMService.ts`](src/shared/lib/DOM/DOMService.ts) — element creation/update, listener management
 - [`shared/lib/Fragment/FragmentService.ts`](src/shared/lib/Fragment/FragmentService.ts) — Handlebars → DocumentFragment
 - [`app/providers/store/`](src/app/providers/store/) — reactive store + connect with Page component
@@ -56,13 +69,13 @@ Components are created via **Factory + DI** — dependencies are injected rather
 
 ---
 
-### Testing and quality
+### CI/CD & Testing
 
-**Unit tests** (Vitest + jsdom) cover core modules: EventBus, Store, HTTPTransport, Router. An integration test for the guest flow — authorization → navigation → sending a message.
+**CI:** GitHub Actions — lint, test, build run in parallel on every PR. Build only triggers after lint and tests pass.
+
+**Unit tests** (Vitest + jsdom) cover core modules: EventBus, Store, HTTPTransport, validation. An integration test for the guest flow — authorization → navigation → sending a message.
 
 **Lighthouse:** 94–100 on all routes (Performance, Accessibility, Best Practices, SEO).
-
-![Lighthouse Performance](https://img.shields.io/endpoint?url=https://vitals.rest/api/performance/mmpy-chat.netlify.app)
 
 ---
 

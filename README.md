@@ -4,6 +4,8 @@
 
 *Компонентная система, реактивный стор, роутер, WebSocket, i18n — всё написано руками.*
 
+![Performance](https://img.shields.io/badge/Performance-93-brightgreen) ![Accessibility](https://img.shields.io/badge/Accessibility-100-brightgreen) ![Best Practices](https://img.shields.io/badge/Best_Practices-100-brightgreen) ![SEO](https://img.shields.io/badge/SEO-100-brightgreen)
+
 **[Демо (с гостевым модом 👻)](https://mmpy-chat.netlify.app/)** &nbsp;·&nbsp; **[Дизайн в Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/mmpy-chat?node-id=0-1&t=PrP08m0m5Cfj2EMi-1)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
 
 ---
@@ -37,7 +39,18 @@
 
 Компоненты создаются через **Factory + DI** — зависимости инжектятся, не импортируются напрямую:
 
-- [`shared/lib/Component/`](src/shared/lib/Component/) — декомпозированный базовый класс с lifecycle на EventBus
+```mermaid
+graph LR
+    F["Factory"] -- "создаёт" --> C["Component"]
+    C -- "DI" --> DOM["DOMService"]
+    C -- "DI" --> Frag["FragmentService"]
+    C -- "EventBus" --> LC["Render → Mount → Update"]
+    S["Store"] -- "connect + emit" --> P["Page"]
+    P -- "setProps" --> C
+    R["Router"] -- "guards → render" --> P
+```
+
+- [`shared/lib/Component/`](src/shared/lib/Component/) — базовый класс с lifecycle на EventBus (Render → Mount → Update → Unmount)
 - [`shared/lib/DOM/DOMService.ts`](src/shared/lib/DOM/DOMService.ts) — создание/обновление элементов, управление слушателями
 - [`shared/lib/Fragment/FragmentService.ts`](src/shared/lib/Fragment/FragmentService.ts) — Handlebars → DocumentFragment
 - [`app/providers/store/`](src/app/providers/store/) — реактивный стор + connect с Page-компонентом
@@ -56,9 +69,11 @@
 
 ---
 
-### Тестирование и качество
+### CI/CD и тестирование
 
-**Unit-тесты** (Vitest + jsdom) покрывают core-модули: EventBus, Store, HTTPTransport, Router. Интеграционный тест на гостевой флоу — авторизация → навигация → отправка сообщения.
+**CI:** GitHub Actions — lint, test, build параллельно на каждый PR. Сборка запускается только после прохождения линтинга и тестов.
+
+**Unit-тесты** (Vitest + jsdom) покрывают core-модули: EventBus, Store, HTTPTransport, валидацию. Интеграционный тест на гостевой флоу — авторизация → навигация → отправка сообщения.
 
 **Lighthouse:** 94–100 на всех маршрутах (Performance, Accessibility, Best Practices, SEO).
 

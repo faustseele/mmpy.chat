@@ -5,9 +5,13 @@
   
   display: flex;
   flex-direction: column;
-  row-gap: 8px;
 }
 
-nav > a, nav > p {
- color: var(--color-content-darkest);
+.navLink {
+  padding: 5px 0;
+  color: var(--color-content-darkest);
+}
+
+.nav > button {
+  margin-top: 4px;
 }
