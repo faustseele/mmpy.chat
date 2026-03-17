@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [
     VitePWA({
       registerType: "autoUpdate",
+      injectRegister: "script-defer",
       devOptions: { enabled: true },
       includeAssets: ["logo.ico", "icon-192.png", "icon-512.png", "*.svg"],
       manifest: {
