@@ -1,50 +1,42 @@
-name: Tests
+name: CI
 
 on:
+  push:
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
-  test:
-    if: ${{github.head_ref == 'sprint_1' || github.head_ref == 'sprint_2' || github.head_ref == 'sprint_3' || github.head_ref == 'sprint_4'}}
-    env:
-      SPRINT: ${{github.head_ref}}
-      TERM: xterm-256color
+  lint:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [22.x]
     steps:
-    - name: Set up GitHub Actions
-      uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Сheck if the repository is private
-      if: ${{github.event.repository.private}}
-      run: exit 1
-    - name: Install testing libs
-      uses: mig4/setup-bats@v1
-    - name: Get testing lib
-      run: set -eu && git clone https://github.com/Yandex-Practicum/tests-middle-frontend.git /tmp/tests-middle-frontend
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
 
-    - name: Run tests (sprint_1)
-      if: ${{github.head_ref >= 'sprint_1'}}
-      run: bats --formatter pretty /tmp/tests-middle-frontend/tests/sprint_1.bats
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx vitest run
 
-    - name: Run tests (sprint_2)
-      if: ${{github.head_ref >= 'sprint_2'}}
-      run: bats --formatter pretty /tmp/tests-middle-frontend/tests/sprint_2.bats
-
-    - name: Run tests (sprint_3)
-      if: ${{github.head_ref >= 'sprint_3'}}
-      run: bats --formatter pretty /tmp/tests-middle-frontend/tests/sprint_3.bats
-
-    - name: Run tests (sprint_4)
-      if: ${{github.head_ref >= 'sprint_4'}}
-      run: bats --formatter pretty /tmp/tests-middle-frontend/tests/sprint_4.bats
-
-    - name: Run tests (server)
-      run: bats --formatter pretty /tmp/tests-middle-frontend/tests/node_build.bats
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build

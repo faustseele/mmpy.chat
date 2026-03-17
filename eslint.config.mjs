@@ -29,6 +29,7 @@ export default tseslint.config(
     rules: {
       "eol-last": ["warn", "always"],
       "no-unused-vars": "off",
+      "no-case-declarations": "off",
       "@typescript-eslint/no-unused-vars": [
         "warn",
         {

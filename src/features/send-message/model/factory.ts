@@ -37,7 +37,7 @@ const getMessageFieldParams = (
       label: "Message Input",
     },
     on: {
-      submit: (e) => handleSendMessage(e),
+      submit: (e, chatId) => handleSendMessage(e, chatId),
     },
   };
 };

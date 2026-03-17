@@ -75,6 +75,8 @@
       "notePlaceholder": "Nota:",
       "chatPlaceholder": "Mensaje...",
       "noNotes": "Sin notas",
+      "youPrefix": "Tú: ",
+      "mediaLabel": "[multimedia]",
       "noMessages": "Sin mensajes",
       "stub": "⬅️ Seleccione un chat."
     },

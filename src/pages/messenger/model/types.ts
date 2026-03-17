@@ -22,17 +22,17 @@ export type MessengerConfigs = {
 
 export type MessengerType = "stub" | ChatType;
 
-type TypeStub = {
+export type TypeStub = {
   type: Extract<MessengerType, "stub">;
 };
 
-type TypeChat = {
+export type TypeChat = {
   type: Extract<MessengerType, "chat">;
   chatId: ChatId;
   chatTitle: string;
 };
 
-type TypeNote = {
+export type TypeNote = {
   type: Extract<MessengerType, "notes">;
   chatId: ChatId;
   chatTitle: string;
