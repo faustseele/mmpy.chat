@@ -45,7 +45,7 @@ const getHeadingProps = (
   return {
     configs: {
       id,
-      rootTag: isClickable ? "a" : "h1",
+      rootTag: "h1",
       classNames: css.heading,
       i18nKey,
       isClickable,
