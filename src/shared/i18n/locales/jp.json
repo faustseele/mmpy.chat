@@ -75,6 +75,7 @@
       "notePlaceholder": "メモ：",
       "chatPlaceholder": "メッセージ...",
       "noNotes": "メモなし",
+      "youPrefix": "あなた: ",
       "noMessages": "メッセージなし",
       "stub": "⬅️  チャットを選択します。"
     },

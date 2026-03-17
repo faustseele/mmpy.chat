@@ -75,6 +75,7 @@
       "notePlaceholder": "Note:",
       "chatPlaceholder": "Message...",
       "noNotes": "No notes",
+      "youPrefix": "You: ",
       "noMessages": "No messages",
       "stub": "⬅️ Select a chat."
     },

@@ -54,6 +54,9 @@ export class ChatSocketManager {
             this.setMessages(chatId, history as ChatMessage[]);
           } else {
             this.setMessages(chatId, [data as ChatMessage]);
+
+            /* update the chats list, if a msg-update (single msg) received */
+            handleFetchChats();
           }
         };
 
@@ -168,9 +171,6 @@ export class ChatSocketManager {
     }
 
     socket.send(JSON.stringify({ type, content }));
-
-    /* update the chats list */
-    setTimeout(() => handleFetchChats(), 100);
   }
 
   public isOpen(chatId: ChatId): boolean {

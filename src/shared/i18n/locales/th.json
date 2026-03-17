@@ -75,6 +75,7 @@
       "notePlaceholder": "บันทึก:",
       "chatPlaceholder": "ข้อความ...",
       "noNotes": "ไม่มีบันทึก",
+      "youPrefix": "คุณ: ",
       "noMessages": "ไม่มีข้อความ",
       "stub": "⬅️ เลือกแชท"
     },
