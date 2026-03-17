@@ -43,7 +43,7 @@
 }
 
 .inputButton_send {
-  mask-image: url('/send-msg.svg');
+  mask-image: url('/send.svg');
   width: 17px;
 }
 

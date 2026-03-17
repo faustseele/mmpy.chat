@@ -86,10 +86,10 @@ export const handleDeleteChat = async (id: number, chatTitle: string) => {
 };
 
 export const handleFetchChats = async (
-  restore = false,
+  initial = false,
   query?: GetChatsQuery,
 ): Promise<ApiResponse<ChatResponse[]>> => {
-  const resList = await ChatService.fetchChats(query);
+  const resList = await ChatService.fetchChats(initial, query);
 
   if (!resList.ok) {
     console.error("fetchChats failed:", resList.err?.response);
@@ -102,8 +102,8 @@ export const handleFetchChats = async (
     return resList;
   }
 
-  if (restore) {
-    /* restore last active chat if no active chat */
+  if (initial) {
+    /* restore last active chat on initial fetch if no active chat */
     const list = resList.data;
     const last = Number(ls_getLastChatId());
     const activeId = Store.getState().api.chats.activeId;

@@ -6,12 +6,12 @@ import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
 import { GlobalEvent } from "@shared/lib/EventBus/events.ts";
 import { sortMessagesByTime } from "../model/utils.ts";
 
-export class ChatWebsocket {
+export class ChatSocketManager {
   private _sockets = new Map<ChatId, WebSocket>();
   private _heartbeats = new Map<ChatId, number>();
   private _queuedMsgs = new Map<ChatId, (string | number)[]>();
 
-  public openWS(userId: number, chatId: ChatId, token: string) {
+  public open(userId: number, chatId: ChatId, token: string) {
     const socket = this._sockets.get(chatId);
     const open = socket && socket.readyState === WebSocket.OPEN;
     const connecting = socket && socket.readyState === WebSocket.CONNECTING;
@@ -88,6 +88,23 @@ export class ChatWebsocket {
     });
   }
 
+  public close(chatId: ChatId) {
+    const ws = this._sockets.get(chatId);
+
+    if (ws) {
+      ws.close(1000, "switch");
+      this._sockets.delete(chatId);
+    }
+
+    this.stopHeartbeat(chatId);
+  }
+
+  public closeAll() {
+    for (const chatId of this._sockets.keys()) {
+      this.close(chatId);
+    }
+  }
+
   private _tryDispatchQueued() {
     const chats = this._queuedMsgs.keys();
 
@@ -101,17 +118,6 @@ export class ChatWebsocket {
     this._queuedMsgs.clear();
   }
 
-  public closeWS(chatId: ChatId) {
-    const ws = this._sockets.get(chatId);
-
-    if (ws) {
-      ws.close(1000, "switch");
-      this._sockets.delete(chatId);
-    }
-
-    this.stopHeartbeat(chatId);
-  }
-
   private stopHeartbeat(chatId: ChatId) {
     const timer = this._heartbeats.get(chatId);
 
@@ -119,6 +125,16 @@ export class ChatWebsocket {
       window.clearInterval(timer);
       this._heartbeats.delete(chatId);
     }
+  }
+
+  private setMessages(chatId: ChatId, newMsgs: ChatMessage[]) {
+    const chatsWithMsgs = Store.getState().api.chats.messagesByChatId || {};
+    const updMsgs = [...(chatsWithMsgs[chatId] || []), ...newMsgs];
+
+    Store.set("api.chats.messagesByChatId", {
+      ...chatsWithMsgs,
+      [chatId]: updMsgs,
+    });
   }
 
   public sendMessage(chatId: ChatId, content: string | number) {
@@ -155,16 +171,6 @@ export class ChatWebsocket {
 
     /* update the chats list */
     setTimeout(() => handleFetchChats(), 100);
-  }
-
-  private setMessages(chatId: ChatId, newMsgs: ChatMessage[]) {
-    const chatsWithMsgs = Store.getState().api.chats.messagesByChatId || {};
-    const updMsgs = [...(chatsWithMsgs[chatId] || []), ...newMsgs];
-
-    Store.set("api.chats.messagesByChatId", {
-      ...chatsWithMsgs,
-      [chatId]: updMsgs,
-    });
   }
 
   public isOpen(chatId: ChatId): boolean {
