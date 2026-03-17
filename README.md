@@ -6,7 +6,7 @@
 
 Lighthouse benchmarks on `/messenger` page:
 
-![Performance](https://img.shields.io/badge/Performance-0-brightgreen) ![Accessibility](https://img.shields.io/badge/Accessibility-100-brightgreen) ![Best Practices](https://img.shields.io/badge/Best_Practices-100-brightgreen) ![SEO](https://img.shields.io/badge/SEO-0-brightgreen)
+![Performance](https://img.shields.io/badge/Performance-94-brightgreen) ![Accessibility](https://img.shields.io/badge/Accessibility-100-brightgreen) ![Best Practices](https://img.shields.io/badge/Best_Practices-100-brightgreen) ![SEO](https://img.shields.io/badge/SEO-100-brightgreen)
 
 **[Демо (с гостевым модом 👻)](https://mmpy-chat.netlify.app/)** &nbsp;·&nbsp; **[Дизайн в Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/mmpy-chat?node-id=0-1&t=PrP08m0m5Cfj2EMi-1)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
 
