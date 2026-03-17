@@ -1,13 +1,11 @@
 import Store from "@app/providers/store/model/Store.ts";
+import { handleSelectChat } from "@entities/chat/model/actions.ts";
 import { ChatType } from "@entities/chat/model/types.ts";
 import {
   ChatResponse,
-  ISODateString,
-  UserId,
+  ISODateString
 } from "@shared/api/model/api.types.ts";
-import { cx } from "@shared/lib/helpers/formatting/classnames.ts";
-import { getAvatarNode } from "@shared/ui/Avatar/factory.ts";
-import { handleSelectChat } from "@entities/chat/model/actions.ts";
+import { i18n } from "@shared/i18n/I18nService.ts";
 import {
   ChildGraph,
   ChildrenEdges,
@@ -22,8 +20,9 @@ import {
 import DOMService from "@shared/lib/DOM/DOMService.ts";
 import FragmentService from "@shared/lib/Fragment/FragmentService.ts";
 import { ComponentFactory } from "@shared/lib/helpers/factory/types.ts";
-import { i18n } from "@shared/i18n/I18nService.ts";
+import { cx } from "@shared/lib/helpers/formatting/classnames.ts";
 import { tinyDate } from "@shared/lib/helpers/formatting/date.ts";
+import { getAvatarNode } from "@shared/ui/Avatar/factory.ts";
 import { GoToChat } from "../ui/GoToChat.ts";
 import css from "../ui/goToChat.module.css";
 import { GoToChatConfigs, GoToChatProps } from "./types.ts";
@@ -38,7 +37,8 @@ export function getGoToChatGraph(
     goToChatItems: [],
   };
   const goToChatItems = goToChatEdge.goToChatItems as ComponentId[];
-  const selectedChatId = Store.getState().api.chats.activeId;
+  const { activeId: selectedChatId, messagesByChatId } =
+    Store.getState().api.chats;
 
   for (const chat of apiChats) {
     const { id, type, title, avatar, last_message: lmsg } = chat;
@@ -47,16 +47,22 @@ export function getGoToChatGraph(
       continue;
     }
 
-    console.log(lmsg);
-
     const selected = id === selectedChatId;
 
     const componentId = `goToChatItem_${id}`;
 
-    const contentText =
-      lmsg?.user.login === userLogin
-        ? i18n.t("messenger.message.youPrefix") + lmsg.content
-        : (lmsg?.content ?? "");
+    /* check if last message is a file via full ChatMessage history */
+    const msgs = messagesByChatId?.[id];
+    const lastFullMsg = msgs?.length ? msgs[msgs.length - 1] : null;
+    const isMedia = !!lastFullMsg?.file;
+
+    const youPrefix = lmsg?.user.login === userLogin
+      ? i18n.t("messenger.message.youPrefix")
+      : "";
+
+    const contentText = isMedia
+      ? youPrefix + i18n.t("messenger.message.mediaLabel")
+      : youPrefix + (lmsg?.content ?? "");
 
     const goToChatNode = getGoToChatNode(componentId, type, id, title, {
       avatar,
