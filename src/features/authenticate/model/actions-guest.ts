@@ -56,6 +56,10 @@ export const handleGuestSignIn = async (): Promise<
       handlePresentSession(res);
     } else {
       console.error("guest sign-in failed", res);
+      globalBus.emit(GlobalEvent.Toast, {
+        msg: i18n.t("toasts.auth.guestError"),
+        type: "error",
+      });
     }
   }
   return res;
