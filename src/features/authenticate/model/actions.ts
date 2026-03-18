@@ -83,19 +83,31 @@ export const handleLogout = async (
 };
 
 export const handlePresentSession = async (res: ApiResponse<UserResponse>) => {
-  const reason = res.err?.reason;
+  const status = res.err?.status;
 
-  if (reason === "User already in system") {
+  /* reason: User already in system */
+  if (status === 400) {
+    console.warn("User already in system", res);
+
     globalBus.emit(GlobalEvent.Toast, {
       msg: i18n.t("toasts.auth.alreadyLogged"),
       type: "info",
     });
 
-    Router.go(RouteLink.Settings);
+    /* cookie is valid but local state is stale (isLoggedIn: false) —
+       fetch the user to sync Store before navigating, otherwise guardRoute
+       will block the redirect back to sign-in */
+    const syncRes = await handleFetchUser();
+    if (syncRes.ok) {
+      Router.go(RouteLink.Settings);
+    }
     return;
   }
 
-  if (reason === "Cookie is not valid") {
+  /* reason: Cookie is not valid */
+  if (status === 401) {
+    console.warn("Cookie is not valid, logging out", res);
+
     /* straight logout & cookie removal; bypassing full handleLogout() */
     await handleLogout(true);
 

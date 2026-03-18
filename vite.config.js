@@ -61,7 +61,15 @@ export default defineConfig({
   ],
   server: { port: 3000 },
   preview: { port: 3000 },
-  build: { target: "es2022", outDir: "dist" },
+  build: {
+    target: "es2022",
+    outDir: "dist",
+    rollupOptions: {
+      output: {
+        manualChunks: { handlebars: ["handlebars"] },
+      },
+    },
+  },
   css: {
     modules: {
       scopeBehaviour: "local",
