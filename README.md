@@ -2,13 +2,15 @@
 
 **mmpy.chat** — чат с заметками на TypeScript с нуля, без React/Vue.
 
-*Компонентная система, реактивный стор, роутер, WebSocket, i18n — всё написано руками.*
+_Компонентная система, реактивный стор, роутер, WebSocket, i18n — всё написано руками._
 
 Lighthouse benchmarks on `/messenger` page:
 
 ![Performance](https://img.shields.io/badge/Performance-94-brightgreen) ![Accessibility](https://img.shields.io/badge/Accessibility-100-brightgreen) ![Best Practices](https://img.shields.io/badge/Best_Practices-100-brightgreen) ![SEO](https://img.shields.io/badge/SEO-100-brightgreen)
 
-**[Демо (с гостевым модом 👻)](https://mmpy-chat.netlify.app/)** &nbsp;·&nbsp; **[Дизайн в Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/mmpy-chat?node-id=0-1&t=PrP08m0m5Cfj2EMi-1)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
+**Демо (с гостевым модом 👻)**: [GH-Pages](https://faustseele.github.io/mmpy.chat/) & [Netlify](mmpy-chat.netlify.app)
+
+**[Дизайн в Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/mmpy-chat?node-id=0-1&t=PrP08m0m5Cfj2EMi-1)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
 
 ---
 
@@ -87,12 +89,12 @@ graph LR
 npm install && npm run dev
 ```
 
-| Команда             | Что делает                        |
-| ------------------- | --------------------------------- |
-| `npm run dev`       | Дев-сервер с HMR                  |
-| `npm run build`     | Продакшн-сборка                   |
-| `npm run lint`      | ESLint + TS + Stylelint           |
-| `npm test`          | Тесты (watch)                     |
-| `npm test:coverage` | Тесты с отчётом по покрытию       |
+| Команда             | Что делает                  |
+| ------------------- | --------------------------- |
+| `npm run dev`       | Дев-сервер с HMR            |
+| `npm run build`     | Продакшн-сборка             |
+| `npm run lint`      | ESLint + TS + Stylelint     |
+| `npm test`          | Тесты (watch)               |
+| `npm test:coverage` | Тесты с отчётом по покрытию |
 
 **Маршруты:** `/` · `/sign-up` · `/messenger` · `/settings` · `/404` · `/500`
