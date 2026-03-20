@@ -54,6 +54,7 @@ vi.mock("../../../entities/chat/model/actions.ts", () => {
   return {
     handleFetchChats: vi.fn(),
     handleCreateChat: vi.fn().mockResolvedValue({ ok: true, data: { id: 1 } }),
+    handleCreateNotes: vi.fn().mockResolvedValue({ ok: true }),
     handleAddUser: vi.fn().mockResolvedValue({ ok: true }),
     hardResetMessenger: vi.fn().mockResolvedValue(undefined),
   };
