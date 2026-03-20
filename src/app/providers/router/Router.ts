@@ -36,9 +36,17 @@ class Router {
 
   private _currentRoute: RouteContract | null = null;
 
+  /** base path prefix for subdirectory deployments (e.g. '/mmpy.chat') */
+  private _basePath = "";
+
   constructor() {
     if (Router.__instance) return Router.__instance;
     Router.__instance = this;
+  }
+
+  /** returns the app-relative pathname, stripped of the base path prefix */
+  private get _pathname(): string {
+    return window.location.pathname.slice(this._basePath.length) || "/";
   }
 
   /**
@@ -55,16 +63,17 @@ class Router {
   }
 
   /* inits Router; sets root query to existing Routes */
-  public async start(): Promise<void> {
+  public async start(basePath = "/"): Promise<void> {
+    this._basePath = basePath.replace(/\/$/, "");
+
     /* adds listener that's triggered
       when the active history entry changes. */
     window.onpopstate = () => {
-      this._onRouteChange(window.location.pathname);
+      this._onRouteChange(this._pathname);
     };
 
-
     /* initial page load */
-    this._onRouteChange(window.location.pathname);
+    this._onRouteChange(this._pathname);
   }
 
   /** triggered when the URL changes */
@@ -93,7 +102,7 @@ class Router {
   }
 
   public go(path: RouteLink): void {
-    this._history.pushState({}, "", path);
+    this._history.pushState({}, "", this._basePath + path);
     this._onRouteChange(path);
   }
 

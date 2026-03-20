@@ -13,5 +13,5 @@ try {
   const { registerRoutes } = await import("@app/providers/router/routes.ts");
   registerRoutes();
 
-  Router.start();
+  Router.start(import.meta.env.BASE_URL);
 }
