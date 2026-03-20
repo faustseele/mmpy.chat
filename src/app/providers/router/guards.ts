@@ -13,6 +13,7 @@ export function guardRoute(
 
   /* user is not logged in and trying to access a protected route,leave the current route */
   if (route.authStatus === "protected" && !isAuthenticated(state)) {
+    console.warn("User not logged in", state);
     return {
       ok: false,
       redirect: RouteLink.SignIn,
@@ -21,6 +22,7 @@ export function guardRoute(
 
   /* a guest-only route is accessed by a user, leave the current route */
   if (route.authStatus === "guest" && !isGuest(state)) {
+    console.warn("User is logged in", state);
     return {
       ok: false,
       redirect: RouteLink.NotFound,

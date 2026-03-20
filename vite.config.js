@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [
     VitePWA({
       registerType: "autoUpdate",
+      injectRegister: "script-defer",
       devOptions: { enabled: true },
       includeAssets: ["logo.ico", "icon-192.png", "icon-512.png", "*.svg"],
       manifest: {
@@ -41,30 +42,18 @@ export default defineConfig({
         ],
         screenshots: [
           {
-            src: "/scr-1.jpg",
-            sizes: "1380x1080",
-            type: "image/jpg",
+            src: "/scr_sign-in.jpg",
+            sizes: "700x890",
+            type: "image/jpeg",
             form_factor: "wide",
-            label: "Desktop View",
+            label: "Sign In",
           },
           {
-            src: "/scr-2.jpg",
-            sizes: "1380x1080",
-            type: "image/jpg",
+            src: "/scr_chat.png",
+            sizes: "874x889",
+            type: "image/png",
             form_factor: "wide",
-            label: "Desktop View",
-          },
-          {
-            src: "/scr-mob-1.jpg",
-            sizes: "429x931",
-            type: "image/jpg",
-            label: "Mobile View",
-          },
-          {
-            src: "/scr-mob-2.jpg",
-            sizes: "429x931",
-            type: "image/jpg",
-            label: "Mobile View",
+            label: "Chat",
           },
         ],
       },
@@ -72,7 +61,15 @@ export default defineConfig({
   ],
   server: { port: 3000 },
   preview: { port: 3000 },
-  build: { target: "es2022", outDir: "dist" },
+  build: {
+    target: "es2022",
+    outDir: "dist",
+    rollupOptions: {
+      output: {
+        manualChunks: { handlebars: ["handlebars"] },
+      },
+    },
+  },
   css: {
     modules: {
       scopeBehaviour: "local",

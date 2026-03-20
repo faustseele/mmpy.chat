@@ -8,6 +8,19 @@
 [build]
   publish = "dist"
 
+# ── Security headers (all routes) ──────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' https://ya-praktikum.tech data:; connect-src 'self' https://ya-praktikum.tech wss://ya-praktikum.tech; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+
+# ── Cache control ──────────────────────────────────────────
+
 # index.html must never be cached by the browser — each Netlify deploy
 # generates new content-hashed asset filenames, and a stale cached
 # index.html will reference old hashes that no longer exist, causing

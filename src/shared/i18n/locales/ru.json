@@ -75,6 +75,8 @@
       "notePlaceholder": "Заметка:",
       "chatPlaceholder": "Cообщение...",
       "noNotes": "Нет заметок",
+      "youPrefix": "Вы: ",
+      "mediaLabel": "[медиа]",
       "noMessages": "Нет сообщений",
       "stub": "⬅️ Выберите чат."
     },

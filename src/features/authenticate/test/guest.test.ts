@@ -77,7 +77,12 @@ vi.mock("../../../entities/user/model/UserService.ts", () => {
     default: {
       findByLogin: vi.fn().mockResolvedValue({
         ok: true,
-        data: { id: 2, first_name: "Test", second_name: "User", login: "testuser" },
+        data: {
+          id: 2,
+          first_name: "Test",
+          second_name: "User",
+          login: "testuser",
+        },
       }),
     },
   };
@@ -129,7 +134,7 @@ describe("@Features/Auth: Guest", () => {
 
     /* checking for the last-fired Toast */
     expect(spiedToast).toHaveBeenLastCalledWith(GlobalEvent.Toast, {
-      msg: i18n.t("toasts.chats.devErrorStub").replace('${}', badGuest.err?.reason || ''),
+      msg: i18n.t("toasts.auth.guestError"),
       type: "error",
     });
 

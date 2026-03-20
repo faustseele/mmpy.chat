@@ -1,3 +1,4 @@
+import Store from "@app/providers/store/model/Store.ts";
 import {
   ChatId,
   ChatResponse,
@@ -8,16 +9,63 @@ import {
   UpdateChatAvatarResponse,
 } from "@shared/api/model/api.types.ts";
 import { ApiError, ApiResponse } from "@shared/api/model/types.ts";
-import Store from "@app/providers/store/model/Store.ts";
-import { ls_removeLastChatId, ls_storeLastChatId } from "@shared/lib/LocalStorage/actions.ts";
+import {
+  ls_removeLastChatId,
+  ls_storeLastChatId,
+} from "@shared/lib/LocalStorage/actions.ts";
 import ChatAPI from "../api/ChatAPI.ts";
-import { ChatWebsocket } from "../lib/ChatWebsocket.ts";
+import { ChatSocketManager } from "../lib/ChatSocketManager.ts";
 import { getChatType } from "./utils.ts";
 
 class ChatService {
-  private ws = new ChatWebsocket();
+  private ws = new ChatSocketManager();
+
+  public async addUser(
+    chatId: ChatId,
+    user: number,
+  ): Promise<ApiResponse<string>> {
+    try {
+      const res = await ChatAPI.addUser({ chatId, users: [user] });
+
+      return { ok: true, data: res };
+    } catch (e) {
+      console.error("user-add failed:", e);
+      return { ok: false, err: e as ApiError };
+    }
+  }
+
+  public async createChat(
+    title: string,
+  ): Promise<ApiResponse<CreateChatResponse>> {
+    try {
+      const chat = await ChatAPI.createChat({ title });
+      return { ok: true, data: chat };
+    } catch (e) {
+      console.error("chat create failed:", e);
+      return { ok: false, err: e as ApiError };
+    }
+  }
+
+  public async deleteChat(chatId: ChatId): Promise<ApiResponse<string>> {
+    try {
+      const res = await ChatAPI.deleteChat({ chatId });
+      this.ws.close(chatId);
+
+      return { ok: true, data: res };
+    } catch (e) {
+      console.error("chat delete failed:", e);
+      return { ok: false, err: e as ApiError };
+    }
+  }
+
+  public deselectChat() {
+    Store.set("api.chats.activeId", null);
+    Store.set("api.chats.currentChat", null);
+    ls_removeLastChatId();
+  }
 
   public async fetchChats(
+    initial = false,
     query?: GetChatsQuery,
   ): Promise<ApiResponse<ChatResponse[]>> {
     try {
@@ -25,6 +73,8 @@ class ChatService {
       list.map((chat) => (chat.type = getChatType(chat.title)));
 
       Store.set("api.chats.list", list);
+
+      if (initial) this._tryLazyWsOpen(list);
       return { ok: true, data: list };
     } catch (e) {
       const badCookie = (e as ApiError).status === 401;
@@ -39,8 +89,41 @@ class ChatService {
     }
   }
 
+  public async getUsers(
+    chatId: ChatId,
+    query?: ChatUsersQuery,
+  ): Promise<ApiResponse<ChatUser[]>> {
+    try {
+      const res = await ChatAPI.getUsers(chatId, query);
+
+      return { ok: true, data: res };
+    } catch (e) {
+      console.error(`users-get failed, chatId=${chatId}, query=${query}`, e);
+      return { ok: false, err: e as ApiError };
+    }
+  }
+
+  public onLogout() {
+    this.ws.closeAll();
+  }
+
+  public async removeUsers(
+    chatId: ChatId,
+    users: number[],
+  ): Promise<ApiResponse<string>> {
+    try {
+      const res = await ChatAPI.removeUsers({ chatId, users });
+
+      return { ok: true, data: res };
+    } catch (e) {
+      console.error("users-remove failed:", e);
+      return { ok: false, err: e as ApiError };
+    }
+  }
+
   public async selectChat(chatId: number): Promise<ApiResponse<unknown>> {
     try {
+      /* setting new active chatId */
       Store.set("api.chats.activeId", chatId);
       ls_storeLastChatId(chatId);
 
@@ -77,12 +160,8 @@ class ChatService {
         };
       }
 
-      /* closing prev socket */
-      const prevId = Store.getState().api.chats.activeId;
-      if (prevId && prevId !== chatId) this.ws.closeWS(prevId);
-
       const { token } = await ChatAPI.getToken(chatId);
-      this.ws.openWS(user.id, chatId, token);
+      this.ws.open(user.id, chatId, token);
 
       return { ok: true };
     } catch (e) {
@@ -91,16 +170,12 @@ class ChatService {
     }
   }
 
-  public async createChat(
-    title: string,
-  ): Promise<ApiResponse<CreateChatResponse>> {
-    try {
-      const chat = await ChatAPI.createChat({ title });
-      return { ok: true, data: chat };
-    } catch (e) {
-      console.error("chat create failed:", e);
-      return { ok: false, err: e as ApiError };
-    }
+  public sendFile(chatId: ChatId, resourceId: number) {
+    this.ws.sendMessage(chatId, resourceId);
+  }
+
+  public sendMessage(chatId: ChatId, content: string) {
+    this.ws.sendMessage(chatId, content);
   }
 
   public async updateChatAvatar(
@@ -116,80 +191,18 @@ class ChatService {
     }
   }
 
-  public async deleteChat(chatId: ChatId): Promise<ApiResponse<string>> {
-    try {
-      const res = await ChatAPI.deleteChat({ chatId });
-      this.ws.closeWS(chatId);
+  private async _tryLazyWsOpen(chats: ChatResponse[]) {
+    const userId = Store.getState().api.auth.user!.id;
 
-      return { ok: true, data: res };
-    } catch (e) {
-      console.error("chat delete failed:", e);
-      return { ok: false, err: e as ApiError };
+    for (const chat of chats) {
+      const chatId = chat.id;
+      if (this.ws.isOpen(chatId)) continue;
+
+      const { token } = await ChatAPI.getToken(chatId);
+      this.ws.open(userId, chatId, token);
     }
   }
 
-  public async addUser(
-    chatId: ChatId,
-    user: number,
-  ): Promise<ApiResponse<string>> {
-    try {
-      const res = await ChatAPI.addUser({ chatId, users: [user] });
-
-      return { ok: true, data: res };
-    } catch (e) {
-      console.error("user-add failed:", e);
-      return { ok: false, err: e as ApiError };
-    }
-  }
-
-  public async removeUsers(
-    chatId: ChatId,
-    users: number[],
-  ): Promise<ApiResponse<string>> {
-    try {
-      const res = await ChatAPI.removeUsers({ chatId, users });
-
-      return { ok: true, data: res };
-    } catch (e) {
-      console.error("users-remove failed:", e);
-      return { ok: false, err: e as ApiError };
-    }
-  }
-
-  public async getUsers(
-    chatId: ChatId,
-    query?: ChatUsersQuery,
-  ): Promise<ApiResponse<ChatUser[]>> {
-    try {
-      const res = await ChatAPI.getUsers(chatId, query);
-
-      return { ok: true, data: res };
-    } catch (e) {
-      console.error(`users-get failed, chatId=${chatId}, query=${query}`, e);
-      return { ok: false, err: e as ApiError };
-    }
-  }
-
-  public isCurrentChatNotes(): boolean {
-    return Store.getState().api.chats.currentChat?.type === "notes";
-  }
-
-  public sendMessage(content: string) {
-    this.ws.sendMessage(content);
-  }
-
-  public sendFile(resourceId: number) {
-    this.ws.sendFile(resourceId);
-  }
-
-  public deselectChat() {
-    const currId = Store.getState().api.chats.activeId;
-    if (currId) this.ws.closeWS(currId);
-
-    Store.set("api.chats.activeId", null);
-    Store.set("api.chats.currentChat", null);
-    ls_removeLastChatId();
-  }
 }
 
 export default new ChatService();

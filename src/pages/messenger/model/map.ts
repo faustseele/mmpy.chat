@@ -62,7 +62,7 @@ export const mapMessengerState = (
     return timeB.localeCompare(timeA);
   });
 
-  const goToChatPatch = getGoToChatGraph(sortedChats ?? []);
+  const goToChatPatch = getGoToChatGraph(sortedChats ?? [], state.api.auth.user?.login ?? "");
 
   const messagesPatch = getMessagesGraph();
 

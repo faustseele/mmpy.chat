@@ -40,3 +40,8 @@ function xhrMock(): Partial<XMLHttpRequest> {
 vi.stubGlobal("localStorage", localStorageMock());
 /* vi.fn() is used to track 'new XMLHttpRequest()' and mock it w/ xhrMock() */
 vi.stubGlobal("XMLHttpRequest", vi.fn(xhrMock));
+
+/* dynamic import: i18n must load AFTER localStorage stub is in place,
+   bc I18nService constructor reads locale from localStorage */
+const { i18n } = await import("@shared/i18n/I18nService.ts");
+await i18n.init();

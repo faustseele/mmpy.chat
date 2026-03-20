@@ -9,7 +9,7 @@ export interface HeadingProps extends BaseProps {
 }
 
 export interface HeadingConfigs extends BaseConfigs {
-  rootTag: Extract<RootTag, "h1" | "a">;
+  rootTag: Extract<RootTag, "h1">;
   i18nKey: string;
   isClickable?: boolean;
   isDrama?: boolean;

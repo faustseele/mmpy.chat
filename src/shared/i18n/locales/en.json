@@ -2,7 +2,7 @@
   "langSwitch": "Language: 🇬🇧",
   "auth": {
     "signin": {
-      "heading": "Sign In <36acb5b> 🚪",
+      "heading": "Sign In 🚪",
       "submit": "Sign In 🔑",
       "guest": "Guest 👻",
       "newHere": "New here?"
@@ -75,6 +75,8 @@
       "notePlaceholder": "Note:",
       "chatPlaceholder": "Message...",
       "noNotes": "No notes",
+      "youPrefix": "You: ",
+      "mediaLabel": "[media]",
       "noMessages": "No messages",
       "stub": "⬅️ Select a chat."
     },

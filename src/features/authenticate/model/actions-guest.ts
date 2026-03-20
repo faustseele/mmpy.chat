@@ -51,15 +51,16 @@ export const handleGuestSignIn = async (): Promise<
     /* bootstrap runs after navigation — non-blocking ux */
     bootstrapGuestStarter();
   } else {
-    if (res.err?.status === 400) handlePresentSession(res);
-
-    console.error("Guest Login Failed", res);
-    globalBus.emit(GlobalEvent.Toast, {
-      msg: i18n
-        .t("toasts.chats.devErrorStub")
-        .replace("${}", res.err?.reason || ""),
-      type: "error",
-    });
+    const status = res.err?.status;
+    if (status === 400 || status === 401) {
+      handlePresentSession(res);
+    } else {
+      console.error("guest sign-in failed", res);
+      globalBus.emit(GlobalEvent.Toast, {
+        msg: i18n.t("toasts.auth.guestError"),
+        type: "error",
+      });
+    }
   }
   return res;
 };

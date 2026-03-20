@@ -1,4 +1,5 @@
 import Store from "@app/providers/store/model/Store.ts";
+import { handleSendMessage } from "@features/send-message/model/actions.ts";
 import { MessageField } from "@features/send-message/ui/MessageField.ts";
 import cssPage from "@pages/page/ui/page.module.css";
 import { Page } from "@pages/page/ui/Page.ts";
@@ -17,7 +18,7 @@ import { MessengerNodes, MessengerProps } from "../model/types.ts";
 import css from "./messenger.module.css";
 
 export class MessengerPage extends Page<MessengerProps> {
-  private prevPlaceholder: string = "";
+  private prevChatId: number = 0;
   private prevSpinner: boolean = false;
 
   constructor(props: ComponentProps<MessengerProps, MessengerPage>) {
@@ -60,23 +61,40 @@ export class MessengerPage extends Page<MessengerProps> {
   }
 
   public componentDidUpdate(): void {
+    const info = this.configs.info;
+    const notStub = info.type !== "stub";
     const spinner = this.children?.nodes["spinner"].runtime
       ?.instance as Spinner;
     const msgField = this.children?.nodes["messageField"].runtime
       ?.instance as MessageField;
 
+    /* caching spinner to avoid unnecessary re-renders */
     const isLoadingMessages = this.configs.isLoadingMessages ?? false;
-    const placeholder =
-      this.configs.info.type === "notes" ? "Заметка:" : "Cообщение...";
-
-    /* caching placeholder & spinner to avoid unnecessary re-renders */
-    if (isLoadingMessages !== this.prevSpinner && spinner) {
+    if (notStub && isLoadingMessages !== this.prevSpinner && spinner) {
       spinner.setProps({ configs: { isOn: isLoadingMessages } });
       this.prevSpinner = isLoadingMessages;
     }
-    if (placeholder !== this.prevPlaceholder && msgField) {
-      msgField.setProps({ configs: { placeholder } });
-      this.prevPlaceholder = placeholder;
+
+    /* caching chatId to avoid unnecessary re-renders */
+    if (notStub && info.chatId !== this.prevChatId && msgField) {
+      const placeholder = i18n.t(
+        info.type === "notes"
+          ? "messenger.message.notePlaceholder"
+          : "messenger.message.chatPlaceholder",
+      );
+
+      msgField.setProps({
+        configs: { placeholder, chatId: info.chatId },
+        on: {
+          submit: (e: Event) => handleSendMessage(e, info.chatId),
+        },
+      });
+
+      this.prevChatId = info.chatId;
+    }
+
+    if (!notStub) {
+      this.prevChatId = 0;
     }
   }
 

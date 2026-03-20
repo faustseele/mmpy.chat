@@ -27,7 +27,7 @@ const bootstrapAuth = async () => {
       const user = await handleFetchUser();
 
       /* no-'await' bc it's unnecessary for FCP to happen */
-      if (user.ok) handleFetchChats();
+      if (user.ok) handleFetchChats(true);
     }
 
   } catch (error) {

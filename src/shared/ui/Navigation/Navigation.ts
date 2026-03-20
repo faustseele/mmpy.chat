@@ -5,6 +5,7 @@ import { RouteLink } from "@shared/types/universal.ts";
 import Component from "../../lib/Component/model/Component.ts";
 import { ComponentProps } from "../../lib/Component/model/types.ts";
 import { NavigationProps } from "./types.ts";
+import css from "./navigation.module.css";
 
 /* nav-bar on the left for quick page-travel */
 export class Navigation extends Component<NavigationProps> {
@@ -38,13 +39,13 @@ export class Navigation extends Component<NavigationProps> {
 
   public getInnerMarkup(): string {
     return /* html */ `
-      <a href="/" class="navLink">Вход 🡽</a>
-      <a href="/sign-up" class="navLink">Регистрация 🡽</a>
-      <a href="/messenger" class="navLink">Чат 🡽</a>
-      <a href="/settings" class="navLink">Профиль 🡽</a>
-      <a href="/404" class="navLink">404 🡽</a>
-      <a href="/500" class="navLink">500 🡽</a>
-      <a href="/logout" class="navLink">[ выход ]</a>
+      <a href="/" class="${css.navLink}">Вход 🡽</a>
+      <a href="/sign-up" class="${css.navLink}">Регистрация 🡽</a>
+      <a href="/messenger" class="${css.navLink}">Чат 🡽</a>
+      <a href="/settings" class="${css.navLink}">Профиль 🡽</a>
+      <a href="/404" class="${css.navLink}">404 🡽</a>
+      <a href="/500" class="${css.navLink}">500 🡽</a>
+      <a href="/logout" class="${css.navLink}">[ выход ]</a>
       <button class="langSwitch" style="background: none; color: white; width: 60px;">lang-switch</button>
     `;
   }
