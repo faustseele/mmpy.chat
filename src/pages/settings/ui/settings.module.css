@@ -34,6 +34,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .settingsFace {
@@ -84,11 +88,10 @@
   flex-direction: column;
   row-gap: 8px;
   align-items: center;
-  justify-content: end;
 
-  flex: 1;
-  
-  padding-bottom: 8px;
+  flex-shrink: 0;
+
+  padding: 8px 0;
   box-sizing: border-box;
 }
 

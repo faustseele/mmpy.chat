@@ -4,8 +4,8 @@ export const isMobile = (): boolean => {
   if (typeof navigator === "undefined" || typeof window === "undefined")
     return false;
 
-  /* touch */
-  if ("ontouchstart" in window || navigator.maxTouchPoints > 0) return true;
+  /* touch — maxTouchPoints excluded: Firefox desktop falsely reports > 0 */
+  if ("ontouchstart" in window) return true;
 
   /* pointer is coarse */
   if (matchMedia("(pointer: coarse)").matches) return true;

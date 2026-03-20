@@ -5,6 +5,8 @@
 
 
 :root {
+  color-scheme: dark;
+  
   --color-alert: #f5ae75;
   --color-acc-bold: #607A52;
   --color-acc: #b9dfa5;
