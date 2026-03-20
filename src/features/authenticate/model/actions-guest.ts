@@ -3,6 +3,7 @@ import Store from "@app/providers/store/model/Store.ts";
 import {
   handleAddUser,
   handleCreateChat,
+  handleCreateNotes,
   handleFetchChats,
   handleUpdateChatAvatar,
   hardResetMessenger,
@@ -10,13 +11,12 @@ import {
 import UserService from "@entities/user/model/UserService.ts";
 import { UserResponse } from "@shared/api/model/api.types.ts";
 import { ApiResponse } from "@shared/api/model/types.ts";
-import { ZERO_WIDTH_SPACE } from "@shared/config/const.ts";
 import { API_URL_RESOURCES } from "@shared/config/urls.ts";
 import { i18n } from "@shared/i18n/I18nService.ts";
 import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
 import { GlobalEvent } from "@shared/lib/EventBus/events.ts";
-import { ls_setGuestMode } from "@shared/lib/LocalStorage/actions.ts";
 import { downloadFile } from "@shared/lib/helpers/file.ts";
+import { ls_setGuestMode } from "@shared/lib/LocalStorage/actions.ts";
 import { RouteLink } from "@shared/types/universal.ts";
 import { GUEST_CREDS } from "../config/guest.ts";
 import { handlePresentSession } from "./actions.ts";
@@ -75,8 +75,7 @@ const bootstrapGuestStarter = async (): Promise<void> => {
 
   /* seed test notes */
   for (const noteKey of GUEST_STARTER_NOTES) {
-    const title = i18n.t(noteKey) + ZERO_WIDTH_SPACE;
-    await handleCreateChat(title, true, true, true);
+    await handleCreateNotes(i18n.t(noteKey), true, true, true);
   }
 
   /* seed test convos */

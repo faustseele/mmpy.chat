@@ -1,20 +1,20 @@
-import { UserResponse } from "@shared/api/model/api.types.ts";
-import { ApiResponse } from "@shared/api/model/types.ts";
-import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
-import { GlobalEvent } from "@shared/lib/EventBus/events.ts";
 import Router from "@app/providers/router/Router.ts";
 import Store from "@app/providers/store/model/Store.ts";
 import {
-  handleCreateChat,
+  handleCreateNotes,
   handleFetchChats,
-  hardResetMessenger,
+  hardResetMessenger
 } from "@entities/chat/model/actions.ts";
-import { RouteLink } from "@shared/types/universal.ts";
-import { ls_setGuestMode } from "@shared/lib/LocalStorage/actions.ts";
-import AuthService from "./AuthService.ts";
-import { i18n } from "@shared/i18n/I18nService.ts";
-import { SignInData, SignUpData } from "./types.ts";
 import ChatService from "@entities/chat/model/ChatService.ts";
+import { UserResponse } from "@shared/api/model/api.types.ts";
+import { ApiResponse } from "@shared/api/model/types.ts";
+import { i18n } from "@shared/i18n/I18nService.ts";
+import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
+import { GlobalEvent } from "@shared/lib/EventBus/events.ts";
+import { ls_setGuestMode } from "@shared/lib/LocalStorage/actions.ts";
+import { RouteLink } from "@shared/types/universal.ts";
+import AuthService from "./AuthService.ts";
+import { SignInData, SignUpData } from "./types.ts";
 
 export const handleFetchUser = async (): Promise<ApiResponse<UserResponse>> => {
   const res = await AuthService.fetchUser();
@@ -133,7 +133,7 @@ export const handleSignUp = async (
     Router.go(RouteLink.Messenger);
 
     /* generating one notes-chat */
-    handleCreateChat("Заметки 📃", true);
+    handleCreateNotes(i18n.t("messenger.notes.notes"), true);
   }
 
   return res;

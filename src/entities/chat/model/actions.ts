@@ -11,6 +11,7 @@ import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
 import { GlobalEvent } from "@shared/lib/EventBus/events.ts";
 import { ls_getLastChatId } from "@shared/lib/LocalStorage/actions.ts";
 import ChatService from "./ChatService.ts";
+import { ZERO_WIDTH_SPACE } from "@shared/config/const.ts";
 
 export const handleAddUser = async (
   chatId: ChatId,
@@ -58,6 +59,15 @@ export const handleCreateChat = async (
   }
 
   return res;
+};
+
+export const handleCreateNotes = async (
+  title: string,
+  noToast = false,
+  noFetch = false,
+  noSelect = false,
+) => {
+  await handleCreateChat(title + ZERO_WIDTH_SPACE, noToast, noFetch, noSelect);
 };
 
 export const handleDeleteChat = async (id: number, chatTitle: string) => {

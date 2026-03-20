@@ -2,11 +2,11 @@ import Router from "@app/providers/router/Router.ts";
 import {
   handleAddUser,
   handleCreateChat,
+  handleCreateNotes,
   handleDeleteChat,
   handleUpdateChatAvatar,
 } from "@entities/chat/model/actions.ts";
 import UserService from "@entities/user/model/UserService.ts";
-import { ZERO_WIDTH_SPACE } from "@shared/config/const.ts";
 import { API_URL_RESOURCES } from "@shared/config/urls.ts";
 import { i18n } from "@shared/i18n/I18nService.ts";
 import { globalBus } from "@shared/lib/EventBus/EventBus.ts";
@@ -97,10 +97,10 @@ export const handleAddNotesPrompt = async () => {
   );
   if (input === null) return;
 
-  const title = input.trim() + ZERO_WIDTH_SPACE;
+  const title = input.trim();
   if (!title) return;
 
-  handleCreateChat(title);
+  handleCreateNotes(title);
 };
 
 export const handleDeleteChatPrompt = async (
