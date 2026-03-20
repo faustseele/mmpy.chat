@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
       VitePWA({
         registerType: "autoUpdate",
         injectRegister: "script-defer",
-        devOptions: { enabled: true },
+        devOptions: { enabled: false },
         includeAssets: ["logo.ico", "icon-192.png", "icon-512.png", "*.svg"],
         manifest: {
           name: "MMPY-Chat",
