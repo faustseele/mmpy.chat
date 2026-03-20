@@ -4,7 +4,7 @@ English | [**Русский README** ➡️](README.md)
 
 *A component system, reactive store, router, WebSocket, i18n — everything written by hand.*
 
-![Performance](https://img.shields.io/badge/Performance-98-brightgreen) ![Accessibility](https://img.shields.io/badge/Accessibility-100-brightgreen) ![Best Practices](https://img.shields.io/badge/Best_Practices-100-brightgreen) ![SEO](https://img.shields.io/badge/SEO-100-brightgreen)
+![Performance](https://img.shields.io/badge/Performance-94-brightgreen) ![Accessibility](https://img.shields.io/badge/Accessibility-100-brightgreen) ![Best Practices](https://img.shields.io/badge/Best_Practices-100-brightgreen) ![SEO](https://img.shields.io/badge/SEO-100-brightgreen)
 
 **[Demo (with guest mode 👻)](https://mmpy-chat.netlify.app/)** &nbsp;·&nbsp; **[Design in Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/mmpy-chat?node-id=0-1&t=PrP08m0m5Cfj2EMi-1)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
 
