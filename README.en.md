@@ -6,7 +6,7 @@ English | [**Русский README** ➡️](README.md)
 
 ![Performance](https://img.shields.io/badge/Performance-94-brightgreen) ![Accessibility](https://img.shields.io/badge/Accessibility-100-brightgreen) ![Best Practices](https://img.shields.io/badge/Best_Practices-100-brightgreen) ![SEO](https://img.shields.io/badge/SEO-100-brightgreen)
 
-**Demo (with guest mode 👻)**: [GH-Pages](https://faustseele.github.io/mmpy.chat/) & [Netlify](mmpy-chat.netlify.app)
+**Demo (with guest mode 👻)**: [GH-Pages](https://faustseele.github.io/mmpy.chat/) & [Netlify](https://mmpy-chat.netlify.app)
 
 **[Design in Figma](https://www.figma.com/design/SaTdkvEMsWoRl2dZn7S9Ab/mmpy-chat?node-id=0-1&t=PrP08m0m5Cfj2EMi-1)** &nbsp;·&nbsp; **[API Swagger](https://ya-praktikum.tech/api/v2/swagger)**
 
