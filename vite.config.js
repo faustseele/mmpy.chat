@@ -4,12 +4,20 @@ import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig(({ mode }) => {
-  const base = mode === "production" ? "/mmpy.chat/" : "/";
+  const isGHPages = Boolean(process.env.GITHUB_ACTIONS);
+  const base = isGHPages ? "/mmpy.chat/" : "/";
+  const appUrl = isGHPages
+    ? "https://faustseele.github.io/mmpy.chat"
+    : "https://mmpy-chat.netlify.app";
 
   return {
     base,
     publicDir: "static",
     plugins: [
+      {
+        name: "inject-app-url",
+        transformIndexHtml: (html) => html.replaceAll("__APP_URL__", appUrl),
+      },
       VitePWA({
         registerType: "autoUpdate",
         injectRegister: "script-defer",
